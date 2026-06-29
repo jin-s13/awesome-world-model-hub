@@ -1,5 +1,5 @@
 schema_version: awesome-hub.surveys.v1
-generated_at: '2026-06-28T00:30:38Z'
+generated_at: '2026-06-29T11:04:33Z'
 topics:
 - id: method
   label: method
@@ -7,7 +7,7 @@ topics:
   description: New world model architectures, training objectives, inference methods,
     or planning/control algorithms.
   description_zh: 新的世界模型架构、训练目标、推理方法，或规划/控制算法。
-  paper_count: 854
+  paper_count: 859
   top_tags:
   - CV
   - AI
@@ -18,13 +18,13 @@ topics:
   - reinforcement learning
   - video generation
   component_averages:
-    citation_impact: 27.3
+    citation_impact: 27.1
     citation_velocity: 0.4
     graph_prestige: 0.0
-    methodology_quality: 66.5
-    recency: 90.0
-    reproducibility: 45.0
-    topical_relevance: 54.0
+    methodology_quality: 66.1
+    recency: 89.9
+    reproducibility: 45.2
+    topical_relevance: 53.7
   top_papers:
   - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
     title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
@@ -70,99 +70,382 @@ topics:
     score: 79.3
     url: https://arxiv.org/abs/2504.02792
   related_work_outline:
-  - 'Mainstream direction: World models are shifting from latent-dynamics RL (Dreamer-style)
-    to diffusion-based video generation for planning and pretraining, with increasing
-    emphasis on scalability and real-world deployment.'
-  - 'Shared research pattern: Stochastic latent variables (VAE, diffusion) combined
-    with sequence modeling (RNN, Transformer) to predict future observations or latent
-    states conditioned on actions.'
-  - 'Key differences: Representation space (latent state vs. pixel video), training
-    objective (RL loss vs. generation loss), evaluation target (task performance vs.
-    video fidelity), and interaction mode (online RL vs. offline pretraining).'
-  - 'Trend evolution: From 2018–2022 Dreamer-based online RL on robots (DayDreamer)
-    to 2023–2026 Transformer/diffusion models (STORM, MaskGWM, UWM) that scale to
-    large datasets and support zero-shot generalization and compositional generation.'
-  - 'Open questions: How to guarantee physical consistency in generated videos; how
-    to achieve zero-shot generalization to unseen dynamics without observable context;
-    how to isolate the world model’s contribution from the planner or task prior.'
+  - 'Mainstream direction: method work around CV, AI, RO, world models is converging
+    on Combining generation loss with MAE-style feature-level context learning, Observation
+    that dense DINOv2 features exhibit stronger linear predictability for action-conditioned
+    transitions v…, and First application of the Dreamer algorithm to physical robots
+    for online learning directly in the real world witho….'
+  - 'Shared research pattern: the strongest papers combine The model uses a Diffusion
+    Transformer (DiT) architecture with an additional mask construction task. It introduces…,
+    RAE-NWM uses a Representation Autoencoder to encode observations into a dense
+    visual representation space (DINOv2…, and The paper applies the Dreamer algorithm,
+    which learns a world model from interaction data and uses it for planning… with
+    evidence from The method achieves notable improvements over state-of-the-art driving
+    world models on normal validation (Nuscenes), long-ho…, Modeling sequential rollouts
+    in the dense visual representation space improves structural stability and action
+    accuracy, whi…, and A quadruped robot learns to roll off its back, stand up, and
+    walk from scratch in 1 hour, and adapts to perturbations within….'
+  - 'Key differences: papers diverge by emphasis across CV, AI, RO, world models,
+    world model, so the useful comparison is representation, supervision signal, and
+    decision-time interface rather than title-level novelty.'
+  - 'Trend evolution: From 2018 to 2026, the center of gravity is moving from isolated
+    model claims toward interactive systems, benchmarks, and evidence that can compare
+    across settings.'
+  - 'Open questions: recurring gaps include Only evaluated on four specific robot
+    platforms, limiting generalizability to other hardware or tasks, The approach
+    assumes observability of context values, which may not be available in all real-world
+    settings., and Generalization is limited to combinations of primitives seen during
+    training; entirely novel primitives may not be…, which should anchor deeper literature-review
+    prose.'
   related_work_outline_zh:
-  - 主流方向：世界模型正从潜在动力学强化学习（Dreamer风格）转向基于扩散的视频生成用于规划和预训练，越来越强调可扩展性和真实世界部署。
-  - 研究共性：随机潜在变量（VAE、扩散）结合序列建模（RNN、Transformer），以预测以动作为条件的未来观测或潜在状态。
-  - 关键差异：表示空间（潜在状态 vs. 像素视频）、训练目标（RL损失 vs. 生成损失）、评估目标（任务性能 vs. 视频保真度）以及交互模式（在线RL vs.
-    离线预训练）。
-  - 趋势演进：从2018–2022年基于Dreamer的在线机器人学习（DayDreamer）到2023–2026年Transformer/扩散模型（STORM、MaskGWM、UWM），扩展到大规模数据集并支持零样本泛化和组合生成。
-  - 开放问题：如何保证生成视频的物理一致性；如何在无可观测上下文的情况下实现未见动力学的零样本泛化；如何分离世界模型与规划器或任务先验的贡献。
+  - 主流方向：方法方向中围绕CV、AI、RO、world models的研究正在收敛到将生成损失与MAE风格的特征级上下文学习相结合、通过线性动力学探针发现密集DINOv2特征在动作条件转换中表现出更强的线性可预测性、首次将Dreamer算法应用于物理机器人，直接在真实世界中进行在线学习，无需模拟器。
+  - 研究共性：高分论文通常把模型采用扩散变换器（DiT）架构，并增加额外的掩码构建任务。引入扩散相关掩码令牌，使用行式掩码进行移位自注意力以将掩码构建扩展到时空域，同时配备行式跨视图模块。在包括Nuscenes、OpenDV-2K和Wa…、RAE-NWM使用表示自编码器将观测编码到密集视觉表示空间（DINOv2特征）。它采用带有解耦扩散Transformer头（CDiT-DH）的条件扩散Transformer来建模连续的动作条件状态转换，并引入…、本文应用Dreamer算法，该算法从交互数据中学习世界模型并用于想象规划，在四个不同的物理机器人（四足机器人、两个机械臂、轮式机器人）上进行训练。训练过程在线进行，直接在真实世界中，无需任何模拟器，使用摄像头…与该方法在正常验证（Nuscenes）、长时域展开（OpenDV-2K）和零样本验证（Waymo）数据集上均显著优于最先进的驾驶世界模型。、在密集视觉表示空间中建模序列展开提高了结构稳定性和动作精度，有利于下游规划与导航任务。、四足机器人在1小时内从零开始学会翻身、站立和行走，并在10分钟内适应扰动。两个机械臂从摄像头图像和稀疏奖励中学习拾取和放置多个物体，接近人类水平。轮式机器人仅从摄像头图像中学习导航到目标位置，自动解决朝向歧义。结合起来，而不是只停留在概念声明。
+  - 关键差异：论文之间的差异主要体现在CV、AI、RO、world models、world model，因此更值得比较表示方式、监督信号和决策时接口。
+  - 趋势演进：从 2018 到 2026，研究重心正在从单点模型主张转向可交互系统、标准化基准和可横向比较的证据。
+  - 开放问题：反复出现的缺口包括仅在四个特定机器人平台上评估，限制了向其他硬件或任务的泛化性、该方法假设上下文值可观测，这在许多真实场景中可能不成立。、泛化仅限于训练中见过的原语组合；全新原语可能无法支持，这些应成为后续文献综述的主线。
   literature_review:
+    scope_methodology: Grouped 859 papers under method by research line, using each
+      paper's problem setting, modeling target, evidence type, and reported limitations
+      to identify cross-paper patterns.
     line_of_work_matrix:
-    - line: Latent dynamics for model-based RL
-      what_it_solves: Learning compact latent representations for planning and policy
-        learning from interaction data, enabling sample-efficient online RL on physical
-        robots.
-      what_remains_open: Generalization to unseen dynamics and partial observability;
-        scaling to high-dimensional observations without losing temporal coherence.
-    - line: Diffusion-based video world models
-      what_it_solves: Generating future video frames conditioned on actions, enabling
-        visual planning, pretraining on large datasets, and zero-shot transfer across
-        tasks.
-      what_remains_open: Physical consistency and long-horizon stability of generated
-        videos; action conditioning fidelity when action and video modalities are
-        coupled.
-    - line: Compositional world models via language decomposition
-      what_it_solves: Leveraging language to factorize video generation into primitive-level
-        components, enabling compositional generalization to unseen object-action
-        combinations.
-      what_remains_open: Reliance on predefined primitives and accurate language parsing;
-        evaluation limited to simulation without real-robot validation.
+    - line: Method representation and objective design
+      paper_count: 677
+      what_it_solves: turning world-model ideas into concrete representations, losses,
+        architectures, and training recipes
+      what_remains_open: which algorithmic choices transfer beyond the reported task
+        family and objective design
+      representative_papers:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: rae-nwm-navigation-world-model-in-dense-visual-representati-2026
+        title: 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+        year: 2026
+        score: 85.4
+      - id: dreaming-of-many-worlds-learning-contextual-world-models-ai-2024
+        title: 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+          Generalization'
+        year: 2024
+        score: 81.3
+    - line: Method evidence and ablation protocol
+      paper_count: 486
+      what_it_solves: separating method contribution from dataset, baseline, metric,
+        and implementation effects
+      what_remains_open: whether evidence isolates the proposed method rather than
+        surrounding system choices
+      representative_papers:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: dreaming-of-many-worlds-learning-contextual-world-models-ai-2024
+        title: 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+          Generalization'
+        year: 2024
+        score: 81.3
+    - line: Planning and action-interface methods
+      paper_count: 459
+      what_it_solves: connecting learned dynamics to intervention, planning, and decision-time
+        interfaces
+      what_remains_open: how much of the gain comes from the model versus the planner,
+        controller, or task prior
+      representative_papers:
+      - id: rae-nwm-navigation-world-model-in-dense-visual-representati-2026
+        title: 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+        year: 2026
+        score: 85.4
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: unified-world-models-coupling-video-and-action-diffusion-fo-2025
+        title: 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
+          on Large Robotic Datasets'
+        year: 2025
+        score: 79.3
     consensus:
-    - Stochastic latent variables (VAE or diffusion) improve robustness and sample
-      efficiency in world models.
-    - Sequence modeling (RNN or Transformer) is essential for capturing temporal dependencies
-      in dynamics.
-    - Video generation serves as a useful proxy for learning dynamics, especially
-      when reward signals are sparse or absent.
+    - The main body of work is organized around Method representation and objective
+      design, Method evidence and ablation protocol, Planning and action-interface
+      methods, with a shared goal to turn world-model ideas into concrete architectures,
+      objectives, planners, and training recipes.
+    - A common pattern is to propose a modeling choice, isolate it with ablations
+      or baselines, and test whether it changes downstream behavior, rather than treating
+      paper titles or tags as the unit of comparison.
     disagreements:
-    - 'Representation space: latent state (Dreamer, cRSSM) vs. pixel-level video (MaskGWM,
-      UWM) for planning and control.'
-    - 'Supervision signal: RL reward and value targets (DayDreamer) vs. self-supervised
-      reconstruction or diffusion loss (STORM, RoboScape).'
-    - 'Evaluation target: task performance (Atari score, robot success rate) vs. video
-      fidelity (FVD, PSNR) and physical plausibility.'
-    - 'Interaction mode: online RL with real-world interaction (DayDreamer) vs. offline
-      pretraining on static datasets (UWM, RoboDreamer).'
-    - 'Deployment setting: simulation-only (RoboDreamer, STORM) vs. real-robot validation
-      (DayDreamer, MaskGWM).'
+    - The substantive split is between representation/objective choices, planning
+      interfaces, and evidence protocols; those choices change the input-output contract,
+      evidence standard, and failure modes.
+    - The unresolved boundary is which algorithmic choices transfer beyond the reported
+      task family and objective design; another recurring gap is whether evidence
+      isolates the proposed method rather than surrounding system choices.
     open_questions:
-    - How to guarantee physical consistency in generated videos without explicit physics
-      priors or keypoint dynamics?
-    - How to achieve zero-shot generalization to unseen dynamics when context variables
-      are not observable?
-    - How to disentangle the contribution of the world model from the planner, controller,
-      or task prior in overall performance gains?
+    - Which representation choices remain useful when the downstream task, controller,
+      or data distribution changes?
+    - Do current evaluation protocols measure decision utility directly, or mostly
+      proxy quality signals?
+    trend_evolution: Across 2018-2026, the topic moves from isolated modeling claims
+      toward work that ties turn world-model ideas into concrete architectures, objectives,
+      planners, and training recipes to stronger evidence and clearer boundaries.
+    timeline:
+    - year: 2018
+      paper_count: 1
+      representative_papers:
+      - World Models
+    - year: 2020
+      paper_count: 2
+      representative_papers:
+      - 'Dream to Control: Learning Behaviors by Latent Imagination'
+      - Planning to Explore via Self-Supervised World Models
+    - year: 2021
+      paper_count: 2
+      representative_papers:
+      - Mastering Atari with Discrete World Models
+      - 'Dreaming: Model-based Reinforcement Learning by Latent Imagination without
+        Reconstruction'
+    - year: 2022
+      paper_count: 13
+      representative_papers:
+      - 'DayDreamer: World Models for Physical Robot Learning'
+      - Model-Based Imitation Learning for Urban Driving
+      - Temporal Difference Learning for Model Predictive Control
+    - year: 2023
+      paper_count: 12
+      representative_papers:
+      - 'STORM: Efficient Stochastic Transformer based World Models for Reinforcement
+        Learning'
+      - Transformer-based World Models Are Happy with 100k Interactions
+      - 'ADriver-I: A General World Model for Autonomous Driving'
+    - year: 2024
+      paper_count: 121
+      representative_papers:
+      - 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+        Generalization'
+      - 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      - 'Diffusion for World Modeling: Visual Details Matter in Atari'
+    - year: 2025
+      paper_count: 331
+      representative_papers:
+      - 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      - 'RoboScape: Physics-informed Embodied World Model'
+      - 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
+        on Large Robotic Datasets'
+    - year: 2026
+      paper_count: 377
+      representative_papers:
+      - 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+      - 'From Observations to Events: Event-Aware World Model for Reinforcement Learning'
+      - 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+    references:
+    - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+      title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      year: 2025
+      score: 85.8
+      role: method, application
+    - id: rae-nwm-navigation-world-model-in-dense-visual-representati-2026
+      title: 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+      year: 2026
+      score: 85.4
+      role: method
+    - id: daydreamer-world-models-for-physical-robot-learning-2022
+      title: 'DayDreamer: World Models for Physical Robot Learning'
+      year: 2022
+      score: 81.7
+      role: method, system, application
+    - id: dreaming-of-many-worlds-learning-contextual-world-models-ai-2024
+      title: 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+        Generalization'
+      year: 2024
+      score: 81.3
+      role: method
+    - id: storm-efficient-stochastic-transformer-based-world-models-f-2023
+      title: 'STORM: Efficient Stochastic Transformer based World Models for Reinforcement
+        Learning'
+      year: 2023
+      score: 80.2
+      role: method
+    - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+      title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      year: 2024
+      score: 79.8
+      role: method, application
+    - id: roboscape-physics-informed-embodied-world-model-2025
+      title: 'RoboScape: Physics-informed Embodied World Model'
+      year: 2025
+      score: 79.6
+      role: method
+    - id: unified-world-models-coupling-video-and-action-diffusion-fo-2025
+      title: 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
+        on Large Robotic Datasets'
+      year: 2025
+      score: 79.3
+      role: method
   literature_review_zh:
+    范围与方法: 按研究路线归纳 859 篇方法相关论文，依据问题设定、建模对象、证据类型和已报告局限识别跨论文模式。
     研究路线矩阵:
-    - 路线: 基于模型强化学习的潜在动力学
-      解决的问题: 从交互数据中学习紧凑的潜在表示用于规划和策略学习，实现物理机器人的样本高效在线学习。
-      尚未覆盖: 对未见动力学和部分可观测性的泛化；扩展到高维观测时保持时间一致性。
-    - 路线: 基于扩散的视频世界模型
-      解决的问题: 生成以动作为条件的未来视频帧，支持视觉规划、大规模数据集预训练以及跨任务的零样本迁移。
-      尚未覆盖: 生成视频的物理一致性和长时域稳定性；动作与视频模态耦合时的动作条件保真度。
-    - 路线: 基于语言分解的组合世界模型
-      解决的问题: 利用语言将视频生成分解为原语级组件，实现对未见物体-动作组合的组合泛化。
-      尚未覆盖: 依赖预定义原语和准确的语言解析；评估仅限于仿真，缺乏真实机器人验证。
+    - 路线: 方法表示与目标设计
+      论文数: 677
+      解决的问题: 把世界模型想法落实为具体表示、损失函数、架构和训练配方
+      尚未覆盖: 哪些算法选择能迁移到报告任务族和目标设计之外
+      代表论文:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: rae-nwm-navigation-world-model-in-dense-visual-representati-2026
+        title: 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+        year: 2026
+        score: 85.4
+      - id: dreaming-of-many-worlds-learning-contextual-world-models-ai-2024
+        title: 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+          Generalization'
+        year: 2024
+        score: 81.3
+    - 路线: 方法证据与消融协议
+      论文数: 486
+      解决的问题: 区分方法贡献与数据集、基线、指标和实现因素
+      尚未覆盖: 证据是否真正隔离了方法贡献，而不是周边系统选择
+      代表论文:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: dreaming-of-many-worlds-learning-contextual-world-models-ai-2024
+        title: 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+          Generalization'
+        year: 2024
+        score: 81.3
+    - 路线: 规划与动作接口方法
+      论文数: 459
+      解决的问题: 把学习到的动力学连接到干预、规划和决策时接口
+      尚未覆盖: 收益有多少来自模型本身，而不是规划器、控制器或任务先验
+      代表论文:
+      - id: rae-nwm-navigation-world-model-in-dense-visual-representati-2026
+        title: 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+        year: 2026
+        score: 85.4
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: unified-world-models-coupling-video-and-action-diffusion-fo-2025
+        title: 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
+          on Large Robotic Datasets'
+        year: 2025
+        score: 79.3
     共识:
-    - 随机潜在变量（VAE或扩散）提高了世界模型的鲁棒性和样本效率。
-    - 序列建模（RNN或Transformer）对于捕捉动力学中的时间依赖至关重要。
-    - 视频生成作为学习动力学的有用代理，尤其在奖励信号稀疏或缺失时。
+    - 这个主题的主体由方法表示与目标设计、方法证据与消融协议、规划与动作接口方法构成，共同目标是把世界模型想法落实为架构、目标函数、规划接口和训练配方。
+    - 常见范式是提出一个建模选择，再用消融或基线隔离其贡献，并验证它是否改变下游行为，而不是把论文标题或标签当作比较单位。
     分歧:
-    - 表示空间：用于规划和控制的潜在状态（Dreamer、cRSSM）与像素级视频（MaskGWM、UWM）。
-    - 监督信号：RL奖励和价值目标（DayDreamer）与自监督重建或扩散损失（STORM、RoboScape）。
-    - 评估目标：任务性能（Atari分数、机器人成功率）与视频保真度（FVD、PSNR）及物理合理性。
-    - 交互模式：在线RL与真实世界交互（DayDreamer）与离线预训练静态数据集（UWM、RoboDreamer）。
-    - 部署场景：仅仿真（RoboDreamer、STORM）与真实机器人验证（DayDreamer、MaskGWM）。
+    - 论文之间的实质分歧集中在表示/目标设计、规划接口和证据协议；这些选择决定输入输出约定、证据标准和失败模式。
+    - 尚未解决的边界包括哪些算法选择能迁移到报告任务族和目标设计之外；另一个反复出现的问题是证据是否真正隔离了方法贡献，而不是周边系统选择。
     开放问题:
-    - 如何在没有显式物理先验或关键点动力学的情况下保证生成视频的物理一致性？
-    - 当上下文变量不可观测时，如何实现对未见动力学的零样本泛化？
-    - 如何分离世界模型与规划器、控制器或任务先验在整体性能提升中的贡献？
+    - 当下游任务、控制器或数据分布变化时，哪些表示选择仍然有效？
+    - 现有评测是在直接度量决策效用，还是主要度量视觉质量、预测误差等代理信号？
+    趋势演进: 从 2018 到 2026，研究重心正在从单点主张转向把把世界模型想法落实为架构、目标函数、规划接口和训练配方与更强证据和更清晰边界连接起来。
+    时间线:
+    - year: 2018
+      paper_count: 1
+      representative_papers:
+      - World Models
+    - year: 2020
+      paper_count: 2
+      representative_papers:
+      - 'Dream to Control: Learning Behaviors by Latent Imagination'
+      - Planning to Explore via Self-Supervised World Models
+    - year: 2021
+      paper_count: 2
+      representative_papers:
+      - Mastering Atari with Discrete World Models
+      - 'Dreaming: Model-based Reinforcement Learning by Latent Imagination without
+        Reconstruction'
+    - year: 2022
+      paper_count: 13
+      representative_papers:
+      - 'DayDreamer: World Models for Physical Robot Learning'
+      - Model-Based Imitation Learning for Urban Driving
+      - Temporal Difference Learning for Model Predictive Control
+    - year: 2023
+      paper_count: 12
+      representative_papers:
+      - 'STORM: Efficient Stochastic Transformer based World Models for Reinforcement
+        Learning'
+      - Transformer-based World Models Are Happy with 100k Interactions
+      - 'ADriver-I: A General World Model for Autonomous Driving'
+    - year: 2024
+      paper_count: 121
+      representative_papers:
+      - 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+        Generalization'
+      - 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      - 'Diffusion for World Modeling: Visual Details Matter in Atari'
+    - year: 2025
+      paper_count: 331
+      representative_papers:
+      - 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      - 'RoboScape: Physics-informed Embodied World Model'
+      - 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
+        on Large Robotic Datasets'
+    - year: 2026
+      paper_count: 377
+      representative_papers:
+      - 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+      - 'From Observations to Events: Event-Aware World Model for Reinforcement Learning'
+      - 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+    参考论文:
+    - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+      title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      year: 2025
+      score: 85.8
+      role: method, application
+    - id: rae-nwm-navigation-world-model-in-dense-visual-representati-2026
+      title: 'RAE-NWM: Navigation World Model in Dense Visual Representation Space'
+      year: 2026
+      score: 85.4
+      role: method
+    - id: daydreamer-world-models-for-physical-robot-learning-2022
+      title: 'DayDreamer: World Models for Physical Robot Learning'
+      year: 2022
+      score: 81.7
+      role: method, system, application
+    - id: dreaming-of-many-worlds-learning-contextual-world-models-ai-2024
+      title: 'Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot
+        Generalization'
+      year: 2024
+      score: 81.3
+      role: method
+    - id: storm-efficient-stochastic-transformer-based-world-models-f-2023
+      title: 'STORM: Efficient Stochastic Transformer based World Models for Reinforcement
+        Learning'
+      year: 2023
+      score: 80.2
+      role: method
+    - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+      title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      year: 2024
+      score: 79.8
+      role: method, application
+    - id: roboscape-physics-informed-embodied-world-model-2025
+      title: 'RoboScape: Physics-informed Embodied World Model'
+      year: 2025
+      score: 79.6
+      role: method
+    - id: unified-world-models-coupling-video-and-action-diffusion-fo-2025
+      title: 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
+        on Large Robotic Datasets'
+      year: 2025
+      score: 79.3
+      role: method
 - id: benchmark
   label: benchmark
   label_zh: 基准
@@ -233,91 +516,337 @@ topics:
     score: 70.7
     url: https://arxiv.org/abs/2602.22208
   related_work_outline:
-  - 'Mainstream direction: Designing specialized benchmarks and datasets to evaluate
-    world models on specific capabilities such as spatial consistency, memory, action
-    control, and scene coherence across domains like autonomous driving and embodied
-    AI.'
-  - 'Shared research pattern: Each benchmark introduces a curated dataset and multi-dimensional
-    metrics (e.g., scene graph consistency, memory consistency, action fidelity) to
-    probe aspects beyond standard video generation quality.'
-  - 'Key differences: Domain focus (driving vs. Minecraft vs. general embodied), evaluation
-    dimensions (spatial vs. memory vs. action vs. multi-agent), and inclusion of human
-    preference or not.'
-  - 'Trend evolution: Benchmarks are moving from single-metric evaluations to full-spectrum
-    assessments (visual, geometric, physical, behavioral) and from single-agent to
-    multi-agent scenarios, with increasing emphasis on controllability and long-term
-    consistency.'
-  - 'Open questions: Whether benchmark conclusions generalize across implementations
-    and compute budgets; alignment between proxy metrics and real-world decision utility;
-    how to standardize evaluation across diverse domains.'
+  - 'Mainstream direction: benchmark work around CV, benchmark, world models, AI is
+    converging on LoopNav dataset: 250 hours (20 million frames) of loop-based navigation
+    videos with actions collected from diverse…, First open-domain closed-loop revisited
+    benchmark for evaluating memory consistency and action control in world mo…, and
+    Open-access evaluation framework ACT-Bench for quantifying action fidelity in
+    world models for autonomous driving.'
+  - 'Shared research pattern: the strongest papers combine The authors propose LoopNav,
+    a dataset of 250 hours (20 million frames) of loop-based navigation videos with
+    actio…, MIND contains 250 high-quality videos at 1080p and 24 FPS, including 100
+    first-person and 100 third-person video c…, and The paper proposes ACT-Bench,
+    an open-access evaluation framework that includes a dataset pairing short context
+    vi… with evidence from No experimental results are reported in the abstract; the
+    paper focuses on dataset and benchmark construction., Extensive experiments demonstrate
+    the completeness of MIND and reveal key challenges in current world models, including
+    the…, and The state-of-the-art model does not fully adhere to given action instructions,
+    while Terra achieves improved action fidelity..'
+  - 'Key differences: papers diverge by emphasis across CV, benchmark, world models,
+    AI, video generation, so the useful comparison is representation, supervision
+    signal, and decision-time interface rather than title-level novelty.'
+  - 'Trend evolution: From 2024 to 2026, the center of gravity is moving from isolated
+    model claims toward interactive systems, benchmarks, and evidence that can compare
+    across settings.'
+  - 'Open questions: recurring gaps include Benchmark is specific to driving world
+    models, limiting generalizability to other domains, which should anchor deeper
+    literature-review prose.'
   related_work_outline_zh:
-  - 主流方向：设计专门的基准和数据集，评估世界模型在空间一致性、记忆、动作控制和场景连贯性等特定能力，涵盖自动驾驶和具身AI等领域。
-  - 研究共性：每个基准都引入精心策划的数据集和多维指标（如场景图一致性、记忆一致性、动作保真度），以探测标准视频生成质量之外的方面。
-  - 关键差异：领域焦点（驾驶 vs. Minecraft vs. 通用具身）、评估维度（空间 vs. 记忆 vs. 动作 vs. 多智能体）以及是否包含人类偏好。
-  - 趋势演进：基准从单一指标评估转向全频谱评估（视觉、几何、物理、行为），从单智能体扩展到多智能体场景，越来越强调可控性和长期一致性。
-  - 开放问题：基准结论在不同实现和算力预算下是否稳定；代理指标与真实世界决策效用之间的一致性；如何跨不同领域标准化评估。
+  - 主流方向：基准方向中围绕CV、benchmark、world models、AI的研究正在收敛到LoopNav数据集：250小时（2000万帧）的基于循环的导航视频及动作，收集自Minecraft中的多样地点、首个用于评估世界模型中记忆一致性和动作控制的开放域闭环可复现基准、用于量化自动驾驶世界模型中动作忠实度的开放获取评估框架ACT-Bench。
+  - 研究共性：高分论文通常把作者提出了LoopNav，一个包含250小时（2000万帧）的基于循环的导航视频及动作的数据集，收集自Minecraft开放世界环境中的多样地点。他们引入了场景图一致性分数（Scene
+    Graph Consi…、MIND包含250个高质量视频（1080p，24 FPS），其中100个第一人称和100个第三人称视频片段共享同一动作空间，另有25+25个片段覆盖不同动作空间，涉及八个多样化场景。评估框架衡量两个核心能力：…、本文提出了ACT-Bench，一个开放获取的评估框架，包含一个将nuScenes中的短上下文视频与未来轨迹数据配对的数据集。该数据集作为生成未来视频帧的条件输入，能够定量评估动作忠实度。此外，基线世界模型Te…与摘要中未报告实验结果；本文侧重于数据集和基准的构建。、大量实验证明了MIND的完备性，并揭示了当前世界模型的关键挑战，包括难以维持长期记忆一致性和跨动作空间泛化。、最先进的模型未能完全遵循给定的动作指令，而Terra实现了更高的动作忠实度。结合起来，而不是只停留在概念声明。
+  - 关键差异：论文之间的差异主要体现在CV、benchmark、world models、AI、video generation，因此更值得比较表示方式、监督信号和决策时接口。
+  - 趋势演进：从 2024 到 2026，研究重心正在从单点模型主张转向可交互系统、标准化基准和可横向比较的证据。
+  - 开放问题：反复出现的缺口包括基准专门针对驾驶世界模型，限制了向其他领域的泛化能力，这些应成为后续文献综述的主线。
   literature_review:
+    scope_methodology: Grouped 88 papers under benchmark by research line, using each
+      paper's problem setting, modeling target, evidence type, and reported limitations
+      to identify cross-paper patterns.
     line_of_work_matrix:
     - line: Benchmark task and dataset design
-      what_it_solves: Creating shared tasks and datasets that make world-model claims
-        comparable across different approaches.
-      what_remains_open: Whether the task distribution covers the settings where world
-        models are expected to help, e.g., rare events or multi-agent interactions.
-    - line: Metric and stress-test design
-      what_it_solves: Probing prediction, controllability, robustness, and decision
-        utility beyond aggregate scores like FVD or PSNR.
-      what_remains_open: Alignment between proxy metrics (e.g., scene graph consistency,
-        action fidelity) and the downstream decisions users actually care about.
+      paper_count: 80
+      what_it_solves: creating shared tasks and datasets that make world-model claims
+        comparable
+      what_remains_open: whether the task distribution covers the settings where world
+        models are expected to help
+      representative_papers:
+      - id: toward-memory-aided-world-models-benchmarking-via-spatial-c-2025
+        title: 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+        year: 2025
+        score: 81.4
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+      - id: drivinggen-a-comprehensive-benchmark-for-generative-video-w-2026
+        title: 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models
+          in Autonomous Driving'
+        year: 2026
+        score: 73.7
     - line: Comparable baselines and reporting
-      what_it_solves: Making results auditable through common baselines, artifacts,
-        and reporting conventions (e.g., open-source code, datasets).
-      what_remains_open: Whether benchmark conclusions remain stable across implementations
-        and compute budgets, and how to handle domain-specific baselines.
+      paper_count: 42
+      what_it_solves: making results auditable through common baselines, artifacts,
+        and reporting conventions
+      what_remains_open: whether benchmark conclusions remain stable across implementations
+        and compute budgets
+      representative_papers:
+      - id: toward-memory-aided-world-models-benchmarking-via-spatial-c-2025
+        title: 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+        year: 2025
+        score: 81.4
+      - id: mind-benchmarking-memory-consistency-and-action-control-in-2026
+        title: 'MIND: Benchmarking Memory Consistency and Action Control in World
+          Models'
+        year: 2026
+        score: 79.0
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+    - line: Metric and stress-test design
+      paper_count: 37
+      what_it_solves: probing prediction, controllability, robustness, and decision
+        utility beyond aggregate scores
+      what_remains_open: alignment between proxy metrics and the downstream decisions
+        users actually care about
+      representative_papers:
+      - id: mind-benchmarking-memory-consistency-and-action-control-in-2026
+        title: 'MIND: Benchmarking Memory Consistency and Action Control in World
+          Models'
+        year: 2026
+        score: 79.0
+      - id: drivinggen-a-comprehensive-benchmark-for-generative-video-w-2026
+        title: 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models
+          in Autonomous Driving'
+        year: 2026
+        score: 73.7
+      - id: worldlens-full-spectrum-evaluations-of-driving-world-models-2025
+        title: 'WorldLens: Full-Spectrum Evaluations of Driving World Models in Real
+          World'
+        year: 2025
+        score: 71.6
     consensus:
-    - Current world models lack consistency in spatial memory, action control, and
-      physical plausibility; generic video metrics are insufficient.
-    - New benchmarks must include curated datasets and multi-dimensional metrics to
-      capture these gaps.
-    - Open-source release of datasets and code is critical for reproducibility and
-      fair comparison.
+    - The main body of work is organized around Benchmark task and dataset design,
+      Comparable baselines and reporting, Metric and stress-test design, with a shared
+      goal to make world-model claims comparable through shared tasks, metrics, baselines,
+      and reporting rules.
+    - A common pattern is to define a task distribution, choose measurable failure
+      modes, and expose where proxy scores diverge from useful behavior, rather than
+      treating paper titles or tags as the unit of comparison.
     disagreements:
-    - 'Domain focus: driving benchmarks (e.g., ACT-Bench, DrivingGen) emphasize trajectory-conditioned
-      action control, while Minecraft benchmarks (e.g., LoopNav, Solaris) focus on
-      spatial consistency and multi-agent interaction.'
-    - 'Evaluation target: some benchmarks prioritize memory consistency (MIND), others
-      scene consistency (EWMBench), and others full-spectrum fidelity (WorldLens).'
-    - 'Interaction mode: closed-loop revisited evaluation (MIND) vs. open-loop generation;
-      some include human preference, others rely solely on automated metrics.'
+    - The substantive split is between dataset coverage, metric design, stress tests,
+      and baseline comparability; those choices change the input-output contract,
+      evidence standard, and failure modes.
+    - The unresolved boundary is whether the task distribution covers the settings
+      where world models are expected to help; another recurring gap is whether benchmark
+      conclusions remain stable across implementations and compute budgets.
     open_questions:
-    - How to ensure benchmark tasks cover the diverse real-world settings where world
-      models are deployed, including rare events and multi-agent scenarios?
-    - Can proxy metrics like scene graph consistency or action fidelity reliably predict
-      downstream task performance in planning or control?
-    - How to standardize evaluation across different domains (driving, embodied, gaming)
-      to enable cross-domain comparison and transfer?
+    - Which representation choices remain useful when the downstream task, controller,
+      or data distribution changes?
+    - Do current evaluation protocols measure decision utility directly, or mostly
+      proxy quality signals?
+    trend_evolution: Across 2024-2026, the topic moves from isolated modeling claims
+      toward work that ties make world-model claims comparable through shared tasks,
+      metrics, baselines, and reporting rules to stronger evidence and clearer boundaries.
+    timeline:
+    - year: 2024
+      paper_count: 12
+      representative_papers:
+      - 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      - 'TD-MPC2: Scalable, Robust World Models for Continuous Control'
+      - Can Language Models Serve as Text-Based World Simulators?
+    - year: 2025
+      paper_count: 30
+      representative_papers:
+      - 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+      - 'WorldLens: Full-Spectrum Evaluations of Driving World Models in Real World'
+      - 'EWMBench: Evaluating Scene, Motion, and Semantic Quality in Embodied World
+        Models'
+    - year: 2026
+      paper_count: 46
+      representative_papers:
+      - 'MIND: Benchmarking Memory Consistency and Action Control in World Models'
+      - 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models in
+        Autonomous Driving'
+      - 'Solaris: Building a Multiplayer Video World Model in Minecraft'
+    references:
+    - id: toward-memory-aided-world-models-benchmarking-via-spatial-c-2025
+      title: 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+      year: 2025
+      score: 81.4
+      role: benchmark
+    - id: mind-benchmarking-memory-consistency-and-action-control-in-2026
+      title: 'MIND: Benchmarking Memory Consistency and Action Control in World Models'
+      year: 2026
+      score: 79.0
+      role: benchmark
+    - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+      title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      year: 2024
+      score: 77.5
+      role: method, benchmark, system, application
+    - id: drivinggen-a-comprehensive-benchmark-for-generative-video-w-2026
+      title: 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models
+        in Autonomous Driving'
+      year: 2026
+      score: 73.7
+      role: benchmark, application
+    - id: worldlens-full-spectrum-evaluations-of-driving-world-models-2025
+      title: 'WorldLens: Full-Spectrum Evaluations of Driving World Models in Real
+        World'
+      year: 2025
+      score: 71.6
+      role: benchmark
+    - id: ewmbench-evaluating-scene-motion-and-semantic-quality-in-2025
+      title: 'EWMBench: Evaluating Scene, Motion, and Semantic Quality in Embodied
+        World Models'
+      year: 2025
+      score: 71.3
+      role: benchmark, system
+    - id: gem-a-generalizable-ego-vision-multimodal-world-model-for-f-2025
+      title: 'GEM: A Generalizable Ego-Vision Multimodal World Model for Fine-Grained
+        Ego-Motion, Object Dynamics, and Scene Composition Control'
+      year: 2025
+      score: 71.3
+      role: method, benchmark, application
+    - id: solaris-building-a-multiplayer-video-world-model-in-minecra-2026
+      title: 'Solaris: Building a Multiplayer Video World Model in Minecraft'
+      year: 2026
+      score: 70.7
+      role: method, benchmark, system, application
   literature_review_zh:
+    范围与方法: 按研究路线归纳 88 篇基准相关论文，依据问题设定、建模对象、证据类型和已报告局限识别跨论文模式。
     研究路线矩阵:
     - 路线: 基准任务与数据集设计
-      解决的问题: 构建共享任务和数据集，使世界模型的主张在不同方法间具有可比性。
-      尚未覆盖: 任务分布是否覆盖世界模型预期发挥作用的真实设置，例如罕见事件或多智能体交互。
-    - 路线: 指标与压力测试设计
-      解决的问题: 在总分（如FVD、PSNR）之外检验预测、可控性、鲁棒性和决策效用。
-      尚未覆盖: 代理指标（如场景图一致性、动作保真度）与用户真正关心的下游决策之间是否一致。
+      论文数: 80
+      解决的问题: 构建共享任务和数据集，让世界模型主张具备可比性
+      尚未覆盖: 任务分布是否覆盖世界模型预期发挥作用的真实设置
+      代表论文:
+      - id: toward-memory-aided-world-models-benchmarking-via-spatial-c-2025
+        title: 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+        year: 2025
+        score: 81.4
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+      - id: drivinggen-a-comprehensive-benchmark-for-generative-video-w-2026
+        title: 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models
+          in Autonomous Driving'
+        year: 2026
+        score: 73.7
     - 路线: 可比基线与报告规范
-      解决的问题: 通过统一基线、工件和报告规范（如开源代码、数据集）让结果可审计。
-      尚未覆盖: 基准结论在不同实现和算力预算下是否稳定，以及如何处理领域特定的基线。
+      论文数: 42
+      解决的问题: 通过统一基线、工件和报告规范让结果可审计
+      尚未覆盖: 基准结论在不同实现和算力预算下是否稳定
+      代表论文:
+      - id: toward-memory-aided-world-models-benchmarking-via-spatial-c-2025
+        title: 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+        year: 2025
+        score: 81.4
+      - id: mind-benchmarking-memory-consistency-and-action-control-in-2026
+        title: 'MIND: Benchmarking Memory Consistency and Action Control in World
+          Models'
+        year: 2026
+        score: 79.0
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+    - 路线: 指标与压力测试设计
+      论文数: 37
+      解决的问题: 在总分之外检验预测、可控性、鲁棒性和决策效用
+      尚未覆盖: 代理指标与用户真正关心的下游决策之间是否一致
+      代表论文:
+      - id: mind-benchmarking-memory-consistency-and-action-control-in-2026
+        title: 'MIND: Benchmarking Memory Consistency and Action Control in World
+          Models'
+        year: 2026
+        score: 79.0
+      - id: drivinggen-a-comprehensive-benchmark-for-generative-video-w-2026
+        title: 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models
+          in Autonomous Driving'
+        year: 2026
+        score: 73.7
+      - id: worldlens-full-spectrum-evaluations-of-driving-world-models-2025
+        title: 'WorldLens: Full-Spectrum Evaluations of Driving World Models in Real
+          World'
+        year: 2025
+        score: 71.6
     共识:
-    - 当前世界模型在空间记忆、动作控制和物理合理性方面缺乏一致性；通用视频指标不足以捕捉这些缺陷。
-    - 新基准必须包含精心策划的数据集和多维指标来填补这些空白。
-    - 数据集和代码的开源发布对于可重复性和公平比较至关重要。
+    - 这个主题的主体由基准任务与数据集设计、可比基线与报告规范、指标与压力测试设计构成，共同目标是通过共享任务、指标、基线和报告规范让世界模型主张具备可比性。
+    - 常见范式是定义任务分布，选择可测失败模式，并暴露代理分数与有用行为的偏差，而不是把论文标题或标签当作比较单位。
     分歧:
-    - 领域焦点：驾驶基准（如ACT-Bench、DrivingGen）强调轨迹条件化的动作控制，而Minecraft基准（如LoopNav、Solaris）侧重于空间一致性和多智能体交互。
-    - 评估目标：一些基准优先考虑记忆一致性（MIND），另一些侧重场景一致性（EWMBench），还有一些追求全频谱保真度（WorldLens）。
-    - 交互模式：闭环可复现评估（MIND）与开环生成；有些包含人类偏好，有些仅依赖自动指标。
+    - 论文之间的实质分歧集中在数据覆盖、指标设计、压力测试和基线可比性；这些选择决定输入输出约定、证据标准和失败模式。
+    - 尚未解决的边界包括任务分布是否覆盖世界模型预期发挥作用的真实设置；另一个反复出现的问题是基准结论在不同实现和算力预算下是否稳定。
     开放问题:
-    - 如何确保基准任务覆盖世界模型部署的真实场景，包括罕见事件和多智能体交互？
-    - 场景图一致性或动作保真度等代理指标能否可靠预测下游规划或控制任务的性能？
-    - 如何跨不同领域（驾驶、具身、游戏）标准化评估，以实现跨领域比较和迁移？
+    - 当下游任务、控制器或数据分布变化时，哪些表示选择仍然有效？
+    - 现有评测是在直接度量决策效用，还是主要度量视觉质量、预测误差等代理信号？
+    趋势演进: 从 2024 到 2026，研究重心正在从单点主张转向把通过共享任务、指标、基线和报告规范让世界模型主张具备可比性与更强证据和更清晰边界连接起来。
+    时间线:
+    - year: 2024
+      paper_count: 12
+      representative_papers:
+      - 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      - 'TD-MPC2: Scalable, Robust World Models for Continuous Control'
+      - Can Language Models Serve as Text-Based World Simulators?
+    - year: 2025
+      paper_count: 30
+      representative_papers:
+      - 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+      - 'WorldLens: Full-Spectrum Evaluations of Driving World Models in Real World'
+      - 'EWMBench: Evaluating Scene, Motion, and Semantic Quality in Embodied World
+        Models'
+    - year: 2026
+      paper_count: 46
+      representative_papers:
+      - 'MIND: Benchmarking Memory Consistency and Action Control in World Models'
+      - 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models in
+        Autonomous Driving'
+      - 'Solaris: Building a Multiplayer Video World Model in Minecraft'
+    参考论文:
+    - id: toward-memory-aided-world-models-benchmarking-via-spatial-c-2025
+      title: 'Toward Memory-Aided World Models: Benchmarking via Spatial Consistency'
+      year: 2025
+      score: 81.4
+      role: benchmark
+    - id: mind-benchmarking-memory-consistency-and-action-control-in-2026
+      title: 'MIND: Benchmarking Memory Consistency and Action Control in World Models'
+      year: 2026
+      score: 79.0
+      role: benchmark
+    - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+      title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      year: 2024
+      score: 77.5
+      role: method, benchmark, system, application
+    - id: drivinggen-a-comprehensive-benchmark-for-generative-video-w-2026
+      title: 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models
+        in Autonomous Driving'
+      year: 2026
+      score: 73.7
+      role: benchmark, application
+    - id: worldlens-full-spectrum-evaluations-of-driving-world-models-2025
+      title: 'WorldLens: Full-Spectrum Evaluations of Driving World Models in Real
+        World'
+      year: 2025
+      score: 71.6
+      role: benchmark
+    - id: ewmbench-evaluating-scene-motion-and-semantic-quality-in-2025
+      title: 'EWMBench: Evaluating Scene, Motion, and Semantic Quality in Embodied
+        World Models'
+      year: 2025
+      score: 71.3
+      role: benchmark, system
+    - id: gem-a-generalizable-ego-vision-multimodal-world-model-for-f-2025
+      title: 'GEM: A Generalizable Ego-Vision Multimodal World Model for Fine-Grained
+        Ego-Motion, Object Dynamics, and Scene Composition Control'
+      year: 2025
+      score: 71.3
+      role: method, benchmark, application
+    - id: solaris-building-a-multiplayer-video-world-model-in-minecra-2026
+      title: 'Solaris: Building a Multiplayer Video World Model in Minecraft'
+      year: 2026
+      score: 70.7
+      role: method, benchmark, system, application
 - id: system
   label: system
   label_zh: 系统
@@ -387,111 +916,343 @@ topics:
     score: 72.1
     url: https://arxiv.org/abs/2508.13009
   related_work_outline:
-  - 'Mainstream direction: Building real-time interactive world models that generate
-    controllable video sequences for closed-loop applications in robotics, autonomous
-    driving, and gaming.'
-  - 'Shared research pattern: Use of autoregressive or diffusion architectures with
-    action conditioning; emphasis on open-source release, reproducibility, and evaluation
-    of both visual quality and action fidelity.'
-  - 'Key differences: Architecture choice (autoregressive vs diffusion), training
-    data source (synthetic vs real), target domain (physical robots vs driving vs
-    games), and efficiency strategy (key frame reasoning, distillation, parallel decoding).'
-  - 'Trend evolution: From offline world models for robot learning (2022) to real-time
-    interactive systems (2025–2026), with growing focus on action controllability,
-    deployment speed, and open-source infrastructure.'
-  - 'Open questions: Long-term temporal consistency without degradation; generalization
-    across diverse environments and tasks; action fidelity under distribution shift;
-    scalability to complex action spaces and multi-sensor setups.'
+  - 'Mainstream direction: system work around CV, world model, RO, AI is converging
+    on First application of the Dreamer algorithm to physical robots for online learning
+    directly in the real world witho…, Open-access evaluation framework ACT-Bench
+    for quantifying action fidelity in world models for autonomous driving, and Real-time
+    interactive world model on Minecraft using a visual-action autoregressive Transformer.'
+  - 'Shared research pattern: the strongest papers combine The paper applies the Dreamer
+    algorithm, which learns a world model from interaction data and uses it for planning…,
+    The paper proposes ACT-Bench, an open-access evaluation framework that includes
+    a dataset pairing short context vi…, and MineWorld uses a visual-action autoregressive
+    Transformer that takes paired game scenes and actions as input, toke… with evidence
+    from A quadruped robot learns to roll off its back, stand up, and walk from scratch
+    in 1 hour, and adapts to perturbations within…, The state-of-the-art model does
+    not fully adhere to given action instructions, while Terra achieves improved action
+    fidelity., and MineWorld generates 4 to 7 frames per second, enabling real-time
+    interaction, and significantly outperforms state-of-the-art….'
+  - 'Key differences: papers diverge by emphasis across CV, world model, RO, AI, video
+    generation, so the useful comparison is representation, supervision signal, and
+    decision-time interface rather than title-level novelty.'
+  - 'Trend evolution: From 2022 to 2026, the center of gravity is moving from isolated
+    model claims toward interactive systems, benchmarks, and evidence that can compare
+    across settings.'
+  - 'Open questions: recurring gaps include Only evaluated on four specific robot
+    platforms, limiting generalizability to other hardware or tasks, Preview version
+    only supports image input, not text or video as originally aimed, and Evaluation
+    is limited to the nuScenes dataset, so generalization to other driving environments
+    or sensor configura…, which should anchor deeper literature-review prose.'
   related_work_outline_zh:
-  - 主流方向：构建实时交互式世界模型，为机器人、自动驾驶和游戏等闭环应用生成可控视频序列。
-  - 研究共性：采用自回归或扩散架构并加入动作条件；强调开源、可复现，以及视觉质量和动作忠实度的联合评估。
-  - 关键差异：架构选择（自回归 vs 扩散）、训练数据来源（合成 vs 真实）、目标领域（物理机器人 vs 驾驶 vs 游戏）、效率策略（关键帧推理、蒸馏、并行解码）。
-  - 趋势演进：从2022年离线机器人世界模型发展到2025–2026年的实时交互系统，动作可控性、部署速度和开源基础设施日益重要。
-  - 开放问题：长时域一致性不退化；跨环境和任务的泛化；分布外场景下的动作忠实度；复杂动作空间和多传感器设置的可扩展性。
+  - 主流方向：系统方向中围绕CV、world model、RO、AI的研究正在收敛到首次将Dreamer算法应用于物理机器人，直接在真实世界中进行在线学习，无需模拟器、用于量化自动驾驶世界模型中动作忠实度的开放获取评估框架ACT-Bench、基于Minecraft的实时交互世界模型，采用视觉-动作自回归Transformer。
+  - 研究共性：高分论文通常把本文应用Dreamer算法，该算法从交互数据中学习世界模型并用于想象规划，在四个不同的物理机器人（四足机器人、两个机械臂、轮式机器人）上进行训练。训练过程在线进行，直接在真实世界中，无需任何模拟器，使用摄像头…、本文提出了ACT-Bench，一个开放获取的评估框架，包含一个将nuScenes中的短上下文视频与未来轨迹数据配对的数据集。该数据集作为生成未来视频帧的条件输入，能够定量评估动作忠实度。此外，基线世界模型Te…、MineWorld使用视觉-动作自回归Transformer，以配对的游戏场景和动作作为输入，通过图像分词器和动作分词器将场景和动作分别转换为离散token
+    ID，输入由交错拼接的token ID组成。模型通…与四足机器人在1小时内从零开始学会翻身、站立和行走，并在10分钟内适应扰动。两个机械臂从摄像头图像和稀疏奖励中学习拾取和放置多个物体，接近人类水平。轮式机器人仅从摄像头图像中学习导航到目标位置，自动解决朝向歧义。、最先进的模型未能完全遵循给定的动作指令，而Terra实现了更高的动作忠实度。、MineWorld每秒生成4到7帧，实现实时交互，并在提出的评估指标上显著优于当前开源的基于扩散的最先进世界模型。结合起来，而不是只停留在概念声明。
+  - 关键差异：论文之间的差异主要体现在CV、world model、RO、AI、video generation，因此更值得比较表示方式、监督信号和决策时接口。
+  - 趋势演进：从 2022 到 2026，研究重心正在从单点模型主张转向可交互系统、标准化基准和可横向比较的证据。
+  - 开放问题：反复出现的缺口包括仅在四个特定机器人平台上评估，限制了向其他硬件或任务的泛化性、预览版本仅支持图像输入，不支持最初目标中的文本或视频、评估仅限于nuScenes数据集，未展示对其他驾驶环境或传感器配置的泛化能力，这些应成为后续文献综述的主线。
   literature_review:
+    scope_methodology: Grouped 107 papers under system by research line, using each
+      paper's problem setting, modeling target, evidence type, and reported limitations
+      to identify cross-paper patterns.
     line_of_work_matrix:
-    - line: Real-time interactive world models for closed-loop control
-      what_it_solves: Generating controllable video sequences in real time for autonomous
-        driving, robotics, and game environments, enabling closed-loop simulation
-        and interaction.
-      what_remains_open: Balancing speed, visual fidelity, long-term consistency,
-        and action adherence across diverse domains; generalization beyond training
-        environments.
-    - line: World models for physical robot learning without simulators
-      what_it_solves: Enabling robots to learn behaviors directly from real-world
-        interaction using learned world models, avoiding the sim-to-real gap.
-      what_remains_open: Scalability to more complex tasks and robots; reliance on
-        physical hardware and reset mechanisms; hyperparameter sensitivity.
-    - line: Benchmarks and evaluation for action-controllable world models
-      what_it_solves: Providing standardized datasets and metrics to quantify how
-        well world models follow action commands, particularly in autonomous driving.
-      what_remains_open: Coverage of diverse action modalities and long-tail scenarios;
-        correlation between benchmark metrics and downstream task performance.
-    - line: Efficient world model inference via key frame reasoning
-      what_it_solves: Reducing computational cost by generating only semantically
-        important frames and interpolating the rest, achieving speedups for robotic
-        tasks.
-      what_remains_open: Generalizability of key frame selection across different
-        tasks and environments; trade-off between speed and video quality.
+    - line: Runnable pipelines and deployment stacks
+      paper_count: 87
+      what_it_solves: turning model ideas into end-to-end workflows for data, training,
+        inference, and evaluation
+      what_remains_open: how well the stack survives external deployment, hardware
+        changes, and user-specific settings
+      representative_papers:
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+      - id: yume-an-interactive-world-generation-model-2025
+        title: 'Yume: An Interactive World Generation Model'
+        year: 2025
+        score: 75.7
+    - line: Artifacts and reproducible engineering
+      paper_count: 61
+      what_it_solves: making systems inspectable and reusable through code, tools,
+        and experiment artifacts
+      what_remains_open: independent reproduction across teams, datasets, and infrastructure
+        environments
+      representative_papers:
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+      - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+        title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on
+          Minecraft'
+        year: 2025
+        score: 77.0
+      - id: yume-an-interactive-world-generation-model-2025
+        title: 'Yume: An Interactive World Generation Model'
+        year: 2025
+        score: 75.7
+    - line: Real-time and interactive serving
+      paper_count: 39
+      what_it_solves: meeting latency and interactivity requirements for closed-loop
+        use
+      what_remains_open: trade-offs between speed, fidelity, controllability, and
+        system complexity
+      representative_papers:
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+        title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on
+          Minecraft'
+        year: 2025
+        score: 77.0
+      - id: astra-general-interactive-world-model-with-autoregressive-d-2025
+        title: 'Astra: General Interactive World Model with Autoregressive Denoising'
+        year: 2025
+        score: 76.4
     consensus:
-    - World models should be interactive and controllable via actions, with evaluation
-      covering both visual quality and action fidelity.
-    - Real-time or near-real-time inference is a critical requirement for closed-loop
-      deployment.
-    - Open-source release of code, datasets, and benchmarks is widely adopted to support
-      reproducibility and community progress.
-    - Autoregressive and diffusion-based architectures are the dominant backbones,
-      often combined with action conditioning mechanisms.
+    - The main body of work is organized around Runnable pipelines and deployment
+      stacks, Artifacts and reproducible engineering, Real-time and interactive serving,
+      with a shared goal to turn model research into runnable stacks that connect
+      data, training, inference, evaluation, and deployment.
+    - A common pattern is to package multiple engineering stages into a usable workflow
+      and then report latency, reproducibility, or integration evidence, rather than
+      treating paper titles or tags as the unit of comparison.
     disagreements:
-    - 'Architecture choice: autoregressive Transformers (e.g., MineWorld) vs diffusion
-      models (e.g., Yume) vs hybrid autoregressive-denoising (e.g., Astra).'
-    - 'Training data source: synthetic data from game engines (Matrix-Game 2.0) vs
-      real-world driving logs (FAR-Drive) vs physical robot interaction (DayDreamer).'
-    - 'Target domain and interaction mode: keyboard-based exploration (Yume) vs trajectory
-      commands (Terra ACT-Bench) vs learned policies (DayDreamer).'
-    - 'Efficiency approach: key frame reasoning (KeyWorld) vs distillation (Matrix-Game
-      2.0) vs parallel decoding (MineWorld).'
+    - The substantive split is between runtime performance, reproducible artifacts,
+      and integration with external simulators or applications; those choices change
+      the input-output contract, evidence standard, and failure modes.
+    - The unresolved boundary is how well the stack survives external deployment,
+      hardware changes, and user-specific settings; another recurring gap is independent
+      reproduction across teams, datasets, and infrastructure environments.
     open_questions:
-    - How can world models maintain long-term temporal consistency without degradation
-      over hundreds of generated frames?
-    - What evaluation protocols best predict downstream task performance (e.g., planning,
-      control) from world model fidelity metrics?
-    - How to ensure action fidelity under out-of-distribution actions or novel environment
-      dynamics?
-    - Can key frame reasoning generalize beyond scripted robotic tasks to open-ended
-      interactive scenarios?
-    - What is the minimal computational budget required for real-time interactive
-      world models without sacrificing controllability?
+    - Which representation choices remain useful when the downstream task, controller,
+      or data distribution changes?
+    - What shared benchmarks would let the field compare prediction quality, controllability,
+      and decision utility together?
+    trend_evolution: Across 2022-2026, the topic moves from isolated modeling claims
+      toward work that ties turn model research into runnable stacks that connect
+      data, training, inference, evaluation, and deployment to stronger evidence and
+      clearer boundaries.
+    timeline:
+    - year: 2022
+      paper_count: 1
+      representative_papers:
+      - 'DayDreamer: World Models for Physical Robot Learning'
+    - year: 2024
+      paper_count: 14
+      representative_papers:
+      - 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      - 'CarDreamer: Open-Source Learning Platform for World Model based Autonomous
+        Driving'
+      - 'WoVoGen: World Volume-aware Diffusion for Controllable Multi-camera Driving
+        Scene Generation'
+    - year: 2025
+      paper_count: 50
+      representative_papers:
+      - 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      - 'Astra: General Interactive World Model with Autoregressive Denoising'
+      - 'Yume: An Interactive World Generation Model'
+    - year: 2026
+      paper_count: 42
+      representative_papers:
+      - 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      - Advancing Open-source World Models
+      - 'minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video
+        World Models'
+    references:
+    - id: daydreamer-world-models-for-physical-robot-learning-2022
+      title: 'DayDreamer: World Models for Physical Robot Learning'
+      year: 2022
+      score: 81.7
+      role: method, system, application
+    - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+      title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      year: 2024
+      score: 77.5
+      role: method, benchmark, system, application
+    - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+      title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      year: 2025
+      score: 77.0
+      role: method, system, application
+    - id: astra-general-interactive-world-model-with-autoregressive-d-2025
+      title: 'Astra: General Interactive World Model with Autoregressive Denoising'
+      year: 2025
+      score: 76.4
+      role: method, system
+    - id: yume-an-interactive-world-generation-model-2025
+      title: 'Yume: An Interactive World Generation Model'
+      year: 2025
+      score: 75.7
+      role: method, system
+    - id: far-drive-frame-autoregressive-video-generation-in-closed-l-2026
+      title: 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      year: 2026
+      score: 75.0
+      role: method, system, application
+    - id: keyworld-key-frame-reasoning-enables-effective-and-efficien-2025
+      title: 'KeyWorld: Key Frame Reasoning Enables Effective and Efficient World
+        Models'
+      year: 2025
+      score: 72.7
+      role: method, system, application
+    - id: matrix-game-2-0-an-open-source-real-time-and-streaming-in-2025
+      title: 'Matrix-Game 2.0: An Open-Source, Real-Time, and Streaming Interactive
+        World Model'
+      year: 2025
+      score: 72.1
+      role: method, system
   literature_review_zh:
+    范围与方法: 按研究路线归纳 107 篇系统相关论文，依据问题设定、建模对象、证据类型和已报告局限识别跨论文模式。
     研究路线矩阵:
-    - 路线: 用于闭环控制的实时交互式世界模型
-      解决的问题: 实时生成可控视频序列，用于自动驾驶、机器人和游戏环境，支持闭环模拟与交互。
-      尚未覆盖: 速度、视觉保真度、长时一致性和动作遵循之间的平衡；跨领域泛化能力。
-    - 路线: 无需模拟器的物理机器人学习世界模型
-      解决的问题: 通过真实世界交互直接学习机器人行为，避免模拟到真实的差距。
-      尚未覆盖: 扩展到更复杂任务和机器人；对物理硬件和重置机制的依赖；超参数敏感性。
-    - 路线: 动作可控世界模型的基准与评估
-      解决的问题: 提供标准化数据集和指标，量化世界模型遵循动作指令的能力，尤其用于自动驾驶。
-      尚未覆盖: 覆盖多种动作模态和长尾场景；基准指标与下游任务性能的相关性。
-    - 路线: 基于关键帧推理的高效世界模型推理
-      解决的问题: 仅生成语义关键帧并插值其余帧，降低计算成本，加速机器人任务。
-      尚未覆盖: 关键帧选择在不同任务和环境中的泛化性；速度与视频质量之间的权衡。
+    - 路线: 可运行流水线与部署栈
+      论文数: 87
+      解决的问题: 把模型想法转化为覆盖数据、训练、推理和评测的端到端工作流
+      尚未覆盖: 系统栈在外部部署、硬件变化和用户特定设置下是否仍然可靠
+      代表论文:
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+      - id: yume-an-interactive-world-generation-model-2025
+        title: 'Yume: An Interactive World Generation Model'
+        year: 2025
+        score: 75.7
+    - 路线: 工件与可复现工程
+      论文数: 61
+      解决的问题: 通过代码、工具和实验工件让系统可检查、可复用
+      尚未覆盖: 跨团队、数据集和基础设施环境的独立复现
+      代表论文:
+      - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+        title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+          Driving'
+        year: 2024
+        score: 77.5
+      - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+        title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on
+          Minecraft'
+        year: 2025
+        score: 77.0
+      - id: yume-an-interactive-world-generation-model-2025
+        title: 'Yume: An Interactive World Generation Model'
+        year: 2025
+        score: 75.7
+    - 路线: 实时与交互式服务
+      论文数: 39
+      解决的问题: 满足闭环使用中的延迟和交互需求
+      尚未覆盖: 速度、保真度、可控性和系统复杂度之间的权衡
+      代表论文:
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+        title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on
+          Minecraft'
+        year: 2025
+        score: 77.0
+      - id: astra-general-interactive-world-model-with-autoregressive-d-2025
+        title: 'Astra: General Interactive World Model with Autoregressive Denoising'
+        year: 2025
+        score: 76.4
     共识:
-    - 世界模型应支持交互和动作控制，评估需同时考虑视觉质量和动作忠实度。
-    - 实时或近实时推理是闭环部署的关键需求。
-    - 开源代码、数据集和基准被广泛采用，以支持可复现性和社区进展。
-    - 自回归和扩散架构是主流骨干，常与动作条件机制结合。
+    - 这个主题的主体由可运行流水线与部署栈、工件与可复现工程、实时与交互式服务构成，共同目标是把模型研究转化为连接数据、训练、推理、评测和部署的可运行系统栈。
+    - 常见范式是把多个工程阶段封装成可用工作流，再报告延迟、可复现性或集成证据，而不是把论文标题或标签当作比较单位。
     分歧:
-    - 架构选择：自回归Transformer（如MineWorld） vs 扩散模型（如Yume） vs 混合自回归去噪（如Astra）。
-    - 训练数据来源：游戏引擎合成数据（Matrix-Game 2.0） vs 真实驾驶日志（FAR-Drive） vs 物理机器人交互（DayDreamer）。
-    - 目标领域与交互模式：键盘探索（Yume） vs 轨迹指令（Terra ACT-Bench） vs 学习策略（DayDreamer）。
-    - 效率策略：关键帧推理（KeyWorld） vs 蒸馏（Matrix-Game 2.0） vs 并行解码（MineWorld）。
+    - 论文之间的实质分歧集中在运行时性能、可复现工件，以及与外部仿真器或应用的集成；这些选择决定输入输出约定、证据标准和失败模式。
+    - 尚未解决的边界包括系统栈在外部部署、硬件变化和用户特定设置下是否仍然可靠；另一个反复出现的问题是跨团队、数据集和基础设施环境的独立复现。
     开放问题:
-    - 世界模型如何在数百帧生成中保持长时域一致性而不退化？
-    - 哪些评估协议能最好地从世界模型保真度指标预测下游任务（如规划、控制）性能？
-    - 如何在分布外动作或新环境动态下确保动作忠实度？
-    - 关键帧推理能否从脚本化机器人任务泛化到开放式交互场景？
-    - 实时交互式世界模型所需的最小计算预算是多少，同时不牺牲可控性？
+    - 当下游任务、控制器或数据分布变化时，哪些表示选择仍然有效？
+    - 什么样的共享基准能同时比较预测质量、可控性和决策效用？
+    趋势演进: 从 2022 到 2026，研究重心正在从单点主张转向把把模型研究转化为连接数据、训练、推理、评测和部署的可运行系统栈与更强证据和更清晰边界连接起来。
+    时间线:
+    - year: 2022
+      paper_count: 1
+      representative_papers:
+      - 'DayDreamer: World Models for Physical Robot Learning'
+    - year: 2024
+      paper_count: 14
+      representative_papers:
+      - 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      - 'CarDreamer: Open-Source Learning Platform for World Model based Autonomous
+        Driving'
+      - 'WoVoGen: World Volume-aware Diffusion for Controllable Multi-camera Driving
+        Scene Generation'
+    - year: 2025
+      paper_count: 50
+      representative_papers:
+      - 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      - 'Astra: General Interactive World Model with Autoregressive Denoising'
+      - 'Yume: An Interactive World Generation Model'
+    - year: 2026
+      paper_count: 42
+      representative_papers:
+      - 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      - Advancing Open-source World Models
+      - 'minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video
+        World Models'
+    参考论文:
+    - id: daydreamer-world-models-for-physical-robot-learning-2022
+      title: 'DayDreamer: World Models for Physical Robot Learning'
+      year: 2022
+      score: 81.7
+      role: method, system, application
+    - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+      title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      year: 2024
+      score: 77.5
+      role: method, benchmark, system, application
+    - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+      title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      year: 2025
+      score: 77.0
+      role: method, system, application
+    - id: astra-general-interactive-world-model-with-autoregressive-d-2025
+      title: 'Astra: General Interactive World Model with Autoregressive Denoising'
+      year: 2025
+      score: 76.4
+      role: method, system
+    - id: yume-an-interactive-world-generation-model-2025
+      title: 'Yume: An Interactive World Generation Model'
+      year: 2025
+      score: 75.7
+      role: method, system
+    - id: far-drive-frame-autoregressive-video-generation-in-closed-l-2026
+      title: 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      year: 2026
+      score: 75.0
+      role: method, system, application
+    - id: keyworld-key-frame-reasoning-enables-effective-and-efficien-2025
+      title: 'KeyWorld: Key Frame Reasoning Enables Effective and Efficient World
+        Models'
+      year: 2025
+      score: 72.7
+      role: method, system, application
+    - id: matrix-game-2-0-an-open-source-real-time-and-streaming-in-2025
+      title: 'Matrix-Game 2.0: An Open-Source, Real-Time, and Streaming Interactive
+        World Model'
+      year: 2025
+      score: 72.1
+      role: method, system
 - id: theory
   label: theory
   label_zh: 理论
@@ -509,7 +1270,7 @@ topics:
   - world model
   - supervised fine-tuning
   component_averages:
-    citation_impact: 35.4
+    citation_impact: 35.2
     citation_velocity: 0.0
     graph_prestige: 0.0
     methodology_quality: 73.1
@@ -562,94 +1323,340 @@ topics:
     score: 60.8
     url: https://arxiv.org/abs/2602.23152
   related_work_outline:
-  - 'Mainstream direction: Formalizing world models through taxonomies, consistency
-    principles, and sufficiency constraints to define necessary properties beyond
-    passive prediction.'
-  - 'Shared research pattern: Emphasis on latent state design, scaling behaviors,
-    and evaluation frameworks that prioritize functional benchmarks over visual fidelity.'
-  - 'Key differences: Representation (explicit vs implicit state construction), supervision
-    signal (dynamics prediction vs equivariance vs generative loss), and evaluation
-    target (zero-shot generalization vs scaling laws vs consistency).'
-  - 'Trend evolution: From 2024 to 2026, the field moves from isolated scaling studies
-    and taxonomy proposals toward unified principles (e.g., Trinity of Consistency)
-    and functional evaluation, though empirical validation remains narrow.'
-  - 'Open questions: Whether formal conditions match empirical model behavior; how
-    to operationalize sufficiency constraints; transferability of scaling laws across
-    environments; scalability of structured world models.'
+  - 'Mainstream direction: theory work around AI, world models, LG, RO is converging
+    on Proposes a novel taxonomy for video generation as world models centered on
+    State Construction and Dynamics Modelin…, Introduction of a ''levels x laws''
+    taxonomy for agentic world modeling, defining three capability levels (L1 Predic…,
+    and Isolates the independent impact of model scale from architectural mechanisms
+    in world models.'
+  - 'Shared research pattern: the strongest papers combine The paper presents a conceptual
+    analysis and taxonomy based on reviewing existing video generation models and
+    worl…, The paper constructs a ''levels x laws'' taxonomy to categorize world models
+    along two axes: capability levels (pred…, and The study uses a minimalist transformer
+    world model trained on fixed offline datasets derived from a presupposed e… with
+    evidence from The paper proposes a taxonomy of state construction (implicit/explicit)
+    and dynamics modeling (knowledge integration, archit…, No experimental results
+    are reported; the paper is a survey and taxonomy that provides a structured roadmap
+    for agentic worl…, and Individual environments exhibit distinct scaling regimes:
+    some show monotonic improvements in the overparameterized regime w….'
+  - 'Key differences: papers diverge by emphasis across AI, world models, LG, RO,
+    reinforcement learning, so the useful comparison is representation, supervision
+    signal, and decision-time interface rather than title-level novelty.'
+  - 'Trend evolution: From 2024 to 2026, the center of gravity is moving from isolated
+    model claims toward interactive systems, benchmarks, and evidence that can compare
+    across settings.'
+  - 'Open questions: recurring gaps include Current video generation models are stateless
+    and lack explicit state construction, creating a gap with classic wo…, Relies
+    on fixed offline datasets derived from a presupposed expert policy, limiting generalization
+    to other data s…, and The framework is integrated within the Dreamer architecture,
+    which may limit applicability to other model-based RL…, which should anchor deeper
+    literature-review prose.'
   related_work_outline_zh:
-  - 主流方向：通过分类法、一致性原则和充分性约束形式化世界模型，定义超越被动预测的必要属性。
-  - 研究共性：强调潜在状态设计、缩放行为以及优先考虑功能基准而非视觉保真度的评估框架。
-  - 关键差异：表示方式（显式与隐式状态构建）、监督信号（动力学预测 vs 等变性 vs 生成损失）以及评估目标（零样本泛化 vs 缩放规律 vs 一致性）。
-  - 趋势演进：从2024到2026年，领域从孤立的缩放研究和分类法提案转向统一原则（如一致性三位一体）和功能评估，但实证验证仍狭窄。
-  - 开放问题：形式条件是否符合经验模型行为；如何操作化充分性约束；缩放规律跨环境的可迁移性；结构化世界模型的可扩展性。
+  - 主流方向：理论方向中围绕AI、world models、LG、RO的研究正在收敛到提出了一种以状态构建和动态建模为中心的视频生成作为世界模型的新分类法。、引入'levels
+    x laws'分类法用于智能体世界建模，定义三个能力层级（L1 Predictor, L2 Simulator, L3 Evolver）和四个法则领域（物理、数字、社会、科学）。、将模型规模对世界模型的影响与架构机制独立分离。
+  - 研究共性：高分论文通常把本文基于对现有视频生成模型和世界模型理论的回顾，提出了一种概念性分析和分类法。它将方法分为隐式和显式状态构建，以及通过知识整合和架构重构的动态建模。未引入新的实验或数据集。、本文构建了一个'levels
+    x laws'分类法，沿两个轴对世界模型进行分类：能力层级（predictor, simulator, evolver）和法则领域（物理、数字、社会、科学）。利用该框架，作者进行…、本研究使用最小化Transformer世界模型，在Atari
+    100k基准上基于预设专家策略的固定离线数据集进行训练。分别分析单个任务和统一设置（单个Transformer在26个Atari环境上训练）下的缩…与本文提出了状态构建（隐式/显式）和动态建模（知识整合、架构重构）的分类法，并倡导功能基准。确定了两个关键前沿：增强持久性和推进因果推理。、未报告实验结果；本文是一篇综述和分类法论文，为智能体世界建模提供了结构化路线图，综合现有工作并提出评估原则。、单个环境表现出不同的缩放机制：部分在过参数化区域呈现单调改进，而其他环境随着模型增大性能下降。在26个环境上的联合训练稳定了缩放，所有环境均获得单调增益。最佳下游策略达到中位数专家-随机归一化分数0.770。结合起来，而不是只停留在概念声明。
+  - 关键差异：论文之间的差异主要体现在AI、world models、LG、RO、reinforcement learning，因此更值得比较表示方式、监督信号和决策时接口。
+  - 趋势演进：从 2024 到 2026，研究重心正在从单点模型主张转向可交互系统、标准化基准和可横向比较的证据。
+  - 开放问题：反复出现的缺口包括当前的视频生成模型是无状态的，缺乏显式状态构建，与经典世界模型理论存在差距。、依赖于预设专家策略的固定离线数据集，限制了向其他数据源的泛化、该框架集成在Dreamer架构中，可能限制其应用于其他基于模型的强化学习方法，这些应成为后续文献综述的主线。
   literature_review:
+    scope_methodology: Grouped 49 papers under theory by research line, using each
+      paper's problem setting, modeling target, evidence type, and reported limitations
+      to identify cross-paper patterns.
     line_of_work_matrix:
-    - line: Formal definitions and assumptions for world models
-      what_it_solves: Clarifying necessary properties (state construction, dynamics
-        modeling, consistency) and assumptions under which world models can be considered
-        general or actionable.
-      what_remains_open: Whether formal conditions match empirical model behavior
-        in realistic settings; lack of unified evaluation to test these conditions.
-    - line: Scaling laws and guarantees for world models
-      what_it_solves: Connecting model scale, data, and objectives to predictive and
-        control performance, revealing distinct scaling regimes across tasks.
-      what_remains_open: Direct validation that scaling laws predict failures and
-        transfer across diverse environments; limited to Atari and small-scale settings.
+    - line: Formal definitions and assumptions
+      paper_count: 34
+      what_it_solves: clarifying what a world model must represent and under which
+        assumptions claims hold
+      what_remains_open: whether the formal conditions match empirical model behavior
+        in realistic settings
+      representative_papers:
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
+      - id: dynamics-aligned-latent-imagination-in-contextual-world-mode-2025
+        title: Dynamics-Aligned Latent Imagination in Contextual World Models for
+          Zero-Shot Generalization
+        year: 2025
+        score: 63.4
+      - id: latent-state-design-for-world-models-under-sufficiency-const-2026
+        title: Latent State Design for World Models under Sufficiency Constraints
+        year: 2026
+        score: 62.8
+    - line: Scaling laws and guarantees
+      paper_count: 30
+      what_it_solves: connecting model size, data, objectives, or assumptions to expected
+        behavior
+      what_remains_open: direct validation that the claimed laws predict failures
+        and transfers
+      representative_papers:
+      - id: agentic-world-modeling-foundations-capabilities-laws-and-2026
+        title: 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+        year: 2026
+        score: 65.8
+      - id: probing-the-impact-of-scale-on-data-efficient-generalist-tr-2026
+        title: Probing the Impact of Scale on Data-Efficient, Generalist Transformer
+          World Models for Atari
+        year: 2026
+        score: 65.1
+      - id: dynamics-aligned-latent-imagination-in-contextual-world-mode-2025
+        title: Dynamics-Aligned Latent Imagination in Contextual World Models for
+          Zero-Shot Generalization
+        year: 2025
+        score: 63.4
     - line: Conceptual taxonomy and boundaries
-      what_it_solves: Organizing fragmented world-model claims into categories (e.g.,
-        levels, laws, sufficiency constraints) to expose hidden gaps and guide design.
-      what_remains_open: Whether taxonomies change how researchers evaluate or design
-        models; need for operationalization and quantitative benchmarks.
+      paper_count: 16
+      what_it_solves: organizing fragmented world-model claims into categories and
+        problem boundaries
+      what_remains_open: whether the taxonomy changes how researchers evaluate or
+        design models
+      representative_papers:
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
+      - id: agentic-world-modeling-foundations-capabilities-laws-and-2026
+        title: 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+        year: 2026
+        score: 65.8
+      - id: latent-state-design-for-world-models-under-sufficiency-const-2026
+        title: Latent State Design for World Models under Sufficiency Constraints
+        year: 2026
+        score: 62.8
     consensus:
-    - World models must go beyond passive prediction to support control and generalization;
-      current evaluation metrics (visual fidelity) are insufficient.
-    - Latent state design is crucial and should be task-specific rather than maximizing
-      information preservation.
-    - Scaling can improve performance but not uniformly across tasks; joint training
-      across environments stabilizes scaling dynamics.
+    - The main body of work is organized around Formal definitions and assumptions,
+      Scaling laws and guarantees, Conceptual taxonomy and boundaries, with a shared
+      goal to clarify definitions, assumptions, laws, and boundaries behind world-model
+      claims.
+    - A common pattern is to state a formal or conceptual claim, identify the conditions
+      under which it holds, and connect it to evaluation criteria, rather than treating
+      paper titles or tags as the unit of comparison.
     disagreements:
-    - 'Representation: explicit state construction (object-centric, structured) vs
-      implicit context management (latent compression).'
-    - 'Supervision signal: self-supervised dynamics prediction vs equivariance constraints
-      vs generative objectives (e.g., video prediction).'
-    - 'Evaluation target: zero-shot generalization across symmetries vs scaling law
-      characterization vs consistency across modalities/spacetime.'
-    - 'Deployment setting: Atari benchmarks vs real-world robotics vs multi-modal
-      video generation; limited cross-setting validation.'
+    - The substantive split is between formal guarantees, conceptual taxonomies, and
+      empirical validity of assumptions; those choices change the input-output contract,
+      evidence standard, and failure modes.
+    - The unresolved boundary is whether the formal conditions match empirical model
+      behavior in realistic settings; another recurring gap is direct validation that
+      the claimed laws predict failures and transfers.
     open_questions:
-    - Can formal consistency principles (modal, spatial, temporal) be empirically
-      verified in current world models?
-    - Do scaling laws observed on Atari transfer to more complex environments with
-      higher-dimensional observations?
-    - How to operationalize sufficiency constraints for latent state design in a quantitative,
-      task-agnostic manner?
-    - Can exact equivariance be maintained at scale without sacrificing model capacity
-      or data efficiency?
+    - Which representation choices remain useful when the downstream task, controller,
+      or data distribution changes?
+    - What shared benchmarks would let the field compare prediction quality, controllability,
+      and decision utility together?
+    trend_evolution: Across 2024-2026, the topic moves from isolated modeling claims
+      toward work that ties clarify definitions, assumptions, laws, and boundaries
+      behind world-model claims to stronger evidence and clearer boundaries.
+    timeline:
+    - year: 2024
+      paper_count: 6
+      representative_papers:
+      - Evaluating the World Model Implicit in a Generative Model
+      - Emergence of Implicit World Models from Mortal Agents
+      - 'Generative Emergent Communication: Large Language Model is a Collective World
+        Model'
+    - year: 2025
+      paper_count: 21
+      representative_papers:
+      - Dynamics-Aligned Latent Imagination in Contextual World Models for Zero-Shot
+        Generalization
+      - 'Natural Building Blocks for Structured World Models: Theory, Evidence, and
+        Scaling'
+      - Embodied World Models Emerge from Navigational Task in Open-Ended Environments
+    - year: 2026
+      paper_count: 22
+      representative_papers:
+      - 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+      - 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+      - Probing the Impact of Scale on Data-Efficient, Generalist Transformer World
+        Models for Atari
+    references:
+    - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+      title: 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+      year: 2026
+      score: 70.2
+      role: survey, theory
+    - id: agentic-world-modeling-foundations-capabilities-laws-and-2026
+      title: 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+      year: 2026
+      score: 65.8
+      role: theory
+    - id: probing-the-impact-of-scale-on-data-efficient-generalist-tr-2026
+      title: Probing the Impact of Scale on Data-Efficient, Generalist Transformer
+        World Models for Atari
+      year: 2026
+      score: 65.1
+      role: method, theory
+    - id: dynamics-aligned-latent-imagination-in-contextual-world-mode-2025
+      title: Dynamics-Aligned Latent Imagination in Contextual World Models for Zero-Shot
+        Generalization
+      year: 2025
+      score: 63.4
+      role: method, theory
+    - id: latent-state-design-for-world-models-under-sufficiency-const-2026
+      title: Latent State Design for World Models under Sufficiency Constraints
+      year: 2026
+      score: 62.8
+      role: theory, survey
+    - id: exact-equivariance-kept-through-training-buys-zero-shot-ge-2026
+      title: Exact equivariance, kept through training, buys zero-shot generalisation
+        across the symmetry group
+      year: 2026
+      score: 62.0
+      role: method, theory
+    - id: natural-building-blocks-for-structured-world-models-theory-2025
+      title: 'Natural Building Blocks for Structured World Models: Theory, Evidence,
+        and Scaling'
+      year: 2025
+      score: 62.0
+      role: theory
+    - id: the-trinity-of-consistency-as-a-defining-principle-for-gener-2026
+      title: The Trinity of Consistency as a Defining Principle for General World
+        Models
+      year: 2026
+      score: 60.8
+      role: theory
   literature_review_zh:
+    范围与方法: 按研究路线归纳 49 篇理论相关论文，依据问题设定、建模对象、证据类型和已报告局限识别跨论文模式。
     研究路线矩阵:
-    - 路线: 世界模型的形式化定义与假设
-      解决的问题: 澄清必要属性（状态构建、动态建模、一致性）以及世界模型可被视为通用或可操作的假设条件。
-      尚未覆盖: 形式条件是否符合真实场景中的经验模型行为；缺乏统一的评估来检验这些条件。
-    - 路线: 世界模型的缩放规律与保证
-      解决的问题: 将模型规模、数据和目标与预测及控制性能联系起来，揭示不同任务间的不同缩放机制。
-      尚未覆盖: 缩放规律能否预测失败和迁移的直接验证；目前仅限于Atari和小规模设置。
+    - 路线: 形式化定义与假设
+      论文数: 34
+      解决的问题: 澄清世界模型必须表示什么，以及相关主张在哪些假设下成立
+      尚未覆盖: 形式条件是否符合真实场景中的经验模型行为
+      代表论文:
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
+      - id: dynamics-aligned-latent-imagination-in-contextual-world-mode-2025
+        title: Dynamics-Aligned Latent Imagination in Contextual World Models for
+          Zero-Shot Generalization
+        year: 2025
+        score: 63.4
+      - id: latent-state-design-for-world-models-under-sufficiency-const-2026
+        title: Latent State Design for World Models under Sufficiency Constraints
+        year: 2026
+        score: 62.8
+    - 路线: 缩放规律与保证
+      论文数: 30
+      解决的问题: 把模型规模、数据、目标或假设与预期行为联系起来
+      尚未覆盖: 这些规律是否能预测失败和迁移仍缺少直接验证
+      代表论文:
+      - id: agentic-world-modeling-foundations-capabilities-laws-and-2026
+        title: 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+        year: 2026
+        score: 65.8
+      - id: probing-the-impact-of-scale-on-data-efficient-generalist-tr-2026
+        title: Probing the Impact of Scale on Data-Efficient, Generalist Transformer
+          World Models for Atari
+        year: 2026
+        score: 65.1
+      - id: dynamics-aligned-latent-imagination-in-contextual-world-mode-2025
+        title: Dynamics-Aligned Latent Imagination in Contextual World Models for
+          Zero-Shot Generalization
+        year: 2025
+        score: 63.4
     - 路线: 概念分类与边界
-      解决的问题: 将碎片化的世界模型主张组织成类别（如层级、法则、充分性约束），以暴露隐藏的差距并指导设计。
-      尚未覆盖: 这些分类是否真正改变研究者的评测和模型设计方式；需要操作化和定量基准。
+      论文数: 16
+      解决的问题: 把碎片化的世界模型主张组织为类别和问题边界
+      尚未覆盖: 这些分类是否真正改变研究者的评测和模型设计方式
+      代表论文:
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
+      - id: agentic-world-modeling-foundations-capabilities-laws-and-2026
+        title: 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+        year: 2026
+        score: 65.8
+      - id: latent-state-design-for-world-models-under-sufficiency-const-2026
+        title: Latent State Design for World Models under Sufficiency Constraints
+        year: 2026
+        score: 62.8
     共识:
-    - 世界模型必须超越被动预测以支持控制和泛化；当前评估指标（视觉保真度）不足。
-    - 潜在状态设计至关重要，应针对任务而非最大化信息保留。
-    - 缩放可以提升性能，但并非所有任务都一致；多环境联合训练稳定了缩放动态。
+    - 这个主题的主体由形式化定义与假设、缩放规律与保证、概念分类与边界构成，共同目标是澄清世界模型主张背后的定义、假设、规律和边界。
+    - 常见范式是提出形式化或概念性主张，说明其成立条件，并连接到评测标准，而不是把论文标题或标签当作比较单位。
     分歧:
-    - 表示方式：显式状态构建（对象中心、结构化） vs 隐式上下文管理（潜在压缩）。
-    - 监督信号：自监督动力学预测 vs 等变性约束 vs 生成目标（如视频预测）。
-    - 评估目标：跨对称群的零样本泛化 vs 缩放规律表征 vs 跨模态/时空的一致性。
-    - 部署场景：Atari基准 vs 真实机器人 vs 多模态视频生成；跨场景验证有限。
+    - 论文之间的实质分歧集中在形式保证、概念分类和假设的经验有效性；这些选择决定输入输出约定、证据标准和失败模式。
+    - 尚未解决的边界包括形式条件是否符合真实场景中的经验模型行为；另一个反复出现的问题是这些规律是否能预测失败和迁移仍缺少直接验证。
     开放问题:
-    - 一致性原则（模态、空间、时间）能否在当前世界模型中得到经验验证？
-    - 在Atari上观察到的缩放规律能否迁移到具有更高维观测的复杂环境？
-    - 如何以定量、任务无关的方式操作化潜在状态设计的充分性约束？
-    - 精确等变性能否在不牺牲模型容量或数据效率的情况下保持大规模？
+    - 当下游任务、控制器或数据分布变化时，哪些表示选择仍然有效？
+    - 什么样的共享基准能同时比较预测质量、可控性和决策效用？
+    趋势演进: 从 2024 到 2026，研究重心正在从单点主张转向把澄清世界模型主张背后的定义、假设、规律和边界与更强证据和更清晰边界连接起来。
+    时间线:
+    - year: 2024
+      paper_count: 6
+      representative_papers:
+      - Evaluating the World Model Implicit in a Generative Model
+      - Emergence of Implicit World Models from Mortal Agents
+      - 'Generative Emergent Communication: Large Language Model is a Collective World
+        Model'
+    - year: 2025
+      paper_count: 21
+      representative_papers:
+      - Dynamics-Aligned Latent Imagination in Contextual World Models for Zero-Shot
+        Generalization
+      - 'Natural Building Blocks for Structured World Models: Theory, Evidence, and
+        Scaling'
+      - Embodied World Models Emerge from Navigational Task in Open-Ended Environments
+    - year: 2026
+      paper_count: 22
+      representative_papers:
+      - 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+      - 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+      - Probing the Impact of Scale on Data-Efficient, Generalist Transformer World
+        Models for Atari
+    参考论文:
+    - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+      title: 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+      year: 2026
+      score: 70.2
+      role: survey, theory
+    - id: agentic-world-modeling-foundations-capabilities-laws-and-2026
+      title: 'Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond'
+      year: 2026
+      score: 65.8
+      role: theory
+    - id: probing-the-impact-of-scale-on-data-efficient-generalist-tr-2026
+      title: Probing the Impact of Scale on Data-Efficient, Generalist Transformer
+        World Models for Atari
+      year: 2026
+      score: 65.1
+      role: method, theory
+    - id: dynamics-aligned-latent-imagination-in-contextual-world-mode-2025
+      title: Dynamics-Aligned Latent Imagination in Contextual World Models for Zero-Shot
+        Generalization
+      year: 2025
+      score: 63.4
+      role: method, theory
+    - id: latent-state-design-for-world-models-under-sufficiency-const-2026
+      title: Latent State Design for World Models under Sufficiency Constraints
+      year: 2026
+      score: 62.8
+      role: theory, survey
+    - id: exact-equivariance-kept-through-training-buys-zero-shot-ge-2026
+      title: Exact equivariance, kept through training, buys zero-shot generalisation
+        across the symmetry group
+      year: 2026
+      score: 62.0
+      role: method, theory
+    - id: natural-building-blocks-for-structured-world-models-theory-2025
+      title: 'Natural Building Blocks for Structured World Models: Theory, Evidence,
+        and Scaling'
+      year: 2025
+      score: 62.0
+      role: theory
+    - id: the-trinity-of-consistency-as-a-defining-principle-for-gener-2026
+      title: The Trinity of Consistency as a Defining Principle for General World
+        Models
+      year: 2026
+      score: 60.8
+      role: theory
 - id: survey
   label: survey
   label_zh: 综述
@@ -719,104 +1726,340 @@ topics:
     score: 67.0
     url: https://arxiv.org/abs/2509.07996
   related_work_outline:
-  - 'Mainstream direction: Surveys on world models are converging on taxonomies that
-    bridge video generation, autonomous driving, and embodied AI, with increasing
-    emphasis on evaluation frameworks and open challenges.'
-  - 'Shared research pattern: Most surveys propose a taxonomy or framework to organize
-    the fragmented field, identify technical challenges (state construction, dynamics
-    modeling, evaluation), and advocate for functional benchmarks.'
-  - 'Key differences: Surveys differ in focus domain (driving vs. general vs. 3D/4D),
-    stance on evaluation (visual fidelity vs. decision utility), and whether they
-    propose new architectures or remain descriptive.'
-  - 'Trend evolution: From 2024 to 2026, surveys moved from broad overviews (Sora
-    as world simulator) to specialized taxonomies (latent world models for driving,
-    mechanistic view) and position papers on evaluation, indicating maturation and
-    increasing specificity.'
-  - 'Open questions: How to design evaluation protocols for causal reasoning and policy
-    utility? How to achieve explicit state construction and long-term memory? How
-    to unify evaluation across domains and settings?'
+  - 'Mainstream direction: survey work around world models, CV, RO, AI is converging
+    on Systematic review of interactive world modeling covering application scenarios,
+    world state evolution, and scene m…, Sora model''s simulation capabilities demonstrating
+    incipient comprehension of physical laws, and Unified latent-space framework for
+    world models in automated driving.'
+  - 'Shared research pattern: the strongest papers combine This paper conducts a systematic
+    review of recent research trends, technical developments, evaluation benchmarks…,
+    This survey conducts a comprehensive literature review of recent advancements
+    in world models, analyzing generativ…, and The paper synthesizes recent progress
+    in world models for automated driving by proposing a unifying latent-space f…
+    with evidence from The paper provides a comprehensive survey of interactive world
+    modeling, summarizing current trends and challenges, and comp…, The survey finds
+    that Sora exhibits remarkable simulation capabilities with an incipient comprehension
+    of physical laws, and…, and The paper presents a conceptual taxonomy and evaluation
+    framework for latent world models in automated driving, but does not….'
+  - 'Key differences: papers diverge by emphasis across world models, CV, RO, AI,
+    reinforcement learning, so the useful comparison is representation, supervision
+    signal, and decision-time interface rather than title-level novelty.'
+  - 'Trend evolution: From 2024 to 2026, the center of gravity is moving from isolated
+    model claims toward interactive systems, benchmarks, and evidence that can compare
+    across settings.'
+  - 'Open questions: recurring gaps include The survey may not cover all recent works
+    due to the rapid pace of development in the field, Challenges and limitations
+    of world models are discussed but not detailed in the abstract., and The proposed
+    framework is theoretical and lacks empirical validation, which should anchor deeper
+    literature-review prose.'
   related_work_outline_zh:
-  - 主流方向：世界模型综述正汇聚于连接视频生成、自动驾驶和具身AI的分类体系，越来越强调评估框架和开放挑战。
-  - 研究共性：多数综述提出分类法或框架来组织碎片化领域，识别技术挑战（状态构建、动态建模、评估），并倡导功能基准。
-  - 关键差异：综述在聚焦领域（驾驶 vs. 通用 vs. 3D/4D）、评估立场（视觉逼真度 vs. 决策效用）以及是否提出新架构或保持描述性上存在差异。
-  - 趋势演进：从2024到2026年，综述从宽泛概述（Sora作为世界模拟器）转向专门分类法（驾驶潜在世界模型、机制视角）和评估立场论文，表明领域成熟且日益具体。
-  - 开放问题：如何设计测试因果推理和策略效用的评估协议？如何实现显式状态构建和长期记忆？如何统一跨领域和设置的评估？
+  - 主流方向：综述方向中围绕world models、CV、RO、AI的研究正在收敛到系统综述交互式世界建模，涵盖应用场景、世界状态演化及场景模态、Sora模型的模拟能力展现出对物理规律的初步理解、自动驾驶世界模型的统一潜在空间框架。
+  - 研究共性：高分论文通常把本文对交互式世界建模的最新研究趋势、技术进展、评估基准及未来方向进行了系统综述。按应用场景、世界状态演化及场景模态分类，深入探讨三大技术挑战，并比较四个具体应用领域的现有基准与指标。、本综述对世界模型的最新进展进行了全面的文献回顾，分析了视频生成中的生成方法、自动驾驶世界模型以及自主智能体中的世界模型。它考察了挑战与局限，并讨论了未来方向。、本文通过提出一个统一的潜在空间框架，综合了自动驾驶世界模型的最新进展。它根据潜在表示的目标和形式以及结构先验来组织设计空间，并阐述了五种跨领域的内部机制。还提出了包括闭环度量套件和资源感知的推理成本在内的评估…与本文提供了交互式世界建模的全面综述，总结了当前趋势与挑战，并比较了开放世界探索、游戏引擎、自动驾驶和机器人领域的基准。未呈现新的实验结果。、综述发现，Sora展现出卓越的模拟能力，具有对物理规律的初步理解；世界模型对于合成逼真的视觉内容、重塑交通以及实现动态环境中的智能交互至关重要。、本文提出了一个概念性的分类法和评估框架，用于自动驾驶中的潜在世界模型，但未提供实验结果或对所提思想的实证验证。结合起来，而不是只停留在概念声明。
+  - 关键差异：论文之间的差异主要体现在world models、CV、RO、AI、reinforcement learning，因此更值得比较表示方式、监督信号和决策时接口。
+  - 趋势演进：从 2024 到 2026，研究重心正在从单点模型主张转向可交互系统、标准化基准和可横向比较的证据。
+  - 开放问题：反复出现的缺口包括由于该领域发展迅速，综述可能未涵盖所有最新工作、世界模型的挑战与局限在摘要中有所讨论但未详细展开。、所提框架是理论性的，缺乏实证验证，这些应成为后续文献综述的主线。
   literature_review:
+    scope_methodology: Grouped 36 papers under survey by research line, using each
+      paper's problem setting, modeling target, evidence type, and reported limitations
+      to identify cross-paper patterns.
     line_of_work_matrix:
     - line: Taxonomy and roadmap synthesis
-      what_it_solves: Mapping a fragmented field into coherent directions, milestones,
-        and research gaps across domains such as video generation, autonomous driving,
-        and embodied AI.
-      what_remains_open: Whether the synthesis is backed by systematic evidence rather
-        than selective examples; prioritization of gaps remains subjective.
-    - line: Comparative evaluation synthesis
-      what_it_solves: Summarizing how different evaluation choices (visual fidelity,
-        counterfactual reasoning, policy utility) shape conclusions across papers
-        and proposing unified evaluation frameworks.
-      what_remains_open: Whether compared results are actually compatible across different
-        settings (e.g., open-loop vs. closed-loop, different simulators); lack of
-        empirical validation of proposed frameworks.
+      paper_count: 27
+      what_it_solves: mapping a fragmented field into directions, milestones, and
+        research gaps
+      what_remains_open: whether the synthesis is backed by systematic evidence rather
+        than selective examples
+      representative_papers:
+      - id: is-sora-a-world-simulator-a-comprehensive-survey-on-general-2024
+        title: Is Sora a World Simulator? A Comprehensive Survey on General World
+          Models and Beyond
+        year: 2024
+        score: 72.8
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
+      - id: how-should-world-models-be-evaluated-a-decision-making-cent-2026
+        title: How Should World Models Be Evaluated? A Decision-Making-Centric Position
+        year: 2026
+        score: 70.1
     - line: Open problem and gap mapping
-      what_it_solves: Turning broad literature coverage into concrete next research
-        questions, such as state construction, long-horizon memory, causal reasoning,
-        and real-time interactivity.
-      what_remains_open: Prioritization of which gaps matter most for progress; many
-        proposed architectures (e.g., GLP) remain speculative without implementation.
+      paper_count: 27
+      what_it_solves: turning broad literature coverage into concrete next research
+        questions
+      what_remains_open: prioritization of which gaps matter most for progress
+      representative_papers:
+      - id: towards-interactive-video-world-modeling-frontiers-challen-2026
+        title: 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+          and Future Trends'
+        year: 2026
+        score: 75.1
+      - id: is-sora-a-world-simulator-a-comprehensive-survey-on-general-2024
+        title: Is Sora a World Simulator? A Comprehensive Survey on General World
+          Models and Beyond
+        year: 2024
+        score: 72.8
+      - id: latent-world-models-for-automated-driving-a-unified-taxonom-2026
+        title: 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+          Framework, and Open Challenges'
+        year: 2026
+        score: 71.2
+    - line: Comparative evaluation synthesis
+      paper_count: 15
+      what_it_solves: summarizing how different evaluation choices shape conclusions
+        across papers
+      what_remains_open: whether the compared results are actually compatible across
+        settings
+      representative_papers:
+      - id: towards-interactive-video-world-modeling-frontiers-challen-2026
+        title: 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+          and Future Trends'
+        year: 2026
+        score: 75.1
+      - id: latent-world-models-for-automated-driving-a-unified-taxonom-2026
+        title: 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+          Framework, and Open Challenges'
+        year: 2026
+        score: 71.2
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
     consensus:
-    - World models are critical for decision-making, planning, and simulation across
-      multiple domains.
-    - Current evaluation metrics overemphasize visual fidelity and underemphasize
-      functional utility (counterfactual reasoning, policy improvement).
-    - There is a need for unified taxonomies and standardized benchmarks to compare
-      approaches.
-    - Existing generative models lack explicit state construction and long-term persistence,
-      limiting their use as world models.
+    - The main body of work is organized around Taxonomy and roadmap synthesis, Open
+      problem and gap mapping, Comparative evaluation synthesis, with a shared goal
+      to organize a fragmented literature into directions, comparisons, gaps, and
+      roadmaps.
+    - A common pattern is to cluster prior work by problem, compare evidence standards,
+      and surface unresolved tensions, rather than treating paper titles or tags as
+      the unit of comparison.
     disagreements:
-    - 'Whether video generation models qualify as world models: some argue they are
-      stateless and lack explicit state, others see them as incipient world simulators.'
-    - 'The appropriate evaluation focus: visual realism vs. decision-making utility
-      (e.g., L0–L7 ladder vs. traditional metrics).'
-    - 'The role of latent representations vs. pixel-level generation: some surveys
-      advocate latent world models for efficiency, others focus on 3D/4D geometric
-      modeling.'
-    - Whether to propose new architectures (e.g., GLP) or remain descriptive in surveys.
+    - The substantive split is between taxonomy scope, evaluation comparability, and
+      prioritization of open problems; those choices change the input-output contract,
+      evidence standard, and failure modes.
+    - The unresolved boundary is whether the synthesis is backed by systematic evidence
+      rather than selective examples; another recurring gap is prioritization of which
+      gaps matter most for progress.
     open_questions:
-    - How to design evaluation protocols that test causal reasoning and counterfactual
-      action fidelity?
-    - How to achieve explicit state construction and long-term memory in generative
-      world models?
-    - How to ensure evaluation compatibility across different domains (driving, robotics,
-      video games) and settings (open-loop vs. closed-loop)?
-    - How to prioritize open gaps (e.g., persistence, causality, real-time interactivity)
-      for the field's progress?
-    - How to empirically validate proposed taxonomies and evaluation frameworks?
+    - Which representation choices remain useful when the downstream task, controller,
+      or data distribution changes?
+    - Do current evaluation protocols measure decision utility directly, or mostly
+      proxy quality signals?
+    trend_evolution: Across 2024-2026, the topic moves from isolated modeling claims
+      toward work that ties organize a fragmented literature into directions, comparisons,
+      gaps, and roadmaps to stronger evidence and clearer boundaries.
+    timeline:
+    - year: 2024
+      paper_count: 4
+      representative_papers:
+      - Is Sora a World Simulator? A Comprehensive Survey on General World Models
+        and Beyond
+      - Understanding World or Predicting Future? A Comprehensive Survey of World
+        Models
+      - 'Exploring the Interplay Between Video Generation and World Models in Autonomous
+        Driving: A Survey'
+    - year: 2025
+      paper_count: 21
+      representative_papers:
+      - Critiques of World Models
+      - 'The Role of World Models in Shaping Autonomous Driving: A Comprehensive Survey'
+      - '3D and 4D World Modeling: A Survey'
+    - year: 2026
+      paper_count: 11
+      representative_papers:
+      - 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+        and Future Trends'
+      - 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+        Framework, and Open Challenges'
+      - 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+    references:
+    - id: towards-interactive-video-world-modeling-frontiers-challen-2026
+      title: 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+        and Future Trends'
+      year: 2026
+      score: 75.1
+      role: survey
+    - id: is-sora-a-world-simulator-a-comprehensive-survey-on-general-2024
+      title: Is Sora a World Simulator? A Comprehensive Survey on General World Models
+        and Beyond
+      year: 2024
+      score: 72.8
+      role: survey
+    - id: latent-world-models-for-automated-driving-a-unified-taxonom-2026
+      title: 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+        Framework, and Open Challenges'
+      year: 2026
+      score: 71.2
+      role: survey, application
+    - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+      title: 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+      year: 2026
+      score: 70.2
+      role: survey, theory
+    - id: how-should-world-models-be-evaluated-a-decision-making-cent-2026
+      title: How Should World Models Be Evaluated? A Decision-Making-Centric Position
+      year: 2026
+      score: 70.1
+      role: survey
+    - id: critiques-of-world-models-2025
+      title: Critiques of World Models
+      year: 2025
+      score: 67.7
+      role: survey
+    - id: the-role-of-world-models-in-shaping-autonomous-driving-a-co-2025
+      title: 'The Role of World Models in Shaping Autonomous Driving: A Comprehensive
+        Survey'
+      year: 2025
+      score: 67.2
+      role: survey
+    - id: 3d-and-4d-world-modeling-a-survey-2025
+      title: '3D and 4D World Modeling: A Survey'
+      year: 2025
+      score: 67.0
+      role: survey
   literature_review_zh:
+    范围与方法: 按研究路线归纳 36 篇综述相关论文，依据问题设定、建模对象、证据类型和已报告局限识别跨论文模式。
     研究路线矩阵:
     - 路线: 分类体系与路线图综合
-      解决的问题: 将碎片化领域映射为连贯的方向、里程碑和研究缺口，涵盖视频生成、自动驾驶和具身AI等领域。
-      尚未覆盖: 综合是否由系统证据支撑而非选择性举例；缺口优先级排序仍主观。
-    - 路线: 对比评测综合
-      解决的问题: 总结不同评测选择（视觉逼真度、反事实推理、策略效用）如何影响跨论文结论，并提出统一评测框架。
-      尚未覆盖: 被比较的结果在不同设置（如开环vs闭环、不同模拟器）下是否真正兼容；所提框架缺乏实证验证。
+      论文数: 27
+      解决的问题: 把碎片化领域整理为方向、里程碑和研究缺口
+      尚未覆盖: 综合是否由系统证据支撑，而不是选择性举例
+      代表论文:
+      - id: is-sora-a-world-simulator-a-comprehensive-survey-on-general-2024
+        title: Is Sora a World Simulator? A Comprehensive Survey on General World
+          Models and Beyond
+        year: 2024
+        score: 72.8
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
+      - id: how-should-world-models-be-evaluated-a-decision-making-cent-2026
+        title: How Should World Models Be Evaluated? A Decision-Making-Centric Position
+        year: 2026
+        score: 70.1
     - 路线: 开放问题与缺口映射
-      解决的问题: 将广泛文献覆盖转化为具体下一步研究问题，如状态构建、长时记忆、因果推理和实时交互。
-      尚未覆盖: 哪些缺口最值得优先解决仍待排序；许多提议架构（如GLP）仍停留在推测阶段，未实现。
+      论文数: 27
+      解决的问题: 把广泛文献覆盖转化为具体下一步研究问题
+      尚未覆盖: 哪些缺口最值得优先解决仍需要排序
+      代表论文:
+      - id: towards-interactive-video-world-modeling-frontiers-challen-2026
+        title: 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+          and Future Trends'
+        year: 2026
+        score: 75.1
+      - id: is-sora-a-world-simulator-a-comprehensive-survey-on-general-2024
+        title: Is Sora a World Simulator? A Comprehensive Survey on General World
+          Models and Beyond
+        year: 2024
+        score: 72.8
+      - id: latent-world-models-for-automated-driving-a-unified-taxonom-2026
+        title: 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+          Framework, and Open Challenges'
+        year: 2026
+        score: 71.2
+    - 路线: 对比评测综合
+      论文数: 15
+      解决的问题: 总结不同评测选择如何影响跨论文结论
+      尚未覆盖: 被比较的结果在不同设置下是否真正兼容
+      代表论文:
+      - id: towards-interactive-video-world-modeling-frontiers-challen-2026
+        title: 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+          and Future Trends'
+        year: 2026
+        score: 75.1
+      - id: latent-world-models-for-automated-driving-a-unified-taxonom-2026
+        title: 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+          Framework, and Open Challenges'
+        year: 2026
+        score: 71.2
+      - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+        title: 'A Mechanistic View on Video Generation as World Models: State and
+          Dynamics'
+        year: 2026
+        score: 70.2
     共识:
-    - 世界模型对跨多个领域的决策、规划和模拟至关重要。
-    - 当前评估指标过度强调视觉逼真度，低估功能效用（反事实推理、策略改进）。
-    - 需要统一的分类体系和标准化基准来比较不同方法。
-    - 现有生成模型缺乏显式状态构建和长期持久性，限制了其作为世界模型的使用。
+    - 这个主题的主体由分类体系与路线图综合、开放问题与缺口映射、对比评测综合构成，共同目标是把碎片化文献组织为方向、对比、缺口和路线图。
+    - 常见范式是按问题聚类既有工作，对比证据标准，并指出未解决张力，而不是把论文标题或标签当作比较单位。
     分歧:
-    - 视频生成模型是否算作世界模型：有人认为它们无状态、缺乏显式状态，另一些人视其为初步的世界模拟器。
-    - 评估焦点：视觉逼真度 vs. 决策效用（例如L0–L7阶梯 vs. 传统指标）。
-    - 潜在表示 vs. 像素级生成的角色：一些综述倡导潜在世界模型以提高效率，另一些聚焦3D/4D几何建模。
-    - 是否在综述中提出新架构（如GLP）还是保持描述性。
+    - 论文之间的实质分歧集中在分类范围、评测可比性和开放问题优先级；这些选择决定输入输出约定、证据标准和失败模式。
+    - 尚未解决的边界包括综合是否由系统证据支撑，而不是选择性举例；另一个反复出现的问题是哪些缺口最值得优先解决仍需要排序。
     开放问题:
-    - 如何设计测试因果推理和反事实动作保真度的评估协议？
-    - 如何在生成式世界模型中实现显式状态构建和长期记忆？
-    - 如何确保跨不同领域（驾驶、机器人、视频游戏）和设置（开环vs闭环）的评估兼容性？
-    - 如何为领域进展优先排序开放缺口（如持久性、因果性、实时交互）？
-    - 如何实证验证所提分类体系和评估框架？
+    - 当下游任务、控制器或数据分布变化时，哪些表示选择仍然有效？
+    - 现有评测是在直接度量决策效用，还是主要度量视觉质量、预测误差等代理信号？
+    趋势演进: 从 2024 到 2026，研究重心正在从单点主张转向把把碎片化文献组织为方向、对比、缺口和路线图与更强证据和更清晰边界连接起来。
+    时间线:
+    - year: 2024
+      paper_count: 4
+      representative_papers:
+      - Is Sora a World Simulator? A Comprehensive Survey on General World Models
+        and Beyond
+      - Understanding World or Predicting Future? A Comprehensive Survey of World
+        Models
+      - 'Exploring the Interplay Between Video Generation and World Models in Autonomous
+        Driving: A Survey'
+    - year: 2025
+      paper_count: 21
+      representative_papers:
+      - Critiques of World Models
+      - 'The Role of World Models in Shaping Autonomous Driving: A Comprehensive Survey'
+      - '3D and 4D World Modeling: A Survey'
+    - year: 2026
+      paper_count: 11
+      representative_papers:
+      - 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+        and Future Trends'
+      - 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+        Framework, and Open Challenges'
+      - 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+    参考论文:
+    - id: towards-interactive-video-world-modeling-frontiers-challen-2026
+      title: 'Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks,
+        and Future Trends'
+      year: 2026
+      score: 75.1
+      role: survey
+    - id: is-sora-a-world-simulator-a-comprehensive-survey-on-general-2024
+      title: Is Sora a World Simulator? A Comprehensive Survey on General World Models
+        and Beyond
+      year: 2024
+      score: 72.8
+      role: survey
+    - id: latent-world-models-for-automated-driving-a-unified-taxonom-2026
+      title: 'Latent World Models for Automated Driving: A Unified Taxonomy, Evaluation
+        Framework, and Open Challenges'
+      year: 2026
+      score: 71.2
+      role: survey, application
+    - id: a-mechanistic-view-on-video-generation-as-world-models-stat-2026
+      title: 'A Mechanistic View on Video Generation as World Models: State and Dynamics'
+      year: 2026
+      score: 70.2
+      role: survey, theory
+    - id: how-should-world-models-be-evaluated-a-decision-making-cent-2026
+      title: How Should World Models Be Evaluated? A Decision-Making-Centric Position
+      year: 2026
+      score: 70.1
+      role: survey
+    - id: critiques-of-world-models-2025
+      title: Critiques of World Models
+      year: 2025
+      score: 67.7
+      role: survey
+    - id: the-role-of-world-models-in-shaping-autonomous-driving-a-co-2025
+      title: 'The Role of World Models in Shaping Autonomous Driving: A Comprehensive
+        Survey'
+      year: 2025
+      score: 67.2
+      role: survey
+    - id: 3d-and-4d-world-modeling-a-survey-2025
+      title: '3D and 4D World Modeling: A Survey'
+      year: 2025
+      score: 67.0
+      role: survey
 - id: application
   label: application
   label_zh: 应用
@@ -886,109 +2129,348 @@ topics:
     score: 75.0
     url: https://arxiv.org/abs/2603.14938
   related_work_outline:
-  - 'Mainstream direction: Applying world models to domain-specific tasks—autonomous
-    driving, robotics, and games—for action-conditional video prediction, planning,
-    and policy learning.'
-  - 'Shared research pattern: Using generative models (diffusion, autoregressive,
-    or latent dynamics) to simulate future states conditioned on actions, then leveraging
-    the model for trajectory selection or agent training.'
-  - 'Key differences: Representation (discrete latent vs. diffusion vs. autoregressive),
-    supervision (sparse rewards, language, trajectory data), evaluation target (agent
-    performance, video quality, action fidelity), and deployment (real robot vs. simulation).'
-  - 'Trend evolution: Shift from latent dynamics (Dreamer) to diffusion-based world
-    models (DIAMOND, MaskGWM) and autoregressive transformers (MineWorld, FAR-Drive);
-    growing emphasis on real-time interaction, closed-loop simulation, and action
-    controllability.'
-  - 'Open questions: Generalization across embodiments, environments, and tasks; alignment
-    between simulation gains and real-world outcomes; long-horizon consistency; action
-    fidelity in driving models; real-time performance at scale.'
+  - 'Mainstream direction: application work around RO, world model, CV, AI is converging
+    on Combining generation loss with MAE-style feature-level context learning, First
+    application of the Dreamer algorithm to physical robots for online learning directly
+    in the real world witho…, and Factorizing video generation by leveraging the natural
+    compositionality of language to parse instructions into low….'
+  - 'Shared research pattern: the strongest papers combine The model uses a Diffusion
+    Transformer (DiT) architecture with an additional mask construction task. It introduces…,
+    The paper applies the Dreamer algorithm, which learns a world model from interaction
+    data and uses it for planning…, and RoboDreamer learns a compositional world model
+    by parsing language instructions into a set of lower-level primitiv… with evidence
+    from The method achieves notable improvements over state-of-the-art driving world
+    models on normal validation (Nuscenes), long-ho…, A quadruped robot learns to
+    roll off its back, stand up, and walk from scratch in 1 hour, and adapts to perturbations
+    within…, and The approach successfully synthesizes video plans on unseen goals
+    in the RT-X dataset, enables successful robot execution in….'
+  - 'Key differences: papers diverge by emphasis across RO, world model, CV, AI, autonomous
+    driving, so the useful comparison is representation, supervision signal, and decision-time
+    interface rather than title-level novelty.'
+  - 'Trend evolution: From 2022 to 2026, the center of gravity is moving from isolated
+    model claims toward interactive systems, benchmarks, and evidence that can compare
+    across settings.'
+  - 'Open questions: recurring gaps include Only evaluated on four specific robot
+    platforms, limiting generalizability to other hardware or tasks and Generalization
+    is limited to combinations of primitives seen during training; entirely novel
+    primitives may not be…, which should anchor deeper literature-review prose.'
   related_work_outline_zh:
-  - 主流方向：将世界模型应用于特定领域任务——自动驾驶、机器人和游戏——用于动作条件视频预测、规划和策略学习。
-  - 研究共性：使用生成模型（扩散、自回归或潜变量动力学）模拟以动作为条件的未来状态，然后利用模型进行轨迹选择或智能体训练。
-  - 关键差异：表示方式（离散潜变量 vs. 扩散 vs. 自回归）、监督信号（稀疏奖励、语言指令、轨迹数据）、评测目标（智能体性能、视频质量、动作忠实度）以及部署场景（真实机器人
-    vs. 仿真）。
-  - 趋势演进：从潜变量动力学（Dreamer）转向基于扩散的世界模型（DIAMOND, MaskGWM）和自回归Transformer（MineWorld, FAR-Drive）；越来越强调实时交互、闭环仿真和动作可控性。
-  - 开放问题：跨本体、环境和任务的泛化能力；仿真收益与真实世界结果之间的一致性；长时域一致性；驾驶模型中的动作忠实度；大规模实时性能。
+  - 主流方向：应用方向中围绕RO、world model、CV、AI的研究正在收敛到将生成损失与MAE风格的特征级上下文学习相结合、首次将Dreamer算法应用于物理机器人，直接在真实世界中进行在线学习，无需模拟器、利用语言的自然组合性将指令解析为低级原语，从而分解视频生成。
+  - 研究共性：高分论文通常把模型采用扩散变换器（DiT）架构，并增加额外的掩码构建任务。引入扩散相关掩码令牌，使用行式掩码进行移位自注意力以将掩码构建扩展到时空域，同时配备行式跨视图模块。在包括Nuscenes、OpenDV-2K和Wa…、本文应用Dreamer算法，该算法从交互数据中学习世界模型并用于想象规划，在四个不同的物理机器人（四足机器人、两个机械臂、轮式机器人）上进行训练。训练过程在线进行，直接在真实世界中，无需任何模拟器，使用摄像头…、RoboDreamer通过将语言指令解析为一组低级原语来学习组合世界模型，每个原语对应一个独立的视频生成模型。推理时，新指令被分解为先前见过的原语，相应模型组合生成视频计划。该方法还支持额外目标图像作为多模态…与该方法在正常验证（Nuscenes）、长时域展开（OpenDV-2K）和零样本验证（Waymo）数据集上均显著优于最先进的驾驶世界模型。、四足机器人在1小时内从零开始学会翻身、站立和行走，并在10分钟内适应扰动。两个机械臂从摄像头图像和稀疏奖励中学习拾取和放置多个物体，接近人类水平。轮式机器人仅从摄像头图像中学习导航到目标位置，自动解决朝向歧义。、该方法成功合成RT-X数据集中未见目标的视频计划，在仿真中实现成功的机器人执行，并显著优于单一基线视频生成方法。结合起来，而不是只停留在概念声明。
+  - 关键差异：论文之间的差异主要体现在RO、world model、CV、AI、autonomous driving，因此更值得比较表示方式、监督信号和决策时接口。
+  - 趋势演进：从 2022 到 2026，研究重心正在从单点模型主张转向可交互系统、标准化基准和可横向比较的证据。
+  - 开放问题：反复出现的缺口包括仅在四个特定机器人平台上评估，限制了向其他硬件或任务的泛化性、泛化仅限于训练中见过的原语组合；全新原语可能无法支持，这些应成为后续文献综述的主线。
   literature_review:
+    scope_methodology: Grouped 370 papers under application by research line, using
+      each paper's problem setting, modeling target, evidence type, and reported limitations
+      to identify cross-paper patterns.
     line_of_work_matrix:
-    - line: Embodied and domain task transfer
-      what_it_solves: Adapting world models to physical robots for online learning
-        without simulators, and enabling compositional generalization from language
-        instructions.
-      what_remains_open: Generalization across embodiments, tasks, and environments;
-        reliance on specific robot platforms; simulation-to-real gap not fully addressed;
-        evaluation mostly in simulation.
     - line: Autonomous driving and simulation use cases
-      what_it_solves: Scene prediction, closed-loop simulation, action-conditional
-        video generation, and safe planning via multiple future trajectory selection.
-      what_remains_open: Alignment between simulation gains and real-world safety;
-        generalization across datasets and sensor configurations; long-horizon consistency;
-        action fidelity (current models do not fully adhere to given actions).
+      paper_count: 240
+      what_it_solves: using world models for scene prediction, closed-loop simulation,
+        and policy evaluation in driving
+      what_remains_open: alignment between simulator gains and real-world safety or
+        operational outcomes
+      representative_papers:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+        title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+        year: 2024
+        score: 79.8
+    - line: Embodied and domain task transfer
+      paper_count: 202
+      what_it_solves: adapting world models to concrete task domains with domain-specific
+        states, actions, and constraints
+      what_remains_open: whether improvements transfer across embodiments, datasets,
+        institutions, or physical environments
+      representative_papers:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+        title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+        year: 2024
+        score: 79.8
+      - id: bevworld-a-multimodal-world-model-for-autonomous-driving-vi-2024
+        title: 'BEVWorld: A Multimodal World Model for Autonomous Driving via Unified
+          BEV Latent Space'
+        year: 2024
+        score: 74.3
     - line: Interactive agents and games
-      what_it_solves: Grounding world models in interactive environments (Atari, Minecraft)
-        for agent training and real-time interaction, with improved visual details
-        boosting agent performance.
-      what_remains_open: Generalization when environment rules or goals change; trade-offs
-        between real-time performance and visual quality; diffusion vs. autoregressive
-        architecture choices.
+      paper_count: 199
+      what_it_solves: grounding world models in interactive environments where agents
+        must act over time
+      what_remains_open: generalization when environment rules, goals, or user interactions
+        change
+      representative_papers:
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: diffusion-for-world-modeling-visual-details-matter-in-atari-2024
+        title: 'Diffusion for World Modeling: Visual Details Matter in Atari'
+        year: 2024
+        score: 78.4
+      - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+        title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on
+          Minecraft'
+        year: 2025
+        score: 77.0
     consensus:
-    - World models can serve as differentiable simulators for planning or policy learning
-      within the model, reducing reliance on real-world interaction.
-    - Action conditioning is essential for controllable generation and downstream
-      task performance.
-    - Visual fidelity in generated frames correlates with agent performance in interactive
-      domains.
-    - Standard benchmarks (nuScenes, Atari 100k) are widely used for evaluation, enabling
-      cross-method comparison.
+    - The main body of work is organized around Autonomous driving and simulation
+      use cases, Embodied and domain task transfer, Interactive agents and games,
+      with a shared goal to adapt world models to domain tasks where success depends
+      on task constraints, embodiment, and operating context.
+    - A common pattern is to bind prediction to domain-specific state/action spaces
+      and evaluate task success under realistic shifts, rather than treating paper
+      titles or tags as the unit of comparison.
     disagreements:
-    - 'Representation: discrete latent variables (Dreamer) vs. diffusion-based pixel
-      generation (DIAMOND, MaskGWM) vs. autoregressive token prediction (MineWorld,
-      FAR-Drive).'
-    - 'Supervision: sparse rewards (DayDreamer) vs. language instructions (RoboDreamer)
-      vs. trajectory data (Terra, FAR-Drive).'
-    - 'Evaluation target: agent performance (DIAMOND) vs. video quality and consistency
-      (MaskGWM) vs. action fidelity (Terra ACT-Bench).'
-    - 'Interaction mode: open-loop prediction vs. closed-loop autoregressive generation
-      with feedback.'
-    - 'Deployment setting: real-world physical robots (DayDreamer) vs. simulation-only
-      (RoboDreamer, DIAMOND, driving models).'
+    - The substantive split is between robotics, driving, interactive agents, and
+      other domains with different action spaces and evidence standards; those choices
+      change the input-output contract, evidence standard, and failure modes.
+    - The unresolved boundary is alignment between simulator gains and real-world
+      safety or operational outcomes; another recurring gap is whether improvements
+      transfer across embodiments, datasets, institutions, or physical environments.
     open_questions:
-    - How well do improvements in simulation transfer to real-world safety and operational
-      outcomes for autonomous driving?
-    - Can world models generalize across different robot embodiments, tasks, and physical
-      environments without retraining?
-    - What is the optimal trade-off between visual detail and computational efficiency
-      for real-time interactive world models?
-    - How can action fidelity be guaranteed in driving world models, especially under
-      distribution-shifted conditions?
-    - Do autoregressive world models scale to longer horizons without degradation,
-      and can they match diffusion models in visual quality?
+    - Which representation choices remain useful when the downstream task, controller,
+      or data distribution changes?
+    - What shared benchmarks would let the field compare prediction quality, controllability,
+      and decision utility together?
+    trend_evolution: Across 2022-2026, the topic moves from isolated modeling claims
+      toward work that ties adapt world models to domain tasks where success depends
+      on task constraints, embodiment, and operating context to stronger evidence
+      and clearer boundaries.
+    timeline:
+    - year: 2022
+      paper_count: 4
+      representative_papers:
+      - 'DayDreamer: World Models for Physical Robot Learning'
+      - Model-Based Imitation Learning for Urban Driving
+      - 'Symphony: Learning Realistic and Diverse Agents for Autonomous Driving Simulation'
+    - year: 2023
+      paper_count: 5
+      representative_papers:
+      - 'ADriver-I: A General World Model for Autonomous Driving'
+      - 'TrafficBots: Towards World Models for Autonomous Driving Simulation and Motion
+        Prediction'
+      - 'UniWorld: Autonomous Driving Pre-training via World Models'
+    - year: 2024
+      paper_count: 60
+      representative_papers:
+      - 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      - 'Diffusion for World Modeling: Visual Details Matter in Atari'
+      - 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+    - year: 2025
+      paper_count: 160
+      representative_papers:
+      - 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      - 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      - 'Epona: Autoregressive Diffusion World Model for Autonomous Driving'
+    - year: 2026
+      paper_count: 141
+      representative_papers:
+      - 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      - 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models in
+        Autonomous Driving'
+      - Probing the effectiveness of World Models for Spatial Reasoning through Test-time
+        Scaling
+    references:
+    - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+      title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      year: 2025
+      score: 85.8
+      role: method, application
+    - id: daydreamer-world-models-for-physical-robot-learning-2022
+      title: 'DayDreamer: World Models for Physical Robot Learning'
+      year: 2022
+      score: 81.7
+      role: method, system, application
+    - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+      title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      year: 2024
+      score: 79.8
+      role: method, application
+    - id: diffusion-for-world-modeling-visual-details-matter-in-atari-2024
+      title: 'Diffusion for World Modeling: Visual Details Matter in Atari'
+      year: 2024
+      score: 78.4
+      role: method, application
+    - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+      title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      year: 2024
+      score: 77.5
+      role: method, benchmark, system, application
+    - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+      title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      year: 2025
+      score: 77.0
+      role: method, system, application
+    - id: driving-into-the-future-multiview-visual-forecasting-and-pl-2024
+      title: 'Driving into the Future: Multiview Visual Forecasting and Planning with
+        World Model for Autonomous Driving'
+      year: 2024
+      score: 76.1
+      role: method, application
+    - id: far-drive-frame-autoregressive-video-generation-in-closed-l-2026
+      title: 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      year: 2026
+      score: 75.0
+      role: method, system, application
   literature_review_zh:
+    范围与方法: 按研究路线归纳 370 篇应用相关论文，依据问题设定、建模对象、证据类型和已报告局限识别跨论文模式。
     研究路线矩阵:
-    - 路线: 具身与领域任务迁移
-      解决的问题: 将世界模型适配到物理机器人，实现无需模拟器的在线学习，并通过语言指令实现组合泛化。
-      尚未覆盖: 跨本体、任务和环境的泛化能力；对特定机器人平台的依赖；仿真到真实的差距未完全解决；评估多在仿真中进行。
     - 路线: 自动驾驶与仿真应用
-      解决的问题: 场景预测、闭环仿真、动作条件视频生成，以及通过多未来轨迹选择实现安全规划。
-      尚未覆盖: 仿真收益与真实安全性之间的一致性；跨数据集和传感器配置的泛化；长时域一致性；动作忠实度（当前模型未能完全遵循给定动作）。
+      论文数: 240
+      解决的问题: 将世界模型用于驾驶中的场景预测、闭环仿真和策略评测
+      尚未覆盖: 仿真收益与真实安全或运营结果之间是否一致
+      代表论文:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+        title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+        year: 2024
+        score: 79.8
+    - 路线: 具身与领域任务迁移
+      论文数: 202
+      解决的问题: 把世界模型适配到具有领域状态、动作和约束的具体任务
+      尚未覆盖: 改进能否跨本体、数据集、机构或物理环境迁移
+      代表论文:
+      - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+        title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+        year: 2025
+        score: 85.8
+      - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+        title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+        year: 2024
+        score: 79.8
+      - id: bevworld-a-multimodal-world-model-for-autonomous-driving-vi-2024
+        title: 'BEVWorld: A Multimodal World Model for Autonomous Driving via Unified
+          BEV Latent Space'
+        year: 2024
+        score: 74.3
     - 路线: 交互式智能体与游戏
-      解决的问题: 将世界模型落地到交互环境（Atari, Minecraft），用于智能体训练和实时交互，改进视觉细节可提升智能体性能。
-      尚未覆盖: 环境规则或目标变化时的泛化能力；实时性能与视觉质量之间的权衡；扩散与自回归架构的选择。
+      论文数: 199
+      解决的问题: 把世界模型落到智能体需要持续行动的交互环境中
+      尚未覆盖: 环境规则、目标或用户交互变化时的泛化能力
+      代表论文:
+      - id: daydreamer-world-models-for-physical-robot-learning-2022
+        title: 'DayDreamer: World Models for Physical Robot Learning'
+        year: 2022
+        score: 81.7
+      - id: diffusion-for-world-modeling-visual-details-matter-in-atari-2024
+        title: 'Diffusion for World Modeling: Visual Details Matter in Atari'
+        year: 2024
+        score: 78.4
+      - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+        title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on
+          Minecraft'
+        year: 2025
+        score: 77.0
     共识:
-    - 世界模型可作为可微分模拟器，用于模型内的规划或策略学习，减少对真实交互的依赖。
-    - 动作条件化对于可控生成和下游任务性能至关重要。
-    - 生成帧的视觉保真度与交互领域中的智能体性能相关。
-    - 标准基准（nuScenes, Atari 100k）被广泛用于评估，支持跨方法比较。
+    - 这个主题的主体由自动驾驶与仿真应用、具身与领域任务迁移、交互式智能体与游戏构成，共同目标是把世界模型适配到受任务约束、本体和运行环境影响的领域任务。
+    - 常见范式是把预测绑定到领域特定的状态/动作空间，并在真实变化下评测任务成功，而不是把论文标题或标签当作比较单位。
     分歧:
-    - 表示方式：离散潜变量（Dreamer） vs. 基于扩散的像素生成（DIAMOND, MaskGWM） vs. 自回归token预测（MineWorld,
-      FAR-Drive）。
-    - 监督信号：稀疏奖励（DayDreamer） vs. 语言指令（RoboDreamer） vs. 轨迹数据（Terra, FAR-Drive）。
-    - 评测目标：智能体性能（DIAMOND） vs. 视频质量和一致性（MaskGWM） vs. 动作忠实度（Terra ACT-Bench）。
-    - 交互模式：开环预测 vs. 带反馈的闭环自回归生成。
-    - 部署场景：真实物理机器人（DayDreamer） vs. 仅仿真（RoboDreamer, DIAMOND, 驾驶模型）。
+    - 论文之间的实质分歧集中在机器人、驾驶、交互式智能体等具有不同动作空间和证据标准的领域；这些选择决定输入输出约定、证据标准和失败模式。
+    - 尚未解决的边界包括仿真收益与真实安全或运营结果之间是否一致；另一个反复出现的问题是改进能否跨本体、数据集、机构或物理环境迁移。
     开放问题:
-    - 自动驾驶中仿真的改进如何迁移到真实安全性和运营结果？
-    - 世界模型能否在不重新训练的情况下泛化到不同的机器人本体、任务和物理环境？
-    - 实时交互世界模型中视觉细节与计算效率的最佳权衡是什么？
-    - 如何保证驾驶世界模型中的动作忠实度，尤其是在分布偏移条件下？
-    - 自回归世界模型能否扩展到更长时域而不退化，并在视觉质量上匹配扩散模型？
+    - 当下游任务、控制器或数据分布变化时，哪些表示选择仍然有效？
+    - 什么样的共享基准能同时比较预测质量、可控性和决策效用？
+    趋势演进: 从 2022 到 2026，研究重心正在从单点主张转向把把世界模型适配到受任务约束、本体和运行环境影响的领域任务与更强证据和更清晰边界连接起来。
+    时间线:
+    - year: 2022
+      paper_count: 4
+      representative_papers:
+      - 'DayDreamer: World Models for Physical Robot Learning'
+      - Model-Based Imitation Learning for Urban Driving
+      - 'Symphony: Learning Realistic and Diverse Agents for Autonomous Driving Simulation'
+    - year: 2023
+      paper_count: 5
+      representative_papers:
+      - 'ADriver-I: A General World Model for Autonomous Driving'
+      - 'TrafficBots: Towards World Models for Autonomous Driving Simulation and Motion
+        Prediction'
+      - 'UniWorld: Autonomous Driving Pre-training via World Models'
+    - year: 2024
+      paper_count: 60
+      representative_papers:
+      - 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      - 'Diffusion for World Modeling: Visual Details Matter in Atari'
+      - 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+    - year: 2025
+      paper_count: 160
+      representative_papers:
+      - 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      - 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      - 'Epona: Autoregressive Diffusion World Model for Autonomous Driving'
+    - year: 2026
+      paper_count: 141
+      representative_papers:
+      - 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      - 'DrivingGen: A Comprehensive Benchmark for Generative Video World Models in
+        Autonomous Driving'
+      - Probing the effectiveness of World Models for Spatial Reasoning through Test-time
+        Scaling
+    参考论文:
+    - id: maskgwm-a-generalizable-driving-world-model-with-video-mask-2025
+      title: 'MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction'
+      year: 2025
+      score: 85.8
+      role: method, application
+    - id: daydreamer-world-models-for-physical-robot-learning-2022
+      title: 'DayDreamer: World Models for Physical Robot Learning'
+      year: 2022
+      score: 81.7
+      role: method, system, application
+    - id: robodreamer-learning-compositional-world-models-for-robot-i-2024
+      title: 'RoboDreamer: Learning Compositional World Models for Robot Imagination'
+      year: 2024
+      score: 79.8
+      role: method, application
+    - id: diffusion-for-world-modeling-visual-details-matter-in-atari-2024
+      title: 'Diffusion for World Modeling: Visual Details Matter in Atari'
+      year: 2024
+      score: 78.4
+      role: method, application
+    - id: terra-act-bench-towards-action-controllable-world-models-fo-2024
+      title: 'Terra ACT-Bench: Towards Action Controllable World Models for Autonomous
+        Driving'
+      year: 2024
+      score: 77.5
+      role: method, benchmark, system, application
+    - id: mineworld-a-real-time-and-open-source-interactive-world-mod-2025
+      title: 'MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft'
+      year: 2025
+      score: 77.0
+      role: method, system, application
+    - id: driving-into-the-future-multiview-visual-forecasting-and-pl-2024
+      title: 'Driving into the Future: Multiview Visual Forecasting and Planning with
+        World Model for Autonomous Driving'
+      year: 2024
+      score: 76.1
+      role: method, application
+    - id: far-drive-frame-autoregressive-video-generation-in-closed-l-2026
+      title: 'FAR-Drive: Frame-AutoRegressive Video Generation in Closed-Loop Autonomous
+        Driving'
+      year: 2026
+      score: 75.0
+      role: method, system, application
