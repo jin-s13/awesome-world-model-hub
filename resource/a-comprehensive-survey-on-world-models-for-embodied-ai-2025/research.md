@@ -1,26 +1,26 @@
-# RoboDreamer: Learning Compositional World Models for Robot Imagination
+# A Comprehensive Survey on World Models for Embodied AI
 
 - Status: planned
 - Generated at: 2026-06-30T03:51:56Z
-- Read-first score: 79.8
-- Paper: https://arxiv.org/abs/2404.12377
-- Code: https://robovideo.github.io/
+- Read-first score: 78.4
+- Paper: https://arxiv.org/abs/2510.16732
+- Code: 
 
 ## Score Signals
 
+- recency: 86.7 - Uses a gentle age decay so recent papers surface without erasing older foundations.
 - reproducibility: 81 - Screens links and visible text for paper, code, dataset, artifact, and repository signals.
-- topical_relevance: 80.0 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - methodology_quality: 80 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
-- recency: 75.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
+- topical_relevance: 74.3 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
 - graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
 
 ## Critique
 
-- Strength: Strong topical fit for the hub's research scope.
 - Strength: Visible methodology or evaluation signals make it worth reading early.
 - Strength: Reproducibility signals suggest useful code, data, paper, or artifact paths.
+- Concern: Code or dataset availability still needs direct verification.
 - Concern: Ranking evidence is triage only; full text, metrics, baselines, and limitations still need inspection.
 
 ## Next Research Actions
