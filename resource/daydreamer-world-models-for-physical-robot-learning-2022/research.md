@@ -1,7 +1,7 @@
 # DayDreamer: World Models for Physical Robot Learning
 
 - Status: planned
-- Generated at: 2026-06-29T11:04:06Z
+- Generated at: 2026-06-30T02:41:05Z
 - Read-first score: 81.7
 - Paper: https://proceedings.mlr.press/v205/wu23c/wu23c.pdf
 - Code: https://github.com/danijar/daydreamer
