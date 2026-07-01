@@ -9,7 +9,7 @@
 
 A curated hub for World Model papers, benchmarks, datasets, and research.
 
-A living, research-oriented awesome list for world models: papers, benchmarks, datasets,
+A living, research-oriented awesome list: papers, benchmarks, datasets,
 citation signals, TLDRs, deep analysis notes, and literature-review style summaries.
 
 [中文 Web UI](https://jin-s13.github.io/awesome-world-model-hub/zh/) [English Web UI](https://jin-s13.github.io/awesome-world-model-hub/en/) [Traditional Awesome List](./AWESOME.md) [Generator](https://github.com/jin-s13/awesome-hub-generator)
@@ -25,10 +25,10 @@ citation signals, TLDRs, deep analysis notes, and literature-review style summar
 
 ## Snapshot
 
-- Papers indexed: **988**
-- Datasets indexed: **159**
-- Papers with deep analysis: **983**
-- Papers matched with OpenAlex metadata: **356**
+- Papers indexed: **1007**
+- Datasets indexed: **165**
+- Papers with deep analysis: **988**
+- Papers matched with OpenAlex metadata: **359**
 - Research runs: **0**
 
 ## Repository Layout
