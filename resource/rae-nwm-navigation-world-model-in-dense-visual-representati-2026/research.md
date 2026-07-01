@@ -1,7 +1,7 @@
 # RAE-NWM: Navigation World Model in Dense Visual Representation Space
 
 - Status: planned
-- Generated at: 2026-06-30T03:51:56Z
+- Generated at: 2026-07-01T04:05:49Z
 - Read-first score: 85.4
 - Paper: https://arxiv.org/abs/2603.09241
 - Code: https://github.com/20robo/raenwm
