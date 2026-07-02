@@ -1,7 +1,7 @@
 # A Comprehensive Survey on World Models for Embodied AI
 
 - Status: planned
-- Generated at: 2026-07-01T04:05:49Z
+- Generated at: 2026-07-02T05:27:59Z
 - Read-first score: 78.4
 - Paper: https://arxiv.org/abs/2510.16732
 - Code: 
