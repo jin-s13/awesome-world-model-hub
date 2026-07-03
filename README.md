@@ -26,10 +26,10 @@ citation signals, TLDRs, deep analysis notes, and literature-review style summar
 
 ## Snapshot
 
-- Papers indexed: **1009**
-- Datasets indexed: **166**
-- Papers with deep analysis: **990**
-- Papers matched with OpenAlex metadata: **359**
+- Papers indexed: **1017**
+- Datasets indexed: **167**
+- Papers with deep analysis: **995**
+- Papers matched with OpenAlex metadata: **367**
 - Research runs: **0**
 
 ## Repository Layout
@@ -54,7 +54,7 @@ Optional secrets: `ARK_API_BASE_URL`, `ARK_MODEL_NAME`, `SMART_MODEL_NAME`,
 `MINERU_API_KEY`, `OPENALEX_API_KEY`, `OPENALEX_MAILTO`,
 `SEMANTIC_SCHOLAR_API_KEY`, `GH_DISCOVERY_TOKEN`.
 Optional repository variables: `ARK_TIMEOUT_SECONDS`, `ARK_SURVEY_TIMEOUT_SECONDS`,
-`SEMANTIC_SCHOLAR_REQUEST_INTERVAL_SECONDS`.
+`ARK_SURVEY_MAX_TOKENS`, `SEMANTIC_SCHOLAR_REQUEST_INTERVAL_SECONDS`.
 The workflow also passes the built-in GitHub token as `GH_TOKEN` so upstream awesome-list
 discovery does not fall back to anonymous GitHub Search limits.
 

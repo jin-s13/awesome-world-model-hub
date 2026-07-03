@@ -1,17 +1,17 @@
-# STORM: Efficient Stochastic Transformer based World Models for Reinforcement Learning
+# Improving Token-Based World Models with Parallel Observation Prediction
 
 - Status: planned
 - Generated at: 2026-07-03T03:28:56Z
-- Read-first score: 80.2
-- Paper: https://arxiv.org/pdf/2310.09615
-- Code: https://github.com/weipu-zhang/STORM
+- Read-first score: 77.8
+- Paper: https://arxiv.org/abs/2402.05643
+- Code: https://github.com/leor-c/REM
 
 ## Score Signals
 
-- topical_relevance: 82.9 - Uses existing LLM keyword relevance scores normalized to 0-100.
+- topical_relevance: 87.1 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - reproducibility: 81 - Screens links and visible text for paper, code, dataset, artifact, and repository signals.
-- methodology_quality: 80 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
-- recency: 65.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
+- recency: 75.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
+- methodology_quality: 60 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
 - graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
@@ -19,8 +19,8 @@
 ## Critique
 
 - Strength: Strong topical fit for the hub's research scope.
-- Strength: Visible methodology or evaluation signals make it worth reading early.
 - Strength: Reproducibility signals suggest useful code, data, paper, or artifact paths.
+- Concern: Methodology details may be incomplete in the current metadata.
 - Concern: Ranking evidence is triage only; full text, metrics, baselines, and limitations still need inspection.
 
 ## Next Research Actions
