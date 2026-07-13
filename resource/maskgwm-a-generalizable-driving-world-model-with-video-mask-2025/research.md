@@ -1,7 +1,7 @@
 # MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction
 
 - Status: planned
-- Generated at: 2026-07-12T02:56:15Z
+- Generated at: 2026-07-13T02:59:08Z
 - Read-first score: 85.8
 - Paper: https://arxiv.org/abs/2502.11663
 - Code: https://github.com/SenseTime-FVG/OpenDWM
