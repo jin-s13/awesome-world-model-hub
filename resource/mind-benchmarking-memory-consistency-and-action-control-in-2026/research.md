@@ -1,7 +1,7 @@
 # MIND: Benchmarking Memory Consistency and Action Control in World Models
 
 - Status: planned
-- Generated at: 2026-07-15T02:40:00Z
+- Generated at: 2026-07-16T02:45:07Z
 - Read-first score: 79.0
 - Paper: https://arxiv.org/abs/2602.08025
 - Code: https://github.com/CSU-JPG/MIND
