@@ -1,17 +1,17 @@
-# RoboDreamer: Learning Compositional World Models for Robot Imagination
+# PAVXploreRL: Physical-Action-Visual World Model Reinforcement Learning with Action Exploration
 
 - Status: planned
 - Generated at: 2026-07-22T02:51:43Z
-- Read-first score: 79.8
-- Paper: https://arxiv.org/abs/2404.12377
-- Code: https://robovideo.github.io/
+- Read-first score: 80.7
+- Paper: https://arxiv.org/abs/2607.16602v1
+- Code: https://github.com/Social-AI-Studio/PAVXploreRL
 
 ## Score Signals
 
+- recency: 100.0 - Uses a gentle age decay so recent papers surface without erasing older foundations.
 - reproducibility: 81 - Screens links and visible text for paper, code, dataset, artifact, and repository signals.
-- topical_relevance: 80.0 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - methodology_quality: 80 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
-- recency: 75.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
+- topical_relevance: 77.1 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
 - graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
