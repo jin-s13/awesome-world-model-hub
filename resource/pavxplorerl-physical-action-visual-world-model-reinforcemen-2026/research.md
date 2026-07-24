@@ -1,7 +1,7 @@
 # PAVXploreRL: Physical-Action-Visual World Model Reinforcement Learning with Action Exploration
 
 - Status: planned
-- Generated at: 2026-07-23T02:54:21Z
+- Generated at: 2026-07-24T02:50:45Z
 - Read-first score: 80.7
 - Paper: https://arxiv.org/abs/2607.16602v1
 - Code: https://github.com/Social-AI-Studio/PAVXploreRL
