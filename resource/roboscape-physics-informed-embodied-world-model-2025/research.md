@@ -1,7 +1,7 @@
 # RoboScape: Physics-informed Embodied World Model
 
 - Status: planned
-- Generated at: 2026-08-25T01:25:03Z
+- Generated at: 2026-08-26T01:31:04Z
 - Read-first score: 79.6
 - Paper: https://arxiv.org/abs/2506.23135
 - Code: https://github.com/tsinghua-fib-lab/RoboScape
