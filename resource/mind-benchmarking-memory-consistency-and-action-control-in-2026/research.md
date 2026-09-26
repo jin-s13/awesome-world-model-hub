@@ -1,7 +1,7 @@
 # MIND: Benchmarking Memory Consistency and Action Control in World Models
 
 - Status: planned
-- Generated at: 2026-09-24T03:41:01Z
+- Generated at: 2026-09-26T04:02:41Z
 - Read-first score: 79.0
 - Paper: https://arxiv.org/abs/2602.08025
 - Code: https://github.com/CSU-JPG/MIND
@@ -13,7 +13,7 @@
 - methodology_quality: 80 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
 - topical_relevance: 72.9 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
-- graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
+- graph_prestige: 0.0 - PageRank-style prestige over the local citation graph built from available OpenAlex references.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
 
 ## Critique

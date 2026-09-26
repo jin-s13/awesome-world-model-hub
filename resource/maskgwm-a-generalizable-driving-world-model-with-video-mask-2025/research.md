@@ -1,7 +1,7 @@
 # MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction
 
 - Status: planned
-- Generated at: 2026-09-24T03:41:01Z
+- Generated at: 2026-09-26T04:02:41Z
 - Read-first score: 85.8
 - Paper: https://arxiv.org/abs/2502.11663
 - Code: https://github.com/SenseTime-FVG/OpenDWM
@@ -13,7 +13,7 @@
 - reproducibility: 81 - Screens links and visible text for paper, code, dataset, artifact, and repository signals.
 - topical_relevance: 80.0 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
-- graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
+- graph_prestige: 0.0 - PageRank-style prestige over the local citation graph built from available OpenAlex references.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
 
 ## Critique

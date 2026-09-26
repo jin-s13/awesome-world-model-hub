@@ -1,7 +1,7 @@
 # RoboDreamer: Learning Compositional World Models for Robot Imagination
 
 - Status: planned
-- Generated at: 2026-09-24T03:41:01Z
+- Generated at: 2026-09-26T04:02:41Z
 - Read-first score: 79.8
 - Paper: https://arxiv.org/abs/2404.12377
 - Code: https://robovideo.github.io/
@@ -13,7 +13,7 @@
 - methodology_quality: 80 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
 - recency: 75.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
-- graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
+- graph_prestige: 0.0 - PageRank-style prestige over the local citation graph built from available OpenAlex references.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
 
 ## Critique

@@ -1,7 +1,7 @@
 # STORM: Efficient Stochastic Transformer based World Models for Reinforcement Learning
 
 - Status: planned
-- Generated at: 2026-09-24T03:41:01Z
+- Generated at: 2026-09-26T04:02:41Z
 - Read-first score: 80.2
 - Paper: https://arxiv.org/pdf/2310.09615
 - Code: https://github.com/weipu-zhang/STORM
@@ -13,7 +13,7 @@
 - methodology_quality: 80 - Screens visible abstract and analysis fields for experiment, dataset, baseline, metric, and limitation evidence.
 - recency: 65.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
-- graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
+- graph_prestige: 0.0 - PageRank-style prestige over the local citation graph built from available OpenAlex references.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
 
 ## Critique

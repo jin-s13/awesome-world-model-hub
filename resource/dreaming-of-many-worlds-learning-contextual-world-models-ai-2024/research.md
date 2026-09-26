@@ -1,7 +1,7 @@
 # Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot Generalization
 
 - Status: planned
-- Generated at: 2026-09-24T03:41:01Z
+- Generated at: 2026-09-26T04:02:41Z
 - Read-first score: 81.3
 - Paper: https://arxiv.org/abs/2403.10967
 - Code: https://github.com/sai-prasanna/dreaming_of_many_worlds
@@ -13,7 +13,7 @@
 - recency: 75.1 - Uses a gentle age decay so recent papers surface without erasing older foundations.
 - topical_relevance: 71.4 - Uses existing LLM keyword relevance scores normalized to 0-100.
 - citation_impact: 0.0 - No OpenAlex identifier was available for this paper.
-- graph_prestige: 0.0 - No local citation edges were available, so graph prestige is excluded.
+- graph_prestige: 0.0 - PageRank-style prestige over the local citation graph built from available OpenAlex references.
 - citation_velocity: 0.0 - No OpenAlex identifier was available for this paper.
 
 ## Critique
