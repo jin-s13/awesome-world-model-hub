@@ -1,7 +1,7 @@
 # STORM: Efficient Stochastic Transformer based World Models for Reinforcement Learning
 
 - Status: planned
-- Generated at: 2026-10-01T04:42:54Z
+- Generated at: 2026-10-02T04:38:20Z
 - Read-first score: 80.2
 - Paper: https://arxiv.org/pdf/2310.09615
 - Code: https://github.com/weipu-zhang/STORM

@@ -1,7 +1,7 @@
 # Diffusion for World Modeling: Visual Details Matter in Atari
 
 - Status: planned
-- Generated at: 2026-10-01T04:42:54Z
+- Generated at: 2026-10-02T04:38:20Z
 - Read-first score: 78.4
 - Paper: https://arxiv.org/abs/2405.12399
 - Code: https://github.com/eloialonso/diamond
