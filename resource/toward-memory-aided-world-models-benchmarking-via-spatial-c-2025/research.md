@@ -1,7 +1,7 @@
 # Toward Memory-Aided World Models: Benchmarking via Spatial Consistency
 
 - Status: planned
-- Generated at: 2026-10-07T04:55:28Z
+- Generated at: 2026-10-08T05:05:58Z
 - Read-first score: 81.4
 - Paper: https://arxiv.org/abs/2505.22976
 - Code: https://github.com/Kevin-lkw/LoopNav
