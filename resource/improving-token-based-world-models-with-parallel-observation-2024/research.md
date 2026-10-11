@@ -1,7 +1,7 @@
 # Improving Token-Based World Models with Parallel Observation Prediction
 
 - Status: planned
-- Generated at: 2026-10-10T04:52:14Z
+- Generated at: 2026-10-11T04:38:44Z
 - Read-first score: 77.8
 - Paper: https://arxiv.org/abs/2402.05643
 - Code: https://github.com/leor-c/REM
