@@ -1,7 +1,7 @@
 # Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot Generalization
 
 - Status: planned
-- Generated at: 2026-10-30T04:56:35Z
+- Generated at: 2026-10-31T04:42:00Z
 - Read-first score: 81.3
 - Paper: https://arxiv.org/abs/2403.10967
 - Code: https://github.com/sai-prasanna/dreaming_of_many_worlds
