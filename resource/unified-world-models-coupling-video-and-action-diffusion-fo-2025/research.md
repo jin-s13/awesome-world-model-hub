@@ -1,7 +1,7 @@
 # Unified World Models: Coupling Video and Action Diffusion for Pretraining on Large Robotic Datasets
 
 - Status: planned
-- Generated at: 2026-11-03T05:50:36Z
+- Generated at: 2026-11-04T05:22:27Z
 - Read-first score: 79.3
 - Paper: https://arxiv.org/abs/2504.02792
 - Code: https://github.com/WEIRDLabUW/unified-world-model
