@@ -1,7 +1,7 @@
 # Interactive World Simulation with Cosmos for Physical AI
 
 - Status: planned
-- Generated at: 2026-11-11T05:13:34Z
+- Generated at: 2026-11-12T06:14:40Z
 - Read-first score: 77.9
 - Paper: https://arxiv.org/abs/2611.06627v1
 - Code: https://github.com/nvidia/cosmos
