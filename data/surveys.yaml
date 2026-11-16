@@ -1,5 +1,5 @@
 schema_version: awesome-hub.surveys.v1
-generated_at: '2026-11-15T05:20:09Z'
+generated_at: '2026-11-16T05:18:53Z'
 topics:
 - id: method
   label: method
@@ -7,7 +7,7 @@ topics:
   description: New world model architectures, training objectives, inference methods,
     or planning/control algorithms.
   description_zh: ''
-  paper_count: 1712
+  paper_count: 1713
   top_tags:
   - CV
   - AI
@@ -70,105 +70,114 @@ topics:
     score: 79.0
     url: https://arxiv.org/abs/2602.08025
   related_work_outline:
-  - 'Mainstream direction: Recent work concentrates on generative video world models
-    using diffusion or Transformer architectures for embodied, driving, and large-scale
-    robot data.'
-  - 'Shared research pattern: Methods augment prediction with auxiliary tasks, conditioning,
-    or benchmarks to improve generalization, consistency, and policy utility.'
-  - 'Key differences: Factorized versus unified generation, world-model-only versus
-    action-coupled planning, and task-specific versus open-domain benchmark evaluation.'
-  - 'Trend evolution: Within the 2023-2026 frontier, the field is moving from RL-specific
-    world models toward general video-action diffusion and open-domain consistency
-    benchmarks.'
-  - 'Open questions: Transferability of architecture choices, source of policy gains,
-    real-robot validation, and whether consistency metrics track downstream control
-    remain open.'
+  - 'Mainstream direction: Recent work favors generative world-model architectures
+    such as diffusion transformers, VAEs, and unified video-action transformers, often
+    with auxiliary self-supervised objectives like mask reconstruction, depth, or
+    keypoint dynamics.'
+  - 'Shared research pattern: Methods couple representation learning with action or
+    context conditioning and evaluate on standard suites such as Atari 100k, CARL,
+    RT-X, nuScenes, OpenDV-2K, Waymo, or newer Minecraft-based benchmarks.'
+  - 'Key differences: Approaches diverge in stochastic modeling, conditioning signals,
+    factorization strategies, and evaluation focus such as visual fidelity, spatial/memory
+    consistency, policy generalization, or action control.'
+  - 'Trend evolution: The frontier has shifted from single-task model-based RL toward
+    large-scale generative pretraining, unified multimodal action-video diffusion,
+    and specialized open-domain consistency and control benchmarks in 2024-2026.'
+  - 'Open questions: Long-term consistency, cross-action-space transfer, reliance
+    on action labels or observable context, real-robot deployment, and whether measured
+    gains isolate the proposed method remain underevidenced.'
   related_work_outline_zh:
-  - 主流方向：近期工作集中在扩散或Transformer架构的生成式视频世界模型，面向具身智能、驾驶和大规模机器人数据。
-  - 研究共性：在预测之外加入辅助任务、条件信息或基准评估，以提升泛化、一致性和策略效用。
-  - 关键差异：存在分解式与统一式生成、仅世界模型与动作耦合规划、任务内评测与开放域基准评测等差异。
-  - 趋势演进：在2023-2026年前沿内，从面向强化学习的专用世界模型走向通用视频-动作扩散和开放域一致性基准。
-  - 开放问题：架构选择的可迁移性、策略收益来源、真实机器人验证，以及一致性指标与下游控制的关系仍待证明。
+  - 主流方向：前沿世界模型以生成式架构为主，包括扩散Transformer、VAE和统一视频-动作Transformer，并结合掩码重建、深度或关键点动力学等自监督目标，以增强长时域预测与控制能力。
+  - 研究共性：方法通常将表示学习与动作或上下文条件耦合，采用自监督视频目标，并在Atari 100k、CARL、RT-X、nuScenes、OpenDV-2K、Waymo或新Minecraft基准上评测。
+  - 关键差异：方法在随机建模、条件信号、因子分解方式以及评测焦点上不同，焦点包括视觉保真、空间/记忆一致性、策略泛化或动作控制。
+  - 趋势演进：前沿正从单任务基于模型强化学习转向大规模生成式预训练、统一多模态动作-视频扩散，以及2024至2026年专门的开放域一致性与控制基准。
+  - 开放问题：长期一致性、跨动作空间迁移、对动作标注或可观测上下文的依赖、真实机器人部署，以及方法贡献是否被充分隔离，仍缺乏证据。
   literature_review:
     line_of_work_matrix:
-    - line: Method representation and objective design
-      what_it_solves: Turns world-model ideas into concrete architectures and training
-        recipes, including diffusion with mask reconstruction, stochastic Transformer-VAE,
-        recurrent state-space models, and auxiliary physics or context signals.
-      what_remains_open: Which representation and auxiliary-loss choices transfer
-        beyond reported driving, Atari, CARL, and robot-video settings; some works
-        omit limitation evidence, leaving failure modes unclear.
-    - line: Planning and action-interface methods
-      what_it_solves: Connects learned dynamics to decision-time interfaces through
-        dream-based policy learning, language-primitive video planning, and unified
-        video-action diffusion pretraining.
-      what_remains_open: How much reported gain comes from the model rather than the
-        planner, controller, task prior, or pretraining data; several evaluations
-        stay in simulation or on narrow task suites.
-    - line: Method evidence and benchmark protocol
-      what_it_solves: Builds datasets and metrics for capabilities beyond visual fidelity,
-        including spatial consistency in loop navigation and memory consistency plus
-        action control.
-      what_remains_open: Whether benchmarks isolate the proposed method from surrounding
-        system choices and whether their metrics predict real downstream control quality
-        or cross-domain generalization.
+    - line: Generative representation and objective design
+      what_it_solves: Builds scalable world models for video prediction and dynamics
+        learning using diffusion, VAE, Transformer, mask reconstruction, depth, and
+        keypoint-dynamics objectives.
+      what_remains_open: Which architectural and objective choices transfer beyond
+        reported datasets, domains, and view settings; long-horizon and cross-domain
+        consistency are not fully isolated.
+    - line: Contextual, compositional, and action-coupled dynamics
+      what_it_solves: Connects learned dynamics to intervention and generalization
+        through explicit context variables, language-primitive factorization, physics-informed
+        signals, or coupled video-action diffusion.
+      what_remains_open: Assumptions about observable context, action-labeled data,
+        predefined primitives, simulation-only evaluation, and whether gains come
+        from the dynamics model or the surrounding control interface.
+    - line: World-model benchmark and evidence protocols
+      what_it_solves: Measures spatial consistency, memory consistency, action control,
+        physical plausibility, and policy generalization under standardized datasets
+        and benchmarks.
+      what_remains_open: Coverage across domains and action spaces is still limited;
+        several records report dataset or benchmark construction without experimental
+        results, full ablations, or limitation details.
     consensus:
-    - Recent methods converge on generative or sequence-modeling architectures, especially
-      diffusion and Transformer variants, for video prediction and learned dynamics.
-    - Research is shifting from pixel-level generation quality toward consistency,
-      memory, action controllability, and downstream policy utility.
-    - Extra conditioning or auxiliary tasks, such as context values, language primitives,
-      physics signals, or action modeling, are used to improve generalization and
-      control interfaces.
-    - Dedicated benchmarks are emerging to evaluate spatial and memory consistency
-      in world models, supplementing existing task benchmarks.
+    - Generative or self-supervised objectives are widely used to train world models
+      from video and interaction, moving beyond deterministic single-step prediction.
+    - Auxiliary signals such as mask reconstruction, depth, keypoint dynamics, context
+      conditioning, and action diffusion are used to improve consistency, physical
+      plausibility, or controllability.
+    - Evaluation increasingly includes long-horizon rollout, zero-shot or unseen-context
+      generalization, spatial and memory consistency, and action control rather than
+      short-frame reconstruction alone.
+    - Standardized datasets and benchmarks provide shared reference points, but reproducibility
+      evidence, baselines, metrics, and ablations remain incomplete across the sample.
     disagreements:
-    - 'Representation choices differ: unified video/action generation contrasts with
-      factorized compositional generation and with recurrent state-space latent dynamics.'
-    - 'Supervisory signals differ: pure video prediction, physics-informed depth and
-      keypoint objectives, context-conditioned latent dynamics, and coupled action
-      diffusion emphasize different training targets.'
-    - 'Evaluation targets differ: some report RL benchmark scores, some report driving
-      or multi-view prediction, and others stress robot-video generation or open-domain
-      consistency.'
-    - 'Interaction modes differ: policy learning from model imagination or simulation
-      is common, but large-scale robot-dataset pretraining and real-robot deployment
-      remain unevenly validated.'
+    - 'Stochastic representation differs: VAE-style recurrent state-space models,
+      diffusion-based video generation, and unified video-action diffusion are used
+      as alternative foundations.'
+    - 'Conditioning and factorization differ: explicit context variables, language-primitive
+      decomposition, independent modality-specific timesteps, and physics-informed
+      auxiliary tasks coexist.'
+    - 'Evaluation targets differ: policy zero-shot generalization, Atari human performance,
+      driving video prediction, robotic video plausibility, spatial consistency, and
+      memory/action control are each prioritized by different lines.'
+    - 'Data assumptions differ: some approaches require action labels or observable
+      context, others exploit action-free video or large-scale robot data, and real-world
+      validation is often absent.'
+    - 'Evidence strength differs: some contributions report strong benchmark results,
+      while others focus on dataset and benchmark construction without experimental
+      outcomes or clear limitations.'
     open_questions:
-    - Which architecture and objective choices transfer beyond the reported task families
-      and benchmarks?
-    - Do spatial or memory consistency benchmark metrics correlate with downstream
-      real-world policy performance?
-    - How much of the policy improvement comes from learned dynamics versus context
-      observability, pretraining data, planner, or task prior?
-    - What failure modes arise for methods that lack limitation evidence or are evaluated
-      only in simulation or on narrow task sets?
+    - Which representation or objective most reliably supports long-horizon spatial
+      and memory consistency across diverse contexts and action spaces?
+    - Can compositional or unified video-action methods handle entirely novel primitives,
+      actions, or embodiment changes beyond combinations seen during training?
+    - How much reported performance comes from learned dynamics versus auxiliary losses,
+      action-conditioning choices, evaluation metrics, or system implementation?
+    - How can world models be deployed reliably under missing action labels, unobserved
+      context, limited physical priors, and real-world constraints?
   literature_review_zh:
     研究路线矩阵:
-    - 路线: 方法表示与目标设计
-      解决的问题: 将世界模型想法落实为具体架构和训练配方，例如扩散掩码重建、随机Transformer-VAE、循环状态空间以及物理或上下文辅助信号。
-      尚未覆盖: 哪些表示和辅助损失选择能迁移到驾驶、Atari、CARL和机器人视频之外；部分工作未给出局限性，失败边界不清。
-    - 路线: 规划与动作接口方法
-      解决的问题: 将学习到的动力学连接到干预、规划和决策时接口，包括基于想象的策略学习、语言原语视频规划和统一视频-动作扩散预训练。
-      尚未覆盖: 收益有多少来自模型本身而非规划器、控制器、任务先验或预训练数据；不少评估仍停留在仿真或较窄任务集。
-    - 路线: 方法证据与消融协议
-      解决的问题: 构建超越视觉保真度的数据集和指标，例如循环导航空间一致性、记忆一致性和动作控制。
-      尚未覆盖: 这些基准是否隔离了方法本身贡献，指标能否预测真实下游控制质量或跨域泛化，仍有待验证。
+    - 路线: 生成式表示与目标设计
+      解决的问题: 利用扩散、VAE、Transformer、掩码重建、深度和关键点动力学等目标，构建可扩展的世界模型以进行视频预测和动力学学习。
+      尚未覆盖: 哪些架构与目标选择能迁移到报告数据集、领域和视角之外；长时域和跨域一致性尚未被充分隔离验证。
+    - 路线: 上下文、组合与动作耦合动力学
+      解决的问题: 通过显式上下文变量、语言原语分解、物理信息信号或耦合视频-动作扩散，将学习到的动力学连接到干预与泛化。
+      尚未覆盖: 可观测上下文、动作标注、预定义原语、仅仿真评估等假设，以及收益来自动力学模型还是周边控制接口仍不清楚。
+    - 路线: 世界模型基准与证据协议
+      解决的问题: 在标准化数据集和基准下，量化空间一致性、记忆一致性、动作控制、物理合理性和策略泛化能力。
+      尚未覆盖: 域和动作空间覆盖仍有限；部分记录只构建数据集或基准，未报告实验结果、完整消融或限制。
     共识:
-    - 近期方法普遍采用生成式或序列建模架构，尤其是扩散与Transformer变体，用于视频预测和动力学学习。
-    - 研究重心正从像素级生成质量转向一致性、记忆、动作可控性和下游策略效用。
-    - 通过上下文、语言原语、物理信号或动作建模等附加条件/辅助任务来提高泛化和控制接口。
-    - 开始出现专门评估世界模型空间一致性和记忆一致性的基准，以补充传统任务指标。
+    - 世界模型训练广泛采用生成式或自监督目标，从视频和交互中学习，已不再局限于确定性单步预测。
+    - 掩码重建、深度、关键点动力学、上下文条件和动作扩散等辅助信号被用于提升一致性、物理合理性或可控性。
+    - 评测开始纳入长时域展开、零样本或未见上下文泛化、空间与记忆一致性以及动作控制，而非只看短期重建误差。
+    - 标准化数据集和基准提供共同参照，但样本中关于可复现性、基线、指标和消融的证据仍不完整。
     分歧:
-    - 表示方式不同：统一视频/动作生成与分解式组合生成、循环状态空间潜在动力学存在明显差异。
-    - 监督信号不同：纯视频预测、物理信息深度/关键点目标、上下文条件潜在动力学和耦合动作扩散各有侧重。
-    - 评测目标不同：部分关注强化学习分数，部分关注驾驶或多视角预测，部分强调机器人视频或开放域一致性。
-    - 交互与部署设置不同：模型想象或仿真中的策略学习较常见，大规模机器人数据预训练和真实机器人验证强度不一。
+    - 随机表示方式不同：VAE式循环状态空间模型、扩散视频生成和统一视频-动作扩散被用作不同基础。
+    - 条件与因子分解方式不同：显式上下文变量、语言原语分解、模态独立时间步和物理信息辅助任务并存。
+    - 评测目标不同：策略零样本泛化、Atari人类表现、驾驶视频预测、机器人视频合理性、空间一致性以及记忆/动作控制各有侧重。
+    - 数据假设不同：部分方法依赖动作标注或可观测上下文，部分利用无动作视频或大规模机器人数据，且真实世界验证通常缺失。
+    - 证据强度不同：部分贡献给出较强基准结果，部分仅构建数据集和基准而未报告实验或限制。
     开放问题:
-    - 哪些架构和目标选择能跨任务族泛化，而不只在报告数据集上有效？
-    - 空间或记忆一致性基准指标是否与真实下游策略表现相关？
-    - 策略提升在多大程度上来自动力学模型本身，而非可观测上下文、预训练数据、规划器或任务先验？
-    - 缺少局限性说明或仅在仿真/较窄任务集上评估的方法，其失败模式和未覆盖边界是什么？
+    - 哪种表示或目标最可靠地支持跨情境和跨动作空间的长期空间与记忆一致性？
+    - 组合式或统一视频-动作方法能否处理训练中未见过的原语、动作或具身变化，而不仅是已见组合内泛化？
+    - 报告性能中多少来自动力学模型，多少来自辅助损失、动作条件设计、评测指标或系统实现？
+    - 在缺少动作标签、上下文不可观测、物理先验有限和真实世界约束下，世界模型如何可靠部署？
   synthesis_status: llm
   generation_notes: []
 - id: benchmark
@@ -177,7 +186,7 @@ topics:
   description: Datasets, evaluation suites, metrics, stress tests, leaderboards, or
     benchmark studies.
   description_zh: ''
-  paper_count: 1208
+  paper_count: 1209
   top_tags:
   - CV
   - world models
@@ -240,94 +249,104 @@ topics:
     score: 78.4
     url: https://arxiv.org/abs/2405.12399
   related_work_outline:
-  - 'Mainstream direction: World-model evaluation is moving from aggregate control
-    scores toward dedicated benchmarks that probe spatial consistency, memory consistency,
-    and action control.'
-  - 'Shared research pattern: Most works adopt action-conditioned visual dynamics
-    or video generation and validate through downstream policy or consistency metrics
-    rather than visual quality alone.'
-  - 'Key differences: They differ mainly in evaluation target, representation, and
-    deployment setting: decision utility vs generative fidelity, diffusion vs transformer-VAE
-    vs recurrent state-space, and gaming, driving, robotics, or Minecraft domains.'
-  - 'Trend evolution: Evidence clusters in 2023-2026; earlier Atari-centric model
-    improvements give way to driving/robotic generalization and explicit open-domain
-    evaluation suites.'
-  - 'Open questions: Open questions concern metric-to-decision alignment, limited
-    scene/action coverage, absent limitation reporting, and stability across implementations
-    and compute budgets.'
+  - 'Mainstream direction: World-model evaluation is converging on generative diffusion/transformer
+    models tested on driving, robotics, Atari, and Minecraft; recent work adds capability-specific
+    benchmarks for spatial consistency, memory, action control, and zero-shot generalization.'
+  - 'Shared research pattern: Papers construct or adopt shared datasets/benchmarks,
+    compare against state-of-the-art baselines, and report visual fidelity, normalized
+    scores, or consistency metrics while releasing code, datasets, or artifacts in
+    some cases.'
+  - 'Key differences: Evaluation targets range from Atari human-normalized policy
+    performance to long-horizon driving prediction, spatial or memory consistency
+    in navigation, and robotic video realism; assumptions differ around observable
+    context, action-free video, closed-loop revisits, and auxiliary physics signals.'
+  - 'Trend evolution: The available 2023–2026 evidence moves from aggregate RL world-model
+    performance toward capability-specific stress tests and embodied/driving benchmarks;
+    the trend is within the current frontier rather than a long historical shift.'
+  - 'Open questions: Whether benchmark tasks cover real deployment settings; whether
+    proxy fidelity/consistency metrics align with downstream decision utility; and
+    whether reported conclusions remain stable across implementations, compute budgets,
+    and missing baseline or limitation details.'
   related_work_outline_zh:
-  - 主流方向：世界模型评估正从Atari、NuScenes等聚合控制分数转向专门的记忆一致性、空间一致性与动作控制基准。
-  - 研究共性：研究多采用动作条件下的视觉动力学或视频生成框架，并用下游策略性能或一致性指标进行验证。
-  - 关键差异：评测目标不同，例如视觉保真与物理合理性、策略泛化或空间/记忆一致性；表示方式包括扩散、Transformer-VAE和循环状态空间。
-  - 趋势演进：证据集中在2023-2026年，从以模型为中心的Atari世界模型转向驾驶、机器人及开放式基准。
-  - 开放问题：一致性代理指标与下游决策的一致性，以及任务覆盖、局限性报告和实现稳定性仍然不明确。
+  - 主流方向：世界模型评测正汇聚于生成式扩散/Transformer模型，在驾驶、机器人、Atari和Minecraft等场景上测试；近期工作新增针对空间一致性、记忆、动作控制和零样本泛化的专项基准。
+  - 研究共性：论文构建或采用共享数据集/基准，与最先进基线比较，并报告视觉保真度、归一化得分或一致性指标；部分工作同时发布代码、数据集或工件。
+  - 关键差异：评测目标从Atari人类归一化策略性能，到长时域驾驶预测、导航空间或记忆一致性，再到机器人视频真实感；假设在可观测上下文、无动作视频、闭环回访和辅助物理信号上各不相同。
+  - 趋势演进：现有2023–2026证据显示，研究从聚合式RL世界模型表现转向能力专项压力测试和具身/驾驶基准；这一趋势属于当前前沿内的演进。
+  - 开放问题：基准任务是否覆盖真实部署环境；代理保真度/一致性指标是否与下游决策效用一致；报告结论在不同实现、算力预算以及缺失基线和局限性证据下是否稳定。
   literature_review:
     line_of_work_matrix:
-    - line: Benchmark task and dataset design
-      what_it_solves: Creates shared navigation or video-action tasks for measuring
-        world-model spatial consistency, memory consistency, and action control across
-        scenes.
-      what_remains_open: Coverage is limited to selected environments such as Minecraft
-        or a few robotic scenes, and deployment extrapolation beyond these distributions
-        remains unverified.
-    - line: Metric and stress-test design
-      what_it_solves: Introduces consistency and controllability probes such as scene-graph
-        consistency and memory/action evaluation beyond aggregate visual fidelity.
-      what_remains_open: Proxy metrics have not been shown to align with downstream
-        decision utility or long-horizon policy quality.
-    - line: Comparable baselines and reporting
-      what_it_solves: Uses shared suites such as Atari 100k, CARL, and NuScenes/OpenDV-2K/Waymo
-        to make world-model and policy results more comparable.
-      what_remains_open: Many works lack limitation details, and conclusions remain
-        sensitive to implementation choices, compute budgets, and benchmark versions.
+    - line: Generative world-model method comparison on shared RL/driving benchmarks
+      what_it_solves: Compares diffusion and transformer world models on visual fidelity,
+        policy performance, zero-shot generalization, and sample efficiency through
+        Atari, CARL, or driving datasets.
+      what_remains_open: Benchmark coverage is narrow; limitation reporting and cross-benchmark
+        stability evidence are often missing.
+    - line: Capability-specific benchmark dataset and metric construction
+      what_it_solves: Builds navigation or multi-scene video data and consistency/action-control
+        scores to probe spatial and memory consistency.
+      what_remains_open: LoopNav reports no experimental results in the abstract;
+        MIND's scenes and action spaces are limited, so open-domain generalization
+        and metric alignment remain unverified.
+    - line: Embodied and robotic world-model evaluation
+      what_it_solves: Tests physics-informed or unified video-action models for visual
+        fidelity, physical plausibility, policy training, and policy evaluation in
+        robot scenarios.
+      what_remains_open: RoboScape and UWM lack visible limitation and dataset details;
+        real-robot deployment or cross-robot generalization evidence is absent.
     consensus:
-    - World-model evaluation is shifting from frame prediction or aggregate return
-      scores toward measuring consistency and controllability under action-conditioned
-      generation.
-    - Public datasets and reproducible evaluation artifacts are treated as necessary
-      for comparable world-model benchmarking.
-    - Visual generation quality alone is insufficient to validate world models; evaluation
-      usually includes downstream policy or control performance.
+    - Recent work treats visual generation quality as a central evaluation target
+      and connects it to downstream policy or control utility.
+    - There is a move toward capability-specific probes such as spatial consistency,
+      memory consistency, action control, and zero-shot generalization rather than
+      relying only on aggregate scores.
+    - Shared baselines, datasets, or code artifacts are increasingly used, though
+      reproducibility evidence remains uneven.
     disagreements:
-    - One line evaluates spatial or memory consistency in open-domain video, while
-      another evaluates policy returns on game or driving benchmarks; the split is
-      whether the evaluation target is generative consistency or decision utility.
-    - 'Representations differ: diffusion-based video generation, transformer-VAE world
-      models, recurrent state-space models, and physics-informed keypoint-depth training
-      make distinct fidelity, efficiency, and controllability trade-offs.'
-    - 'Supervision and coverage differ: some rely on action-free or action-coupled
-      video, others assume observable context values; task domains range from Atari
-      and CARL to Minecraft and robotic scenes.'
+    - 'Evaluation target differs: some optimize Atari human-normalized score, others
+      driving or robotic video fidelity, and others navigation consistency and action
+      controllability.'
+    - 'Supervision and interaction assumptions differ: observable context, action-labeled
+      video, action-free video, closed-loop revisits, or auxiliary physics signals.'
+    - 'Modeling choice differs: discrete or VAE stochastic world models versus diffusion-based
+      generation versus coupled video-action diffusion transformers, with different
+      visual detail and efficiency tradeoffs.'
+    - 'Metric preference differs: pixel-level fidelity-oriented evaluation versus
+      consistency scores invariant to pixel variation versus memory and action-control
+      metrics.'
     open_questions:
-    - Do spatial consistency and memory consistency metrics predict downstream robotic
-      or driving policy success?
-    - How stable are leaderboard conclusions across implementation details, compute
-      budgets, and dataset versions when many method papers report no limitations?
-    - What task distributions and action spaces are required to expose long-horizon
-      memory and cross-action-space generalization failures?
+    - How well do Minecraft navigation or curated multi-scene videos transfer to open-domain
+      driving, robotics, or real-world decision settings?
+    - Which fidelity, consistency, or action-control metrics predict downstream policy
+      robustness and task success?
+    - Do current conclusions remain stable across datasets, compute budgets, implementation
+      variants, and absent baseline or limitation details?
+    - Can context-conditioned, action-free, and closed-loop evaluation assumptions
+      be unified into a common benchmark framework?
   literature_review_zh:
     研究路线矩阵:
-    - 路线: 基准任务与数据集设计
-      解决的问题: 构建共享的导航或视频-动作任务，以衡量世界模型的空间一致性、记忆一致性与动作控制。
-      尚未覆盖: 现有场景和动作空间覆盖有限，主要集中于Minecraft或少数量机器人场景，部署外推证据不足。
-    - 路线: 指标与压力测试设计
-      解决的问题: 引入场景图一致性、记忆/动作控制等探针，以超越聚合视觉保真度评估。
-      尚未覆盖: 这些代理指标与下游决策效用或长期策略质量之间的一致性尚未验证。
-    - 路线: 可比基线与报告规范
-      解决的问题: 采用Atari 100k、CARL、NuScenes/OpenDV-2K/Waymo等共享基准与基线，使结果可比较。
-      尚未覆盖: 许多工作缺少局限性说明，结论对实现细节、算力预算和基准版本的敏感性仍不清晰。
+    - 路线: 基于共享RL/驾驶基准的生成式世界模型方法比较
+      解决的问题: 通过Atari、CARL或驾驶数据集比较扩散与Transformer世界模型的视觉保真度、策略表现、零样本泛化和样本效率。
+      尚未覆盖: 基准覆盖范围较窄；局限性报告和跨基准稳定性证据常缺失。
+    - 路线: 能力专项基准数据集与指标构建
+      解决的问题: 构建导航或多场景视频数据以及一致性/动作控制分数，用于检验空间一致性和记忆一致性。
+      尚未覆盖: LoopNav摘要未报告实验结果；MIND的场景与动作空间有限，开放域泛化和指标对齐仍未验证。
+    - 路线: 具身与机器人世界模型评测
+      解决的问题: 检验物理信息驱动或统一视频-动作模型的视觉保真度、物理合理性、策略训练和策略评估能力。
+      尚未覆盖: RoboScape和UWM缺少可见的局限性与数据集细节；真实机器人部署或跨机器人泛化证据缺失。
     共识:
-    - 世界模型评估正从单帧预测或聚合奖励分数转向衡量动作条件下的空间/记忆一致性与可控性。
-    - 公开数据集和可复现评估工件被视为构建可比较基准的必要条件。
-    - 视觉生成质量不足以单独验证世界模型，评估通常包含下游策略或控制表现。
+    - 近期工作将视觉生成质量视为核心评测目标，并将其与下游策略或控制效用联系起来。
+    - 评测正从单一聚合分数转向空间一致性、记忆一致性、动作控制和零样本泛化等能力专项探测。
+    - 共享基线、数据集或代码工件越来越常见，但可复现性证据仍不均衡。
     分歧:
-    - 一条路线评估开放域视频中的空间或记忆一致性，另一条评估游戏或驾驶基准上的策略回报，评测目标在生成一致性与决策效用之间存在分歧。
-    - 表示方式存在差异：扩散视频生成、Transformer-VAE世界模型、循环状态空间模型以及物理信息关键点/深度训练各有保真度、效率和可控性取舍。
-    - 监督信号与评估覆盖不同：一部分依赖动作耦合或无动作视频，另一部分假设上下文可观测；任务域从Atari、CARL延伸到Minecraft和机器人场景。
+    - 评测目标不同：有的优化Atari人类归一化得分，有的关注驾驶或机器人视频保真度，有的关注导航一致性与动作可控性。
+    - 监督与交互假设不同：可观测上下文、带动作视频、无动作视频、闭环回访或辅助物理信号各有不同。
+    - 建模选择不同：离散或VAE随机世界模型、扩散式生成模型、以及耦合视频-动作扩散Transformer在视觉细节和效率上取舍不同。
+    - 指标偏好不同：面向像素级保真度、对像素变化不变的场景图一致性分数、或记忆与动作控制指标的偏好不一致。
     开放问题:
-    - 空间一致性和记忆一致性指标能否预测下游机器人或驾驶策略成功率？
-    - 在大量方法论文未报告局限性的情况下，排行榜结论对实现细节、算力预算和数据集版本有多稳定？
-    - 需要什么样的任务分布和动作空间来暴露长时记忆一致性与跨动作空间泛化失败？
+    - Minecraft导航或人工多场景视频基准能否迁移到开放域驾驶、机器人或真实决策环境？
+    - 哪些保真度、一致性或动作控制指标能预测下游策略鲁棒性和任务成功？
+    - 当前结论在不同数据集、算力预算、实现变体以及缺失基线与局限性细节时是否稳定？
+    - 能否把上下文条件、无动作和闭环评测假设统一到一个基准框架中？
   synthesis_status: llm
   generation_notes: []
 - id: system
@@ -336,7 +355,7 @@ topics:
   description: Runnable systems, platforms, simulators, frameworks, toolkits, or deployed
     pipelines.
   description_zh: ''
-  paper_count: 568
+  paper_count: 569
   top_tags:
   - CV
   - AI
@@ -347,11 +366,11 @@ topics:
   - video generation
   - benchmark
   component_averages:
-    citation_impact: 18.7
+    citation_impact: 18.6
     citation_velocity: 2.6
     graph_prestige: 3.4
-    methodology_quality: 63.0
-    recency: 92.7
+    methodology_quality: 62.9
+    recency: 92.6
     reproducibility: 41.0
     topical_relevance: 48.8
   top_papers:
@@ -402,106 +421,108 @@ topics:
     score: 75.0
     url: https://arxiv.org/abs/2603.14938
   related_work_outline:
-  - 'Mainstream direction: runnable world-model systems for controllable future-frame
-    generation and evaluation, concentrated in autonomous driving, robotics, and navigation.'
-  - 'Shared research pattern: condition generation on action, context, or physics
-    and evaluate via consistency, action fidelity, physical plausibility, or downstream
-    policy utility.'
-  - 'Key differences: works split between benchmark/evaluation harnesses, model-level
-    generation methods, cross-embodiment adaptation, and closed-loop low-latency serving;
-    control representation and evaluation target vary.'
-  - 'Trend evolution: from single-task contextual world models and action-fidelity
-    benchmarks toward larger-scale, physics-informed, cross-embodiment, closed-loop
-    systems; top-paper evidence is concentrated in 2024-2026.'
-  - 'Open questions: long-horizon consistency, generalization beyond nuScenes/CARL/Minecraft/LIBERO-style
-    settings, independent physical-plausibility evidence, and unreported limitations
-    remain open.'
+  - 'Mainstream direction: Closed-loop generative simulation systems for embodied
+    and driving tasks, where action-conditioned future-frame generation is built as
+    a runnable system with bundled benchmarks or baseline platforms.'
+  - 'Shared research pattern: Papers jointly construct a controllable generative model,
+    a dataset or evaluation harness, and downstream policy training/evaluation, then
+    report visual fidelity, action fidelity, or policy success as system-level evidence.'
+  - 'Key differences: Work differs in control interface (trajectory commands, latent
+    actions, context variables, physics keypoints), evaluation target (spatial consistency,
+    action fidelity, downstream policy success, real-time deployment), and setting
+    (Minecraft, CARL, nuScenes-derived driving, real robots).'
+  - 'Trend evolution: The visible top-paper evidence runs from 2024 contextual and
+    driving generators, through 2025 physics-informed and spatial-consistency artifacts,
+    to 2026 cross-embodiment and frame-autoregressive closed-loop systems; the trend
+    is within the current frontier.'
+  - 'Open questions: Generalization beyond nuScenes, CARL, and Minecraft; independent
+    reproduction across teams and hardware; long-horizon stability under distribution
+    shift; and deployable latency/resource trade-offs remain verification gaps.'
   related_work_outline_zh:
-  - 主流方向：以世界模型为核心的可运行系统，面向自动驾驶、机器人和导航中的可控未来帧生成、动作遵循与评测。
-  - 研究共性：将动作、上下文或物理结构作为条件，生成未来视频或想象轨迹，并用一致性、动作忠实度、物理合理性或下游策略成功率评估。
-  - 关键差异：研究在基准评测、模型生成、跨具身适配和闭环低延迟服务之间分化，控制表示与评测目标也不相同。
-  - 趋势演进：从单任务上下文模型和动作可控基准，走向更大规模、物理知情、跨具身和闭环系统；证据集中在2024至2026年前沿。
-  - 开放问题：长时域一致性、跨域跨传感器泛化、独立物理合理性证据和缺失的局限性说明仍未解决。
+  - 主流方向：面向具身与自动驾驶任务的闭环生成式仿真系统，将动作条件下的未来帧生成作为可部署系统，并同时给出基准或平台。
+  - 研究共性：工作通常同时构建可控生成模型、数据集或评测工具，并用视觉保真度、动作忠实度或策略成功率作为系统级证据。
+  - 关键差异：控制对象不同（轨迹、潜在动作、上下文、物理关键点）；评测目标不同（空间一致性、动作忠实度、下游策略成功率、实时部署）；场景不同（Minecraft、CARL、基于nuScenes的驾驶、真实机器人）。
+  - 趋势演进：可见高排名论文从2024年上下文/驾驶生成，到2025年物理信息与空间一致性工件，再到2026年跨具身和帧级自回归闭环系统；集中在当前前沿。
+  - 开放问题：跨数据集/跨环境泛化、独立复现、长时域稳定性、实时与资源权衡等仍是证据缺口。
   literature_review:
     line_of_work_matrix:
-    - line: Runnable pipelines and deployment stacks
-      what_it_solves: turning world-model ideas into end-to-end workflows for data,
-        training, inference, and evaluation in driving and robotics
-      what_remains_open: deployment outside tested settings such as nuScenes or specific
-        robot platforms; multi-sensor and multi-GPU scaling are not independently
-        verified
-    - line: Real-time and interactive closed-loop serving
-      what_it_solves: meeting latency and interactivity requirements for closed-loop
-        video generation and simulation
-      what_remains_open: trade-offs between sub-second latency, long-horizon fidelity,
-        and degradation under self-conditioning or distribution shift
-    - line: Benchmark and reproducibility artifacts
-      what_it_solves: making systems inspectable and reusable through open datasets,
-        baselines, and evaluation frameworks
-      what_remains_open: independent reproduction across teams and environments; some
-        benchmarks report construction but not experimental results
-    - line: Controllable and physics-informed generation
-      what_it_solves: making future-frame generation follow action, context, or physical
-        structure for policy training and evaluation
-      what_remains_open: independent evidence for physical plausibility, cross-context
-        zero-shot transfer, and action fidelity beyond reported datasets
+    - line: Runnable closed-loop simulation pipelines for embodied and driving rollouts
+      what_it_solves: Turns action-conditioned future-frame generation into end-to-end
+        workflows that can train or evaluate policies in closed-loop settings.
+      what_remains_open: Cross-scene, cross-sensor, and long-horizon reliability;
+        real-time multi-GPU scaling and deployment beyond the reported driving dataset
+        are not fully demonstrated.
+    - line: Physics- and context-aware generation stacks
+      what_it_solves: Embeds context values, depth, or keypoint dynamics to make generated
+        futures more physically plausible and improve zero-shot or downstream policy
+        transfer.
+      what_remains_open: Context observability assumptions, limited benchmark breadth,
+        and missing cross-embodiment or real-world validation leave broader generalization
+        unverified.
+    - line: Benchmark and reproducibility artifacts for action fidelity and spatial
+        coherence
+      what_it_solves: Provides datasets, metrics, and baseline platforms that quantify
+        whether generated trajectories follow actions and remain spatially coherent
+        across loops or driving scenes.
+      what_remains_open: Some artifacts report no experimental results in the abstract,
+        and independent reproduction across teams and infrastructure environments
+        remains a verification gap.
     consensus:
-    - World-model systems are treated as more than video generators; they are evaluated
-      on action adherence, spatial or physical consistency, or downstream policy utility.
-    - Action- or context-conditioned future-frame generation is a shared mechanism
-      across driving, robotics, and navigation settings.
-    - Benchmark construction is often packaged with open baselines or datasets to
-      standardize evaluation rather than only report model scores.
-    - Several top papers provide model or dataset artifacts but omit explicit limitations,
-      leaving failure modes and generalization boundaries unverified.
+    - 'Systems are evaluated partly or wholly by task-oriented outputs: future-frame
+      realism, action-following fidelity, or downstream policy success.'
+    - Open datasets, benchmarks, or code are treated as part of the system contribution
+      rather than merely supplementary material.
+    - Action conditioning is shifting from raw action vectors toward shared interfaces
+      or structured controls.
+    - Deployment-related evidence, such as single-GPU latency or closed-loop simulation
+      behavior, is increasingly treated as part of system quality.
     disagreements:
-    - 'Control representation differs: structured action/trajectory controls, observable
-      context values, universal latent actions, and physics/keypoint signals are used.'
-    - 'Evaluation target differs: some focus on fidelity metrics or action adherence,
-      while others score downstream policy success, real-robot performance, or latency.'
-    - 'Interaction mode differs: offline benchmark scoring, closed-loop simulator
-      rollouts, and policy training/evaluation are adopted as separate deployment
-      settings.'
-    - 'Deployment setting differs: single-domain driving with low-latency serving
-      contrasts with cross-embodiment robot adaptation and zero-shot context transfer.'
+    - 'Representation differs: some systems use scene graphs or keypoint dynamics
+      for structural and physical constraints, while others use latent action tokens
+      or diffusion-generated features.'
+    - 'Evaluation target differs: work may emphasize spatial consistency in navigation,
+      driving action fidelity, visual fidelity, or robot policy success; these are
+      not interchangeable.'
+    - 'Interaction mode differs: frame-level autoregressive closed-loop rollout, benchmark-style
+      future prediction, and cross-embodiment latent-action simulation coexist.'
+    - 'Deployment setting differs: evidence is split across Minecraft, CARL, driving
+      data derived from nuScenes, and real-robot platforms, with no demonstrated cross-setting
+      transfer.'
     open_questions:
-    - How do spatial-consistency and action-fidelity metrics transfer when sensors,
-      environments, or robot embodiments change beyond the evaluated datasets?
-    - Can closed-loop frame-autoregressive systems maintain consistency over long
-      horizons outside nuScenes-like sequences?
-    - What independent evidence would confirm the physical plausibility and policy
-      utility claimed by physics-informed and cross-embodiment systems?
-    - How much of the reported performance comes from large-scale pretraining or dataset
-      design rather than the specific control interface or architecture?
+    - How well do these action-controllable simulators transfer outside nuScenes,
+      CARL, or Minecraft without retraining or heavy adaptation?
+    - Can spatial-consistency and action-fidelity metrics be independently reproduced
+      across teams and hardware when some artifacts omit abstract-level result details?
+    - What are the minimal latency, memory, and multi-GPU scaling requirements for
+      closed-loop frame-level generation in real deployment?
+    - Do physics-informed or context-aware inductive biases remain reliable under
+      distribution shift or partially observed context?
   literature_review_zh:
     研究路线矩阵:
-    - 路线: 可运行流水线与部署栈
-      解决的问题: 将世界模型想法转化为覆盖数据、训练、推理和评测的端到端工作流
-      尚未覆盖: 在nuScenes或特定机器人平台之外的部署；多传感器和多GPU扩展尚未独立验证
-    - 路线: 实时与交互式闭环服务
-      解决的问题: 满足闭环视频生成与模拟中的延迟和交互要求
-      尚未覆盖: 亚秒级延迟与长时域保真度、自条件或分布外退化之间的权衡仍不明确
-    - 路线: 基准与可复现工件
-      解决的问题: 通过开放数据集、基线和评测框架使系统可检查、可复用
-      尚未覆盖: 跨团队和环境的独立复现；部分基准只报告构建而缺少实验结果
-    - 路线: 可控与物理知情生成
-      解决的问题: 让未来帧生成遵循动作、上下文或物理结构，用于策略训练和评测
-      尚未覆盖: 物理合理性、跨上下文零样本转移和动作忠实度仍缺少数据集之外的独立证据
+    - 路线: 可运行的闭环仿真流水线
+      解决的问题: 把动作条件下的未来帧生成转化为端到端工作流，用于闭环策略训练或评测。
+      尚未覆盖: 跨场景、跨传感器和长时域可靠性，以及超出已报告驾驶数据集的实时多GPU扩展尚未充分证明。
+    - 路线: 物理与上下文感知的生成栈
+      解决的问题: 嵌入上下文值、深度或关键点动力学，使生成未来更物理合理并改善零样本或下游策略迁移。
+      尚未覆盖: 上下文可观测假设、基准覆盖范围有限，以及跨具身和真实环境验证缺失。
+    - 路线: 动作忠实度与空间一致性的评测工件
+      解决的问题: 提供数据集、指标和基线平台，量化生成轨迹是否遵循动作并在循环或驾驶场景中保持空间连贯。
+      尚未覆盖: 部分工件摘要未报告实验结果，跨团队和基础设施的独立复现仍是证据缺口。
     共识:
-    - 世界模型系统被视为超越视频生成器，需要评估动作遵循、空间或物理一致性，或下游策略价值。
-    - 动作或上下文条件下的未来帧生成是驾驶、机器人和导航场景中的共性机制。
-    - 基准构建通常与开放基线或数据集一起发布，以标准化评测，而不只是报告模型分数。
-    - 一些顶部研究提供模型或数据工件但省略明确的局限性说明，使失败模式和泛化边界未经验证。
+    - 系统评估越来越多采用任务导向输出：未来帧真实度、动作跟随忠实度或下游策略成功率。
+    - 开放数据集、基准或代码被视作系统贡献的一部分，而非仅作为补充材料。
+    - 动作条件正从原始动作向量走向共享接口或结构化控制。
+    - 单GPU延迟或闭环模拟行为等部署相关证据逐渐成为系统质量的一部分。
     分歧:
-    - 控制表示不同：使用结构化动作/轨迹控制、可观测上下文值、通用潜在动作或物理/关键点信号。
-    - 评测目标不同：有的关注保真度指标或动作忠实度，有的评估下游策略成功率、真实机器人表现或延迟。
-    - 交互模式不同：离线基准评分、闭环模拟器推演和策略训练评估作为不同的部署设置。
-    - 部署场景不同：面向驾驶的低延迟服务与跨具身机器人适配、零样本上下文迁移形成对比。
+    - 表示方式不同：有的系统用场景图或关键点动力学施加结构与物理约束，有的依赖潜在动作token或扩散生成特征。
+    - 评测目标不同：分别强调导航空间一致性、驾驶动作忠实度、视觉保真度或机器人策略成功率，这些目标不可互换。
+    - 交互模式不同：帧级自回归闭环推演、基准式未来预测和跨具身潜在动作仿真并存。
+    - 部署场景不同：证据分布在Minecraft、CARL、基于nuScenes的驾驶数据和真实机器人平台之间，跨场景泛化尚未建立。
     开放问题:
-    - 当传感器、环境或机器人具身改变并超出已有数据集时，空间一致性和动作忠实度指标是否仍然有效？
-    - 闭环帧级自回归系统能否在nuScenes类序列之外的更长时间范围内保持一致？
-    - 哪些独立证据可以确认物理知情和跨具身系统所声称的物理合理性与策略价值？
-    - 报告表现中有多少来自大规模预训练或数据集设计，而非特定控制接口或架构？
+    - 这些动作可控仿真器能否在不重训或轻适配的情况下迁移到nuScenes、CARL、Minecraft之外的环境？
+    - 当部分工件在摘要层面省略结果细节时，空间一致性和动作忠实度指标能否跨团队与硬件独立复现？
+    - 闭环帧级生成在真实部署中的最小延迟、显存和多GPU扩展要求是什么？
+    - 物理感知或上下文感知的归纳偏置在分布偏移或部分可观测条件下是否仍然可靠？
   synthesis_status: llm
   generation_notes: []
 - id: theory
@@ -527,7 +548,7 @@ topics:
     methodology_quality: 64.2
     recency: 93.3
     reproducibility: 38.9
-    topical_relevance: 45.8
+    topical_relevance: 45.7
   top_papers:
   - id: unified-world-models-coupling-video-and-action-diffusion-fo-2025
     title: 'Unified World Models: Coupling Video and Action Diffusion for Pretraining
@@ -865,7 +886,7 @@ topics:
   description: Domain applications of world models, such as robotics, driving, games,
     healthcare, or scientific simulation.
   description_zh: ''
-  paper_count: 1675
+  paper_count: 1676
   top_tags:
   - CV
   - AI
@@ -880,7 +901,7 @@ topics:
     citation_velocity: 2.2
     graph_prestige: 3.4
     methodology_quality: 59.7
-    recency: 92.4
+    recency: 92.3
     reproducibility: 41.1
     topical_relevance: 47.2
   top_papers:
@@ -928,106 +949,103 @@ topics:
     score: 79.0
     url: https://arxiv.org/abs/2602.08025
   related_work_outline:
-  - 'Mainstream direction: World-model applications are dominated by generative video
-    and dynamics models for robotics, driving, and interactive control, focusing on
-    action-conditioned or context-conditioned future prediction.'
-  - 'Shared research pattern: Papers couple self-supervised visual or temporal prediction
-    with domain-specific structure such as actions, language primitives, physics signals,
-    or context variables, then evaluate through domain benchmarks or downstream policy
-    utility.'
-  - 'Key differences: They differ in representation, supervision, and evaluation target,
-    including diffusion transformers, recurrent state-space models, VAE-transformers,
-    and unified video-action diffusion, with mask, physics, context, or language-based
-    training signals.'
-  - 'Trend evolution: The visible top-paper evidence concentrates in 2023-2026, moving
-    from efficient game/control world models toward domain-specific robotics and driving
-    generation plus closed-loop diagnostic benchmarks.'
-  - 'Open questions: Cross-embodiment and sim-to-real transfer, long-horizon memory
-    and action consistency, generalization to unseen primitives or action spaces,
-    and verification gaps from missing metrics or limitations remain unresolved.'
+  - 'Mainstream direction: Application research centers on embodied world models for
+    driving and robotics, using generative video and dynamics prediction conditioned
+    on actions, language, context, or physical signals.'
+  - 'Shared research pattern: Methods couple world-model pretraining or generation
+    with downstream control or evaluation, often via diffusion or recurrent state-space
+    models, and validate on domain benchmarks.'
+  - 'Key differences: Domains impose different observations and action spaces; evaluation
+    spans scene prediction, model-based RL, zero-shot control, robot video synthesis,
+    and consistency or action-control benchmarks.'
+  - 'Trend evolution: Within the available 2023–2026 evidence, the frontier is moving
+    from game-oriented model-based RL efficiency toward diffusion-based driving and
+    robot video world models, with 2025–2026 benchmarks probing memory, spatial, and
+    action consistency.'
+  - 'Open questions: Real-world transfer, long-term memory and action-space generalization,
+    limitations of observed context or predefined primitives, and the link between
+    simulation fidelity and operational safety remain unresolved.'
   related_work_outline_zh:
-  - 主流方向：应用研究以机器人、驾驶和交互控制中的生成式视频/动力学世界模型为主，重点学习动作或上下文条件下的未来预测。
-  - 研究共性：多将自监督视觉/时序预测与任务结构结合，如动作、语言原语、物理信号或上下文变量，并用领域基准或策略效用评估。
-  - 关键差异：表示方式、监督信号和评测目标不同，涉及扩散Transformer、循环状态空间、VAE-Transformer、统一视频-动作扩散，以及掩码重建、物理深度/关键点、上下文和语言原语。
-  - 趋势演进：可见前沿从游戏/控制的高效模型式强化学习，走向机器人/驾驶的领域生成模型与闭环诊断基准，尤其集中在2023-2026年。
-  - 开放问题：跨本体与仿真到现实的迁移、长时记忆和动作一致性、新原语/动作泛化，以及缺失指标和局限声明的验证缺口仍待解决。
+  - 主流方向：应用研究集中在驾驶和机器人等具身世界模型，以动作、语言、上下文或物理信号为条件进行生成式视频与动力学预测。
+  - 研究共性：方法将世界模型预训练或生成与下游控制或评测耦合，常用扩散或循环状态空间模型，并在领域基准上验证。
+  - 关键差异：不同领域带来不同观测和动作空间；评测目标涵盖场景预测、基于模型的强化学习、零样本控制、机器人视频合成以及一致性与动作控制基准。
+  - 趋势演进：在现有证据的2023–2026阶段，前沿从游戏场景的模型高效强化学习转向基于扩散的驾驶和机器人视频世界模型，2025–2026年基准开始探测记忆、空间和动作一致性。
+  - 开放问题：真实世界迁移、长期记忆与动作空间泛化、可观测上下文或预定义原语的假设限制，以及仿真保真度与运行安全之间的对应关系仍未解决。
   literature_review:
     line_of_work_matrix:
     - line: Embodied and domain task transfer
-      what_it_solves: Adapting world models to concrete task domains with domain-specific
-        states, actions, and constraints, such as contextual reinforcement learning
-        and robot manipulation.
-      what_remains_open: Transfer across embodiments, datasets, institutions, or physical
-        environments, and generalization beyond observed context values or primitive
+      what_it_solves: Adapts world models to robot manipulation and contextual control
+        by conditioning video or dynamics generation on language instructions, actions,
+        context, or physics-related signals.
+      what_remains_open: Transfer across embodiments, datasets, and physical environments
+        is not shown; some approaches depend on observable context or predefined primitive
         combinations.
     - line: Autonomous driving and simulation use cases
-      what_it_solves: Using world models for driving scene prediction, long-horizon
-        and multi-view video generation, and potential closed-loop simulation or policy
-        evaluation.
-      what_remains_open: Whether simulator-level video gains align with real-world
-        safety or operational outcomes, and whether zero-shot dataset transfer is
-        robust.
+      what_it_solves: Uses driving world models for multi-view and long-horizon video
+        prediction to support closed-loop simulation and policy evaluation in driving
+        scenes.
+      what_remains_open: Evidence ties improvements to video prediction benchmarks,
+        not yet to real-world safety outcomes or operational reliability.
     - line: Interactive agents and games
-      what_it_solves: Grounding world models in interactive environments where agents
-        must act over time, including game benchmarks and navigation-style consistency
-        evaluation.
-      what_remains_open: Generalization when environment rules, goals, user interactions,
-        action spaces, or viewpoints change, especially beyond curated benchmark conditions.
+      what_it_solves: Grounds world models in interactive environments for efficient
+        model-based reinforcement learning and benchmarked spatial, memory, and action
+        consistency.
+      what_remains_open: Generalization under changed environment rules, goals, user
+        interactions, and action spaces remains unresolved; long-term consistency
+        is still difficult.
     consensus:
-    - 'World models are evaluated by more than reconstruction: downstream control,
-      policy utility, video fidelity, spatial consistency, memory consistency, or
-      action controllability is central.'
-    - Domain-specific structure such as actions, context variables, language primitives,
-      or physics signals improves learning when coupled with scalable sequence or
-      diffusion models.
-    - Recent application-focused systems favor generative visual or temporal architectures
-      that can produce future frames or imagined trajectories for agent learning.
+    - Application-oriented world models increasingly use generated video or latent
+      dynamics as a substrate for prediction, imagined policy learning, or robot pretraining.
+    - Methods share a pattern of conditioning on actions, language, context, or physical
+      cues rather than treating world models as passive dynamics learners.
+    - Recent benchmark work shifts evaluation toward closed-loop capabilities such
+      as spatial consistency, memory consistency, and action control.
     disagreements:
-    - 'Representation: recurrent state-space dynamics, VAE-transformer stochastic
-      models, diffusion transformers, and unified video-action diffusion imply different
-      modeling priors.'
-    - 'Supervision: context-conditioned latent dynamics, language-primitive decomposition,
-      physics-informed depth and keypoint tasks, and mask reconstruction represent
-      different learning signals.'
-    - 'Evaluation target: zero-shot policy generalization, video fidelity and physical
-      plausibility, robot execution, and memory/action/spatial consistency benchmarks
-      are not interchangeable.'
-    - 'Deployment setting: some work evaluates simulation-only robot execution, while
-      other work pretrains on large robot datasets for downstream policy transfer;
-      real-world evidence is uneven or absent in the visible packet.'
+    - 'Representation choices differ: contextual recurrent state-space dynamics, diffusion
+      transformer video generation, physics-informed depth/keypoint learning, and
+      unified video-action diffusion.'
+    - 'Evaluation targets differ: some papers optimize zero-shot policy generalization
+      in contextual RL, others optimize driving video prediction or robot video fidelity,
+      and others construct benchmark scores without reporting learned-model results.'
+    - 'Interaction and deployment settings differ: discrete-action game environments,
+      multi-view driving scenes, robot manipulation from language or multi-task datasets,
+      and first/third-person navigation videos.'
+    - 'Supervision assumptions differ: some require observable context values or parsed
+      low-level primitives; others exploit action-free video or learn without explicit
+      physical labels.'
     open_questions:
-    - How well do driving and robot world-model gains transfer across datasets, embodiments,
-      institutions, and from simulation to physical deployment?
-    - Can current models maintain long-horizon memory consistency, spatial consistency,
-      and action control beyond curated loop-based or closed-loop benchmarks?
-    - What mechanisms support generalization to unseen action spaces, language primitives,
-      physical properties, or environment rules?
-    - What verification gaps arise from missing code, dataset, metric, baseline, or
-      limitation details in the visible evidence?
+    - How do gains on driving video prediction benchmarks transfer to closed-loop
+      real-world driving safety and operational decisions?
+    - Will spatial, memory, and action-control benchmarks predict generalization to
+      unseen environments, embodiments, or action spaces?
+    - Can zero-shot generalization be maintained when context is not observable or
+      when instructions require primitives outside the training distribution?
+    - How does physics-informed or visually plausible robot video generation improve
+      actual policy performance and real-world execution beyond simulation?
   literature_review_zh:
     研究路线矩阵:
     - 路线: 具身与领域任务迁移
-      解决的问题: 将世界模型适配到具有领域特定状态、动作和约束的具体任务，例如上下文强化学习和机器人操控。
-      尚未覆盖: 跨本体、数据集、机构或物理环境的迁移，以及对未观测上下文值或原语组合之外的泛化。
+      解决的问题: 用语言指令、动作、上下文或物理相关信号条件化视频或动力学生成，把世界模型适配到机器人操作和上下文控制任务。
+      尚未覆盖: 跨本体、数据集和物理环境的迁移尚未得到验证；部分方法依赖可观测上下文或预定义原语组合。
     - 路线: 自动驾驶与仿真应用
-      解决的问题: 将世界模型用于驾驶场景预测、长时域和多视角视频生成，以及潜在的闭环仿真或策略评测。
-      尚未覆盖: 仿真层面的视频收益是否与真实安全或运营结果一致，以及零样本数据集迁移是否稳健。
+      解决的问题: 将驾驶世界模型用于多视角、长时域视频预测，以支持驾驶场景中的闭环仿真和策略评测。
+      尚未覆盖: 现有证据主要关联视频预测基准的提升，尚未关联真实世界安全结果或运行可靠性。
     - 路线: 交互式智能体与游戏
-      解决的问题: 将世界模型落到智能体需要持续行动的交互环境中，包括游戏基准和导航式一致性评测。
-      尚未覆盖: 环境规则、目标、用户交互、动作空间或视角变化时的泛化，尤其是超出 curated 基准条件的情况。
+      解决的问题: 把世界模型嵌入交互式环境，用于高效的基于模型的强化学习以及空间、记忆与动作一致性评测。
+      尚未覆盖: 环境规则、目标、用户交互和动作空间变化时的泛化未解决；长期一致性仍是难点。
     共识:
-    - 世界模型的评测不只看重建，策略效用、下游控制、视频保真度、空间一致性、记忆一致性或动作可控性同样关键。
-    - 将动作、上下文变量、语言原语或物理信号等任务结构嵌入可扩展序列或扩散模型，有助于应用型世界模型学习。
-    - 近期应用系统倾向于采用生成式视觉或时序架构，为智能体学习生成未来帧或想象轨迹。
+    - 应用导向的世界模型越来越多地以生成视频或潜在动力学作为预测、想象策略学习或机器人预训练的基础。
+    - 方法普遍以动作、语言、上下文或物理线索为条件，而不再把世界模型仅视为被动动力学学习器。
+    - 近期基准工作将评测转向闭环能力，例如空间一致性、记忆一致性和动作控制。
     分歧:
-    - 表示方式不同：循环状态空间、VAE-Transformer 随机模型、扩散 Transformer 和统一视频-动作扩散意味着不同建模先验。
-    - 监督信号不同：上下文条件潜在动力学、语言原语分解、物理深度与关键点任务、掩码重建等学习目标各异。
-    - 评测目标不同：零样本策略泛化、视频保真度与物理合理性、机器人执行、记忆/动作/空间一致性基准不可互换。
-    - 部署场景不同：部分工作仅做仿真机器人执行，部分在大规模机器人数据集上预训练以迁移策略，真实世界证据可见度不一。
+    - 表示选择不同：上下文循环状态空间动力学、扩散Transformer视频生成、物理信息深度/关键点学习，以及统一视频-动作扩散。
+    - 评测目标不同：部分工作优化上下文强化学习中的零样本策略泛化，部分优化驾驶视频预测或机器人视频保真度，另一些构建基准但未报告学习模型结果。
+    - 交互与部署设置不同：离散动作游戏环境、多视角驾驶场景、基于语言或多任务数据的机器人操作，以及第一/第三人称导航视频。
+    - 监督假设不同：一些方法要求可观测上下文值或解析后的低级原语；另一些利用无动作视频或无需显式物理标签进行学习。
     开放问题:
-    - 驾驶和机器人世界模型的收益能否跨数据集、本体、机构以及从仿真迁移到真实物理部署？
-    - 当前模型能否在 curated 的循环或闭环基准之外保持长时记忆一致性、空间一致性和动作控制？
-    - 哪些机制能支持对未见动作空间、语言原语、物理属性或环境规则的泛化？
-    - 可见证据中缺失代码、数据集、指标、基线或局限性说明时，应如何识别和衡量验证缺口？
+    - 驾驶视频预测基准的提升如何迁移到闭环的真实驾驶安全与运行决策？
+    - 空间、记忆和动作控制基准能否预测对未见环境、本体或动作空间的泛化？
+    - 当上下文不可观测或指令需要训练分布之外的原语时，零样本泛化能否保持？
+    - 物理信息或视觉逼真的机器人视频生成如何超越仿真，改善实际策略表现与真实执行？
   synthesis_status: llm
   generation_notes: []
