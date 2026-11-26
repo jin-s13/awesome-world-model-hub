@@ -1,7 +1,7 @@
 # RoboDreamer: Learning Compositional World Models for Robot Imagination
 
 - Status: planned
-- Generated at: 2026-11-25T07:37:04Z
+- Generated at: 2026-11-26T07:27:15Z
 - Read-first score: 79.8
 - Paper: https://arxiv.org/abs/2404.12377
 - Code: https://robovideo.github.io/
